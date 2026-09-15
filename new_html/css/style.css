@@ -250,7 +250,7 @@ address {
 
 .section-title {
     font-family: var(--font-heading);
-    font-size: 52px;
+    font-size: 40px;
     font-weight: 700;
     color: #462D20;
 }
