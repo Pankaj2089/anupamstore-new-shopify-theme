@@ -1,0 +1,326 @@
+{% comment %}
+  Shopify Contact Page Section
+  To use: Create a new section named 'contact-form.liquid' and include it in your template.
+{% endcomment %}
+
+
+<style>
+
+.contact-header {
+padding: 15px;
+    background: #f5f5f5;
+    font: 600 20px / 24px var(--font-stack-header);
+    float: left;
+    width: 100%;
+    color: var(--color-text);
+    margin: 0 0 10px;
+}
+
+.contact-item {
+  display: flex;
+  gap: 12px;
+  padding: 15px;
+}
+
+
+.contact-item p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.contact-footer {
+  background: #e9e9e9;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-icons a {
+  margin-left: 10px;
+  color: #666;
+  text-decoration: none;
+}
+  </style>
+
+<div class="contact-us-page float-start w-100 section-{{ section.id }}">
+  <div class="container">
+    <h2 class="contact-title float-start w-100">{{ section.settings.conact_us }}</h2>
+    
+    <div class="contact-us float-start w-100">
+      <div class="row">
+        
+        {% comment %} --- CONTACT FORM --- {% endcomment %}
+        <div class="contact_wrapper col-sm-8">
+          <div class="contact-us-form">
+            {% form 'contact', id: 'ContactForm' %}
+              
+              {% if form.posted_successfully? %}
+                <p class="note form-success" tabindex="-1" autofocus>
+                  {{ 'contact.form.post_success' | t }}
+                </p>
+              {% endif %}
+
+              {{ form.errors | default_errors }}
+
+              <div id="contactFormWrapper">
+                {% assign name_attr = 'contact.form.name' | t | handle %}
+                <div class="field-group">
+                  <input type="text" 
+                    id="contactFormName" 
+                    name="contact[{{ name_attr }}]" 
+                    placeholder="{{ 'contact.form.name' | t }}" 
+                    autocapitalize="words" 
+                    value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                </div>
+
+                <div class="field-group">
+                  <input type="email" 
+                    id="contactFormEmail" 
+                    name="contact[email]" 
+                    placeholder="{{ 'contact.form.email' | t }}" 
+                    autocorrect="off" 
+                    autocapitalize="off" 
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    aria-required="true">
+                </div>
+
+                {% assign phone_attr = 'contact.form.phone' | t | handle %}
+                <div class="field-group">
+                  <input type="tel" 
+                    id="contactFormPhone" 
+                    name="contact[{{ phone_attr }}]" 
+                    placeholder="{{ 'contact.form.phone' | t }}" 
+                    pattern="[0-9\-]*" 
+                    value="{% if form[phone_attr] %}{{ form[phone_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+                </div>
+
+                <div class="field-group">
+                  <textarea rows="10" 
+                    id="contactFormMessage" 
+                    name="contact[body]" 
+                    placeholder="{{ 'contact.form.message' | t }}">
+                    {%- if form.body -%}{{ form.body }}{%- endif -%}
+                  </textarea>
+                </div>
+
+                <input type="submit" class="btn button right" value="{{ 'contact.form.send' | t }}">
+              </div>
+            {% endform %}
+          </div>
+        </div>
+
+        <div class="rte col-sm-4">
+          <div class="address-container float-start w-100">
+            <div class="contact-card">
+  <div class="contact-header">
+    {{ section.settings.company_name }}
+  </div>
+
+  <div class="contact-item address-text">
+    <div class="icon">
+      <i class="mdi mdi-map-marker"></i>
+    </div>
+    <div class="content">
+    <div class="address-label">{{ section.settings.address_label_one }}</div>
+      <p><a href="https://maps.google.com/?q=Anupam stores sodala" target="_blank" rel="noopener noreferrer"> {{ section.settings.address_one }} </a></p>
+    </div>
+  </div>
+
+  <div class="contact-item address-text">
+    <div class="icon">
+      <i class="mdi mdi-map-marker"></i>
+    </div>
+    <div class="content">
+    <div class="address-label">{{ section.settings.address_label_two }}</div>
+      <p><a href="https://maps.google.com/?q=Sukh Vrindavan (Anupam store)" target="_blank" rel="noopener noreferrer">{{ section.settings.address_two }}</a></p>
+    </div>
+  </div>
+
+  <div class="contact-item address-text">
+    <div class="icon">
+    <i class="mdi mdi-phone-classic"></i>
+    </div>
+    <div class="content">
+   <div class="address-label">{{ section.settings.phone_label }}</div>
+      <p><a class="phone" href="tel:{{ section.settings.phone }}"> {{ section.settings.phone }} </a></p>
+    </div>
+  </div>
+
+  <div class="contact-item address-text">
+    <div class="icon">
+      <i class="mdi mdi-email"></i>
+    </div>
+    <div class="content">
+    <div class="address-label">{{ section.settings.email_label }}</div>
+      <p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</p>
+    </div>
+  </div>
+
+  
+</div>
+            
+            <div class="social-sharing float-start w-100">
+              <h3 class="social-title">{{ section.settings.social_title }}</h3>
+              <div class="tt-social-share float-start w-100 d-flex">
+                {% if settings.social_facebook_link != blank %}
+                  <a href="{{ settings.social_facebook_link }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                  </a>
+                {% endif %}
+                
+                {% if settings.social_twitter_link != blank %}
+                  <a href="{{ settings.social_twitter_link }}" target="_blank">
+                    <svg class="icon icon-twitter" viewBox="0 0 20 20" style="width: 20px;height: 40px; display: inline-block;">
+                      <path fill="currentColor" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z"></path>
+                    </svg>
+                  </a>
+                {% endif %}
+
+                {% if settings.social_instagram_link != blank %}
+                  <a href="{{ settings.social_instagram_link }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  </a>
+                {% endif %}
+
+                {% if settings.social_pinterest_link != blank %}
+                  <a href="{{ settings.social_pinterest_link }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                      <!-- Outer circle -->
+                      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                      
+                      <!-- Pinterest "P" (filled for clarity) -->
+                      <path fill="currentColor" d="M12 6.5c-3 0-5 2-5 4.6 0 1.6.9 2.9 2.2 3.4.2.1.3 0 .3-.2l.3-1c0-.1 0-.2-.1-.3-.3-.4-.5-1-.5-1.6 0-2.1 1.6-3.6 3.9-3.6 2.1 0 3.2 1.3 3.2 3 0 2.2-1 4-2.4 4-.8 0-1.3-.6-1.1-1.4.2-.9.6-1.8.6-2.4 0-.6-.3-1-1-1-.8 0-1.4.8-1.4 1.8 0 .7.2 1.1.2 1.1l-.8 3.3c-.2.9 0 2.1 0 2.2 0 .1.1.2.2.1.1-.2 1.1-1.3 1.4-2.5l.4-1.6c.2.4.9.8 1.7.8 2.3 0 3.9-2.1 3.9-4.9 0-2.1-1.8-4-4.5-4z"/>
+                    </svg>
+                  </a>
+                {% endif %}
+
+                {% if settings.social_youtube_link != blank %}
+                  <a href="{{ settings.social_youtube_link }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube">
+                      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path>
+                      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                    </svg>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %} --- GOOGLE MAP --- {% endcomment %} 
+        {% if section.settings.map_iframe != blank %}
+          <div class="contact-us-map float-start w-25 mt-4">
+            <h3> Store 1: </h3>
+            <div class="map-placeholder">
+              {{ section.settings.map_iframe }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.map_iframe_one != blank %}
+          <div class="contact-us-map float-start w-25 mt-4">
+            <h3> Store 2: </h3>
+            <div class="map-placeholder">
+              {{ section.settings.map_iframe_one }}
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page Section",
+  "settings": [
+    
+     {
+      "type": "text",
+      "id": "conact_us",
+      "label": "Title",
+      "default": "Conact Us"
+    },
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Social Title",
+      "default": "Follow Us :"
+    },
+    {
+      "type": "html",
+      "id": "map_iframe",
+      "label": "Google Map Store 1 Iframe",
+      "info": "Paste the <iframe> code from Google Maps here"
+    },
+    {
+      "type": "html",
+      "id": "map_iframe_one",
+      "label": "Google Map Store 2 Iframe",
+      "info": "Paste the <iframe> code from Google Maps here"
+    },
+    {
+  "type": "text",
+  "id": "address_label_one",
+  "label": "Address One Label",
+  "default": "Address:"
+},
+{
+  "type": "text",
+  "id": "address_label_two",
+  "label": "Address Two Label",
+  "default": "Address:"
+},
+{
+  "type": "text",
+  "id": "phone_label",
+  "label": "Phone Label",
+  "default": "Fax numbers:"
+},
+{
+  "type": "text",
+  "id": "email_label",
+  "label": "Email Label",
+  "default": "Email:"
+},
+    {
+  "type": "text",
+  "id": "company_name",
+  "label": "Company Name",
+  "default": "TemplateTrip Pvt. Ltd."
+},
+{
+  "type": "textarea",
+  "id": "address_one",
+  "label": "Store 1:",
+  "default": "580, Broadway, 1002 - New York NY-U"
+},
+{
+  "type": "textarea",
+  "id": "address_two",
+  "label": "Store 2:",
+  "default": "580, Broadway, 1002 - New York NY-U"
+},
+{
+  "type": "text",
+  "id": "phone",
+  "label": "Fax / Phone",
+  "default": "123456789"
+},
+{
+  "type": "text",
+  "id": "email",
+  "label": "Email",
+  "default": "info@example.com"
+}
+  ],
+  "presets": [
+    {
+      "name": "Contact Page Section"
+    }
+  ]
+}
+{% endschema %}

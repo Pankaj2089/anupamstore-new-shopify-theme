@@ -1,0 +1,41 @@
+{%- assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
+{%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+<div class="pdp-gallery" data-gallery data-id="{{ product.id }}" data-product-single-media-group>
+  <div class="pdp-thumbs additinal-product">
+    <button type="button" class="pdp-thumbs-btn" data-thumbs-prev aria-label="Previous thumbnails">
+      <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_up</span>
+    </button>
+    <div class="pdp-thumbs-track product-block" data-thumbs id="productThumbs">
+      {%- if product.media.size == 0 -%}
+      <button type="button" class="pdp-thumb pro_img is-active" data-index="0" aria-current="true">
+        <img src="{{ featured_image | img_url: '200x200' }}" alt="" width="64" height="64">
+      </button>
+      {%- else -%}
+      {%- for media in product.media -%}
+      <button type="button" class="pdp-thumb pro_img{% if media.id == featured_media.id or forloop.first and featured_media == blank %} is-active{% endif %}" data-index="{{ forloop.index0 }}" data-image-id="{{ media.id }}" data-full="{{ media.preview_image | img_url: 'master' }}" aria-label="View image {{ forloop.index }}"{% if media.id == featured_media.id or forloop.first and featured_media == blank %} aria-current="true"{% endif %}>
+        <img class="product-single__photo" src="{{ media.preview_image | img_url: '200x200' }}" alt="{{ media.alt | default: product.title | escape }}" width="64" height="64"{% unless forloop.first %} loading="lazy"{% endunless %} data-image-id="{{ media.id }}">
+      </button>
+      {%- endfor -%}
+      {%- endif -%}
+    </div>
+    <button type="button" class="pdp-thumbs-btn" data-thumbs-next aria-label="Next thumbnails">
+      <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+    </button>
+  </div>
+  <div class="pdp-stage product-images">
+    <button type="button" class="pdp-nav prev" data-gallery-prev aria-label="Previous product image">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+    </button>
+    <figure class="pdp-main" data-gallery-main>
+      <img id="productPhotoImg" class="product-single__photo" src="{{ featured_image | img_url: '1200x1200' }}" alt="{{ product.title | escape }}" width="800" height="800"{% if settings.product_zoom_enable %} data-mfp-src="{{ featured_image | img_url: 'master' }}"{% endif %} data-image-id="{{ featured_image.id }}">
+    </figure>
+    <button type="button" class="pdp-nav next" data-gallery-next aria-label="Next product image">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    </button>
+  </div>
+  <div class="pdp-dots" data-gallery-dots>
+    {%- for media in product.media -%}
+    <button type="button" class="pdp-dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to image {{ forloop.index }}"></button>
+    {%- endfor -%}
+  </div>
+</div>

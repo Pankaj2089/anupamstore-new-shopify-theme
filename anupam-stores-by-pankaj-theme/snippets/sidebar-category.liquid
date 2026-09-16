@@ -1,0 +1,86 @@
+{%- assign sidebar_linklist = linkedlist  -%}
+{%- assign link = linkedlist  -%}
+{% if enable_sidecategory %} 
+<div id="shopify-section-sidebar-category" class="shopify-section">
+  <div class="widget widget_product_categories">
+    {% if linkedlist_title %}
+    <h4>{{ linkedlist_title }} </h4>  
+    {% endif %}
+    {% if linklists[sidebar_linklist].links.size > 0 %}
+    <ul class="product-categories dt-sc-toggle-frame-set">
+      {% for link in linklists[sidebar_linklist].links %}
+      {% assign child_list_handle = link.title | split: '[' | first | handleize %}      
+      {% if link and link.links != blank  %}
+      <li class="cat-item cat-item-39 cat-parent first">
+        {% comment %} 
+            DYNAMIC HIGHLIGHT CHECK: Matches the current page URL parameter 
+            against the menu item URL to track the clicked filter state.
+        {% endcomment %}
+        {% assign is_parent_link_active = false %}
+        {% if request.path == link.url or request.path contains link.url %}
+            {% assign is_parent_link_active = true %}
+        {% endif %}
+        <a href="{{ link.url }}" class="dt-sc-toggle {% if link.active %}active{% elsif is_parent_link_active %}active{% endif %}">{{ link.title   | split: '[' | first | escape }} </a> 
+        {% assign inner_link = link.title | split: '[' | first | handleize %}
+        <ul class="children dt-sc-toggle-content">
+          {% for child_link in link.links %}
+          {% assign child_list_handle = child_link.title | split: '[' | first1 | handleize %}
+          {% if child_link and child_link.links != blank  %}
+          <li class="cat-item cat-item-39 cat-parent first1">
+            <a href="{{ child_link.url }}" class="dt-sc-toggle {% if link.active %}active{% endif %}">{{ child_link.title  | split: '[' | first | escape }} </a>
+            {% assign inner_link = link.title | split: '[' | first | handleize %}
+            <ul class="children dt-sc-toggle-content">
+              {% for child_link in child_link.links %}
+                {% comment %} 
+                DYNAMIC HIGHLIGHT CHECK: Matches the current page URL parameter 
+                against the menu item URL to track the clicked filter state.
+                {% endcomment %}
+                {% assign is_child_link_active = false %}
+                {% if request.path == child_link.url or request.path contains child_link.url %}
+                    {% assign is_child_link_active = true %}
+                {% endif %}
+              <li><a class="{% if is_child_link_active %}active{% endif %}" href="{{ child_link.url }}">{{ child_link.title  | split: '[' | first | escape }} </a></li>
+              {% endfor %}
+            </ul>
+            <span class="dt-menu-expand">+</span>   
+          </li>
+          {% else %}
+            {% comment %} 
+            DYNAMIC HIGHLIGHT CHECK: Matches the current page URL parameter 
+            against the menu item URL to track the clicked filter state.
+            {% endcomment %}
+            {% assign is_child_link_active = false %}
+            {% if request.path == child_link.url or request.path contains child_link.url %}
+                {% assign is_child_link_active = true %}
+            {% endif %}
+            <li class="cat-item cat-item-39 cat-parent"><a href="{{ child_link.url }}" class="{% if is_child_link_active %}active{% endif %}">{{ child_link.title  | split: '[' | first | escape }} </a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        <span class="dt-menu-expand">+</span>              
+      </li>
+      {% else %}
+        {% comment %} 
+            DYNAMIC HIGHLIGHT CHECK: Matches the current page URL parameter 
+            against the menu item URL to track the clicked filter state.
+        {% endcomment %}
+        {% assign is_parent_link_active = false %}
+        {% if request.path == link.url or request.path contains link.url %}
+            {% assign is_parent_link_active = true %}
+        {% endif %}
+        <li class="cat-item cat-item-39 cat-parent">
+          <i></i><a class="{% if is_parent_link_active %}active{% endif %}" href="{{ link.url }}">{{ link.title | split: '[' | first | escape }} </a> 
+        </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif  %}
+  </div>
+</div>
+{% endif %}
+
+<!-- Filter for Smart Savings -->
+{% render 'sidebar-smart-savings-filter' %}
+
+<!-- Filter for Shop By Brands -->
+{% render 'sidebar-shop-by-brands-filter' %}

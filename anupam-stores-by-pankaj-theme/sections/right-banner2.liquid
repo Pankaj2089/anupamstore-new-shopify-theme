@@ -1,0 +1,161 @@
+<style>
+  .ttcmsrightbanner .ttrightbanner.banner1 .ttbaaner-title{color: {{ section.settings.title_color1 }};}.ttcmsrightbanner .ttrightbanner.banner1 .ttbaaner-subtitle{color: {{ section.settings.subtitle_color1 }};}
+  .ttcmsrightbanner .ttrightbanner.banner2 .ttbaaner-title{color: {{ section.settings.title_color2 }};}.ttcmsrightbanner .ttrightbanner.banner2 .ttbaaner-subtitle{color: {{ section.settings.subtitle_color2 }};}
+  .ttcmsrightbanner .ttrightbanner.banner1 .ttbaaner-pricedesc{color: {{ section.settings.pricedesc_color1 }};}.ttcmsrightbanner .ttrightbanner.banner1 .price{color: {{ section.settings.price_color1 }};}
+  .ttcmsrightbanner .ttrightbanner.banner2 .ttbaaner-pricedesc{color: {{ section.settings.pricedesc_color2 }};}.ttcmsrightbanner .ttrightbanner.banner2 .price{color: {{ section.settings.price_color2 }};}
+</style>
+<div class="ttcmsrightbanner">
+  {% if section.settings.banner_image1 != blank %}
+  <div class="ttrightbanner banner1" {% if settings.enable_animation != blank %} data-aos="fade-up" {% endif %}>
+    <a href="{{section.settings.banner_link1 }}">
+      {% if section.settings.banner_image1 != blank %}
+      <img loading="lazy" src="{{ section.settings.banner_image1 | img_url: "master"}}" alt="banner_image1">
+      {% else %}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{% endif %}      
+      <div class="ttbanner-content">
+        <div class="banner-inner">
+          <div class="ttbaaner-subtitle">{{ section.settings.banner_subtitle1 }}</div>
+          <div class="ttbaaner-title">{{ section.settings.banner_title1 }}</div>
+          <div class="ttbaaner-pricedesc">{{ section.settings.banner_pricedesc1 }}<span class="price">{{ section.settings.banner_price1 }}</span></div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+  {% if section.settings.banner_image2 != blank %}
+  <div class="ttrightbanner banner2" {% if settings.enable_animation != blank %} data-aos="fade-up" {% endif %}>
+    <a href="{{section.settings.banner_link2 }}">
+      {% if section.settings.banner_image2 != blank %}
+      <img loading="lazy" src="{{ section.settings.banner_image2 | img_url: "master"}}" alt="banner_image2">
+      {% else %}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{% endif %}      
+      <div class="ttbanner-content">
+        <div class="banner-inner">
+          <div class="ttbaaner-subtitle">{{ section.settings.banner_subtitle2 }}</div>
+          <div class="ttbaaner-title">{{ section.settings.banner_title2 }}</div>
+          <div class="ttbaaner-pricedesc">{{ section.settings.banner_pricedesc2 }}<span class="price">{{ section.settings.banner_price2 }}</span></div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% schema %}
+{
+"name": "TT cms rightbanner",
+"class": "cmsrightbanner col-sm-6 col-xs-6",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "image_picker",
+"id": "banner_image1",
+"label": "Banner Image1"
+},		
+{
+"type": "text",
+"id": "banner_title1",
+"label": "Banner Title1",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "title_color1",
+"label": "Title color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_subtitle1",
+"label": "Banner Sub Title1",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "subtitle_color1",
+"label": "Sub Title color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_pricedesc1",
+"label": "Banner Price description1",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "pricedesc_color1",
+"label": "Price Description color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_price1",
+"label": "Banner Price1"
+},
+{
+"type": "color",
+"id": "price_color1",
+"label": "Price color",
+"default": "#fff"
+},
+{
+"type": "image_picker",
+"id": "banner_image2",
+"label": "Banner Image2"
+},		
+{
+"type": "text",
+"id": "banner_title2",
+"label": "Banner Title2",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "title_color2",
+"label": "Title color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_subtitle2",
+"label": "Banner Sub Title2",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "subtitle_color2",
+"label": "Sub Title color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_pricedesc2",
+"label": "Banner Price description2",
+"default": "new camera shop"
+},
+{
+"type": "color",
+"id": "pricedesc_color2",
+"label": "Price Description color",
+"default": "#fff"
+},
+{
+"type": "text",
+"id": "banner_price2",
+"label": "Banner Price2"
+},
+{
+"type": "color",
+"id": "price_color2",
+"label": "Price color",
+"default": "#fff"
+}
+],
+"presets": [
+{
+"name": "TT cms rightbanner",
+"category": "Image"
+}
+]
+}
+{% endschema %}

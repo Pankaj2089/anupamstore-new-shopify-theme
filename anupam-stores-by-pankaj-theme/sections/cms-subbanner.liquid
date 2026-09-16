@@ -1,0 +1,289 @@
+<section class="promo-banner" data-slider aria-label="Collection promotions">
+  <div class="slider-track promo-track" data-slider-track>
+    {% if section.settings.banner1_img != blank %}
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner1_url != blank %}{{ section.settings.banner1_url }}{% else %}#{% endif %}">
+      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner1_img | img_url: 'master' }}" alt="{{ section.settings.banner1_title | default: 'Promotion' | escape }}">
+      {% if section.settings.banner1_title != blank or section.settings.banner1_desc != blank or section.settings.banner1_subtitle != blank %}
+      <div class="promo-copy">
+        {% if section.settings.banner1_subtitle != blank %}<p>{{ section.settings.banner1_subtitle }}</p>{% endif %}
+        {% if section.settings.banner1_title != blank %}<h3 class="promo-title">{{ section.settings.banner1_title }}</h3>{% endif %}
+        {% if section.settings.banner1_desc != blank %}<p>{{ section.settings.banner1_desc }}</p>{% endif %}
+      </div>
+      {% endif %}
+    </a>
+    {% endif %}
+    {% if section.settings.banner2_img != blank %}
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner2_url != blank %}{{ section.settings.banner2_url }}{% else %}#{% endif %}">
+      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner2_img | img_url: 'master' }}" alt="{{ section.settings.banner2_title | default: 'Promotion' | escape }}">
+      {% if section.settings.banner2_title != blank or section.settings.banner2_desc != blank or section.settings.banner2_subtitle != blank %}
+      <div class="promo-copy">
+        {% if section.settings.banner2_subtitle != blank %}<p>{{ section.settings.banner2_subtitle }}</p>{% endif %}
+        {% if section.settings.banner2_title != blank %}<h3 class="promo-title">{{ section.settings.banner2_title }}</h3>{% endif %}
+        {% if section.settings.banner2_desc != blank %}<p>{{ section.settings.banner2_desc }}</p>{% endif %}
+      </div>
+      {% endif %}
+    </a>
+    {% endif %}
+    {% if section.settings.banner3_img != blank %}
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner3_url != blank %}{{ section.settings.banner3_url }}{% else %}#{% endif %}">
+      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner3_img | img_url: 'master' }}" alt="{{ section.settings.banner3_title | default: 'Promotion' | escape }}">
+      {% if section.settings.banner3_title != blank or section.settings.banner3_desc != blank or section.settings.banner3_subtitle != blank %}
+      <div class="promo-copy">
+        {% if section.settings.banner3_subtitle != blank %}<p>{{ section.settings.banner3_subtitle }}</p>{% endif %}
+        {% if section.settings.banner3_title != blank %}<h3 class="promo-title">{{ section.settings.banner3_title }}</h3>{% endif %}
+        {% if section.settings.banner3_desc != blank %}<p>{{ section.settings.banner3_desc }}</p>{% endif %}
+      </div>
+      {% endif %}
+    </a>
+    {% endif %}
+  </div>
+  <div class="promo-nav">
+    <button class="promo-arrow prev" type="button" data-slider-prev aria-label="Previous promo">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+    </button>
+    <button class="promo-arrow next" type="button" data-slider-next aria-label="Next promo">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    </button>
+  </div>
+</section>
+{% schema %}
+{
+"name": "CMS Sub-Banner",
+"class": "index-section subbanner",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "image_picker",
+"id": "banner1_img",
+"label": "Banner1 image"
+},
+{
+"type": "url",
+"id": "banner1_url",
+"label": "Banner1 url"
+},
+{
+"type": "select",
+"id": "text1_position",
+"label": "Text Position",
+"options": [
+{
+"value": "left",
+"label": "left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "text",
+"id": "banner1_subtitle",
+"label": "Banner1 subtitle"
+},
+{
+"type": "color",
+"id": "banner1_subtitle_color",
+"label": "Banner1 subtitle color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "banner1_title",
+"label": "Banner1 title"
+},
+{
+"type": "color",
+"id": "banner1_title_color",
+"label": "Banner1 title color"
+},
+{
+"type": "text",
+"id": "banner1_desc",
+"label": "Banner1 description"
+},
+{
+"type": "color",
+"id": "banner1_desc_color",
+"label": "Banner1 description color"
+},
+{
+"type": "text",
+"id": "banner1_pricedesc",
+"label": "Banner1 Price Description"
+},
+{
+"type": "color",
+"id": "banner1_pricedesc_color",
+"label": "Banner1 Price Description color"
+},
+{
+"type": "text",
+"id": "banner1_price",
+"label": "Banner1 Price"
+},
+{
+"type": "image_picker",
+"id": "banner2_img",
+"label": "Banner2 image"
+},
+{
+"type": "url",
+"id": "banner2_url",
+"label": "Banner2 url"
+},
+{
+"type": "select",
+"id": "text2_position",
+"label": "Text Position",
+"options": [
+{
+"value": "left",
+"label": "left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "text",
+"id": "banner2_subtitle",
+"label": "Banner2 subtitle"
+},
+{
+"type": "color",
+"id": "banner2_subtitle_color",
+"label": "Banner2 subtitle color"
+},
+{
+"type": "text",
+"id": "banner2_title",
+"label": "Banner2 title"
+},
+{
+"type": "color",
+"id": "banner2_title_color",
+"label": "Banner2 title color"
+},
+{
+"type": "text",
+"id": "banner2_desc",
+"label": "Banner2 description"
+},
+{
+"type": "color",
+"id": "banner2_desc_color",
+"label": "Banner2 description color"
+},
+{
+"type": "text",
+"id": "banner2_pricedesc",
+"label": "Banner2 Price Description"
+},
+{
+"type": "color",
+"id": "banner2_pricedesc_color",
+"label": "Banner2 Price Description color"
+},
+{
+"type": "text",
+"id": "banner2_price",
+"label": "Banner2 Price"
+},
+{
+"type": "image_picker",
+"id": "banner3_img",
+"label": "Banner3 image"
+},
+{
+"type": "url",
+"id": "banner3_url",
+"label": "Banner3 url"
+},
+{
+"type": "select",
+"id": "text3_position",
+"label": "Text Position",
+"options": [
+{
+"value": "left",
+"label": "left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "text",
+"id": "banner3_subtitle",
+"label": "Banner3 subtitle"
+},
+{
+"type": "color",
+"id": "banner3_subtitle_color",
+"label": "Banner3 subtitle color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "banner3_title",
+"label": "Banner3 title"
+},
+{
+"type": "color",
+"id": "banner3_title_color",
+"label": "Banner3 title color"
+},
+{
+"type": "text",
+"id": "banner3_desc",
+"label": "Banner3 description"
+},
+{
+"type": "color",
+"id": "banner3_desc_color",
+"label": "Banner3 description color"
+},
+{
+"type": "text",
+"id": "banner3_pricedesc",
+"label": "Banner3 Price Description"
+},
+{
+"type": "color",
+"id": "banner3_pricedesc_color",
+"label": "Banner3 Price Description color"
+},
+{
+"type": "text",
+"id": "banner3_price",
+"label": "Banner3 Price"
+}
+],
+"presets": [
+{
+"name": "CMS Sub-Banner",
+"category": "TT CMS section"
+}
+]
+}
+{% endschema %}

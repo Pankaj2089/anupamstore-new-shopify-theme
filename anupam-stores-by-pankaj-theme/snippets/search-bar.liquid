@@ -1,0 +1,15 @@
+<form action="/search" method="get" class="header-search anupam-search-bar" role="search" id="custom-results">
+  <input type="hidden" name="type" value="product">
+  <label class="sr-only" for="site-search">{{ 'general.search.placeholder' | t }}</label>
+  <input
+    id="site-search"
+    type="search"
+    name="q"
+    value="{{ search.terms | escape }}"
+    placeholder="Search for products, categories..."
+    class="input-group-field"
+    aria-label="{{ 'general.search.placeholder' | t }}">
+  <button type="submit" aria-label="{{ 'general.search.submit' | t }}">
+    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+  </button>
+</form>

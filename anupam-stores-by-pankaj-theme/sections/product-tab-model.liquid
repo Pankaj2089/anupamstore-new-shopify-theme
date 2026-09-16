@@ -1,0 +1,127 @@
+{% for block in section.blocks %}
+{%- assign collection = collections[block.settings.collection] -%}
+{% if forloop.first %}
+<section class="section new-products" id="new-products" {{ block.shopify_attributes }}>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{{ block.settings.title | default: 'New Products' }}</h2>
+      {% if collection != blank and collection.url != blank %}
+      <a class="section-link" href="{{ collection.url }}">View All Products <span aria-hidden="true">→</span></a>
+      {% endif %}
+    </div>
+    <div class="product-grid">
+      {% if collection != blank %}
+        {% for product in collection.products limit: 8 %}
+          {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'new' %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="section featured" id="featured" {{ block.shopify_attributes }}>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{{ block.settings.title | default: 'Top Featured' }}</h2>
+      <div class="section-controls">
+        <button class="slider-btn prev" type="button" data-featured-prev aria-label="Previous featured products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+        </button>
+        <button class="slider-btn next" type="button" data-featured-next aria-label="Next featured products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    <div class="slider-wrapper featured-slider" data-slider>
+      <div class="slider-track featured-track" data-slider-track>
+        {% if collection != blank %}
+          {% for product in collection.products limit: 12 %}
+            {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'featured' %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+{% schema %}
+{
+"name": "Sortable Products",
+"class": "index-section ttproduct sortable-products-section",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"max_blocks": 5,
+"settings": [
+{
+"type": "checkbox",
+"id": "product_rows",
+"label": "2 Rows Product"
+},
+        {
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 7
+},
+
+
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 1
+},
+{
+"type": "color",
+"id": "button_text",
+"label": "Tab text color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "button_hover_text",
+"label": "Tab text hover color",
+"default": "#fff"
+}
+],
+"blocks": [	
+{
+"type": "text_block",
+"name": "Column",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Collection Name",
+"default": "Tab Name"
+},	
+
+{
+"id": "collection",
+"type": "collection",
+"label": "Collection"
+}	
+]
+}
+],
+"presets": [
+{
+"name": "Sortable Products",
+"category": "Collection",
+"blocks": [
+{
+"type": "text_block"
+}        
+]
+}
+]
+}
+{% endschema %}

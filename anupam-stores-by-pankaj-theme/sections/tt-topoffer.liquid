@@ -1,0 +1,50 @@
+{% if section.blocks.size > 0 %} 
+<div id="tt-topoffer" class="block_content" {% if settings.enable_animation != blank %} data-aos="fade-up" {% endif %}>     
+  <div class="ttofferblock">
+    {% for block in section.blocks %}      
+    <div id="topoffer-{{block.id}}" class="top-offer">
+      <a class="topoffer-img" href="{{block.settings.topoffer_img_url }}">                
+        <img loading="lazy" src="{{ block.settings.topoffer_img  | img_url: "master" }}" alt="offer-img" />
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+<style>
+
+</style>
+{% schema %}
+{
+"name": "topoffer",
+"class": "topoffer col-sm-2",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"blocks": [
+{
+"type": "offer_text",
+"name": "services",
+"settings": [
+{
+"type": "url",
+"id": "topoffer_img_url",
+"label": "Offer Image URL"
+},
+{
+"type": "image_picker",
+"id": "topoffer_img",
+"label": "Offer Image",
+"info": "Size: 324x186"
+}
+]
+}
+],
+"presets": [
+{
+"name": "topoffer",
+"category": "offer"
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<style>
+  #annoucementbar{
+    background: {{ section.settings.bg_clr }};
+  }
+  #annoucementbar .announce-banner-content .announce-cnt{
+    color: {{ section.settings.text_clr }};
+  }
+</style>
+{% if section.blocks.size > 0 %}
+<div id="annoucementbar" class="announce-banner">
+  <div class="container">
+    <div class="announce-banner-content">
+      <div class="announce-content">          
+        {% for block in section.blocks %}  
+        <div id="announce-{{block.id}}" class="announce-cnt">
+          {{ block.settings.announce_cnt }}
+        </div>
+        {% endfor %}
+      </div>    
+    </div>
+  </div>
+</div>
+{% endif %} 
+{% schema %}
+{
+"name": "announcement bar",
+"class": "index-section announcement-bar",
+"enabled_on": {
+    "groups": ["header"]
+},
+"settings": [
+{
+"type": "color",
+"id": "bg_clr",
+"label": "background Color",
+"default":"#f12a43"
+},	
+{
+"type": "color",
+"id": "text_clr",
+"label": "text Color",
+"default":"#f12a43"
+}
+],
+"blocks": [
+{
+"type": "announcement_text",
+"name": "services",
+"settings": [
+{
+"type": "text",
+"id": "announce_cnt",
+"label": "Announcement Bar Title"
+}
+]
+}
+],
+"presets": [
+{
+"name": "announcement bar",
+"category": "offer"
+}
+]
+}
+{% endschema %}

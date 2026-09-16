@@ -1,0 +1,51 @@
+{% comment %} {% if settings.body_font contains 'Google' %}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.body_font | remove: 'Google+' }}:300,300italic,400,,400italic,500,500italic,600,600italic,700,700italic,800,800italic&display=swap">
+{% endif %}
+{% if settings.type_header_family contains 'Google' %}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.type_header_family | remove: 'Google+' }}:300,300italic,400,500,500italic,600,400italic,600italic,700,700italic,800,800italic&display=swap">
+{% endif %}
+{% if settings.type_subheader_family contains 'Google' %}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.type_subheader_family | remove: 'Google+' }}:300,300italic,400,500,500italic,600,400italic,600italic,700,700italic,800,800italic&display=swap">
+{% endif %} {% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+{%- liquid
+  assign body_font = settings.body_font | remove: 'Google+' | strip
+  assign header_font = settings.type_header_family | remove: 'Google+' | strip
+  assign subheader_font = settings.type_subheader_family | remove: 'Google+' | strip
+
+  comment
+    Drop the heavy italics (1,300; 1,400, etc.) to immediately cut the bundle size in half.
+    Modern browsers will natively tilt the regular font if an italic style is needed.
+  endcomment
+  assign weights = 'wght@300;400;500;600;700;800'
+  
+  assign url_params = ''
+
+  if settings.body_font contains 'Google'
+    assign body_clean = body_font | replace: ' ', '+'
+    assign url_params = url_params | append: 'family=' | append: body_clean | append: ':' | append: weights | append: '&'
+  endif
+
+  if settings.type_header_family contains 'Google' and header_font != body_font
+    assign header_clean = header_font | replace: ' ', '+'
+    assign url_params = url_params | append: 'family=' | append: header_clean | append: ':' | append: weights | append: '&'
+  endif
+
+  if settings.type_subheader_family contains 'Google' and subheader_font != body_font and subheader_font != header_font
+    assign subheader_clean = subheader_font | replace: ' ', '+'
+    assign url_params = url_params | append: 'family=' | append: subheader_clean | append: ':' | append: weights | append: '&'
+  endif
+-%}
+
+{%- if url_params != '' -%}
+  {% comment %} This merges everything into exactly 1 HTTP request and applies the non-blocking print technique {% endcomment %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ url_params }}display=swap" media="print" onload="this.media='all'">
+  
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ url_params }}display=swap">
+  </noscript>
+{%- endif -%}
+

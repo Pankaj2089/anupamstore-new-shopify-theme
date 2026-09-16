@@ -1,0 +1,144 @@
+{%- comment -%}
+Homepage product card: new HTML structure + existing Shopify ATC / wishlist / compare / quick view hooks.
+card_style: bestseller | new | featured | deal
+featured_card: true for the large bestseller tile
+deal_theme: sage | night | cocoa | olive
+{%- endcomment -%}
+{%- assign card_style = card_style | default: 'new' -%}
+{%- assign product_url = product.url -%}
+{%- if collection != blank -%}
+  {%- assign product_url = product.url | within: collection -%}
+{%- endif -%}
+{%- assign save_percent = 0 -%}
+{%- if product.compare_at_price > product.price and product.compare_at_price > 0 -%}
+  {%- assign save_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+{%- endif -%}
+{%- assign stock_qty = product.variants.first.inventory_quantity | default: 0 -%}
+{%- assign featured_src = product.featured_media | img_url: '1920x' -%}
+
+{%- if card_style == 'deal' -%}
+<article class="deal-card deal-theme-{{ deal_theme | default: 'sage' }} item-row product-layouts{% unless product.available %} product-price--sold-out{% endunless %}" data-slider-item data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
+  <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
+    <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+  </form>
+  <div class="deal-copy">
+    <h3 class="deal-title"><a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a></h3>
+    {% if stock_qty > 0 %}
+    <p class="deal-stock">Available: {{ stock_qty }}</p>
+    {% endif %}
+    {% if save_percent > 0 %}
+    <span class="deal-badge">Save -{{ save_percent }}%</span>
+    {% endif %}
+    <div class="deal-price product-price grid-view-item__meta">
+      {% if product.compare_at_price > product.price %}
+      <span class="price-was">{{ product.compare_at_price | money }}</span>
+      {% endif %}
+      <span class="price-sale">{{ product.price | money }}</span>
+    </div>
+    {% if product.available %}
+    {% if settings.enable_add_cart != false %}
+    <a class="add-cart-btn deal-cart" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">Add To Cart <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span></a>
+    {% endif %}
+    {% endif %}
+  </div>
+  <div class="deal-visual">
+    <a href="{{ product_url }}">
+      <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="360" height="360" loading="lazy">
+    </a>
+  </div>
+</article>
+{%- else -%}
+<article class="product-card item-row product-layouts{% if featured_card %} product-card--featured{% endif %}{% unless product.available %} product-price--sold-out{% endunless %}" {% if card_style == 'featured' %}data-slider-item{% endif %} data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
+  <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
+    <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+  </form>
+  <div class="product-image{% if card_style == 'featured' %} product-image--contain{% endif %}">
+    {% if card_style == 'new' or card_style == 'featured' %}
+    <a class="product-media" href="{{ product_url }}">
+      <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+    </a>
+    {% if save_percent > 0 %}
+    <span class="badge-sale">Save -{{ save_percent }}%</span>
+    {% endif %}
+    {% if product.available %}
+    <a class="add-cart-btn product-hover-cta" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">
+      Add to Cart <span aria-hidden="true">→</span>
+    </a>
+    {% endif %}
+    {% else %}
+    <a class="product-media" href="{{ product_url }}">
+      <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+    </a>
+    {% if save_percent > 0 %}
+    <span class="badge-sale">Save -{{ save_percent }}%</span>
+    {% endif %}
+    <div class="product-actions">
+      {% if settings.enable_wishlist %}
+      <span class="default-wishbutton-{{ product.handle }}">
+        <a class="action-btn add-in-wishlist-js" href="{{ product.handle }}" aria-label="Add to wishlist"><span class="material-symbols-outlined" aria-hidden="true">favorite</span></a>
+      </span>
+      <span class="loadding-wishbutton-{{ product.handle }}" style="display:none;"></span>
+      <span class="added-wishbutton-{{ product.handle }}" style="display:none;">
+        <a class="action-btn" href="/pages/wishlist" aria-label="View wishlist"><span class="material-symbols-outlined" aria-hidden="true">favorite</span></a>
+      </span>
+      {% endif %}
+      {% if settings.enable_quick_view %}
+      <a class="action-btn quick-view-text for-home" href="javascript:void(0)" data-id="{{ product.handle }}" aria-label="Quick view"><span class="material-symbols-outlined" aria-hidden="true">visibility</span></a>
+      {% endif %}
+      {% if product.available %}
+      <a class="action-btn add-cart-btn" href="javascript:void(0)" aria-label="Add to cart"><span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span></a>
+      {% endif %}
+      {% if settings.enable_compare %}
+      <a class="action-btn add-in-compare-js" href="javascript:void(0)" data-comparehandle="{{ product.handle }}" aria-label="Compare"><span class="material-symbols-outlined" aria-hidden="true">compare_arrows</span></a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="product-body">
+    <h3 class="product-title"><a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a></h3>
+    {% if card_style == 'bestseller' %}
+    <p class="product-desc">{{ product.description | strip_html | truncatewords: 12 }}</p>
+    {% endif %}
+    {% if card_style == 'bestseller' or card_style == 'collection' %}
+    {%- assign rating_value = 5.0 -%}
+    {%- assign rating_count = 0 -%}
+    {%- if product.metafields.reviews.rating.value.rating != blank -%}
+      {%- assign rating_value = product.metafields.reviews.rating.value.rating -%}
+    {%- elsif product.metafields.reviews.rating.value != blank -%}
+      {%- assign rating_value = product.metafields.reviews.rating.value -%}
+    {%- endif -%}
+    {%- if product.metafields.reviews.rating_count.value != blank -%}
+      {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
+    {%- elsif product.metafields.reviews.rating_count != blank -%}
+      {%- assign rating_count = product.metafields.reviews.rating_count -%}
+    {%- endif -%}
+    {%- assign rating_display = rating_value | times: 10 | round | times: 0.1 -%}
+    <div class="product-rating" aria-label="Rated {{ rating_display }} out of 5">
+      <span class="stars" aria-hidden="true">
+        {%- for i in (1..5) -%}
+        <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" focusable="false"><path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        {%- endfor -%}
+      </span>
+      <span class="rating-meta">{{ rating_display }} ({{ rating_count }})</span>
+      {% if settings.collections_show_rating %}
+      <span class="spr-badges grid-item-meta">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </span>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="product-price grid-view-item__meta">
+      {% if product.compare_at_price > product.price %}
+      <span class="price-was">{{ product.compare_at_price | money }}</span>
+      {% endif %}
+      <span class="price-sale">{{ product.price | money }}</span>
+    </div>
+    {% if card_style == 'bestseller' and save_percent > 0 %}
+    <span class="badge-sale">Save -{{ save_percent }}%</span>
+    {% endif %}
+    {% if product.available %}
+    <a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>
+    {% endif %}
+  </div>
+</article>
+{%- endif -%}

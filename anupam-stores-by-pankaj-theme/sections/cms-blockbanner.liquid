@@ -1,0 +1,205 @@
+{% assign has_banner_item = false %}
+{% for block in section.blocks %}
+  {% if block.settings.banner_image1 != blank %}
+    {% assign has_banner_item = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_banner_item %}
+<div class="cmsblockbanner" {% if settings.enable_animation != blank %} data-aos="fade-up" {% endif %}>
+  <div class="container">
+    <div class="row">
+      <div class="ttbanner-wrap owl-carousel">
+        {% for block in section.blocks %}
+        {% if block.settings.banner_image1 != blank %}
+        <div id="blockbanner-{{ block.id }}" class="banner col-sm-12">
+          <a href="{% if block.settings.banner_link1 != blank %} {{block.settings.banner_link1 }}{% else %}#{% endif %}">
+            <img loading="lazy" src="{{  block.settings.banner_image1 | img_url: "master" }}" alt="banner-image" />
+            <div class="banner-content {{ block.settings.text_position }}">
+              <div class="banner-inner">          
+                {% if block.settings.subtitle !="" %}
+                <div class="subtitle">{{ block.settings.subtitle }}</div>
+                {% endif %} 
+                {% if block.settings.title !="" %}
+                <div class="title">{{ block.settings.title }}</div>
+                {% endif %}  
+                {% if block.settings.desc !="" %}
+                <div class="desc">{{ block.settings.desc }}</div>
+                {% endif %}
+                {% if block.settings.price_desc != blank %}
+                <div class="price_desc">
+                  {{ block.settings.price_desc }}
+                  {% if block.settings.price != blank %}
+                  <span class="price">{{ block.settings.price }}</span>  
+                  {% endif %}
+                </div>  
+                {% endif %}
+              </div>
+            </div> 
+          </a>
+          <style>
+            .cmsblockbanner .banner#blockbanner-{{ block.id }} .banner-content .title,.cmsblockbanner .banner#blockbanner-{{ block.id }} .banner-content .subtitle{color:{{ block.settings.title_color }};}
+            .cmsblockbanner .ttbanner-wrap #blockbanner-{{ block.id }} .banner-content .desc{color:{{ block.settings.desc_color }};background:{{ block.settings.desc_bgcolor }};}
+            .cmsblockbanner .ttbanner-wrap #blockbanner-{{ block.id }} .banner-content .price_desc{color:{{ block.settings.price_desc_color }};}
+            .cmsblockbanner .ttbanner-wrap #blockbanner-{{ block.id }} .banner-content .price{color:{{ block.settings.price_color }};}
+            .cmsblockbanner .ttbanner-wrap #blockbanner-{{ block.id }} .banner-content .desc::after,
+            .cmsblockbanner .ttbanner-wrap #blockbanner-{{ block.id }} .banner-content .desc::before{background:{{ block.settings.desc_bgcolor }};}
+          </style>
+        </div>
+        {% endif %}  
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    //cmsblockbanner
+  $('.cmsblockbanner .ttbanner-wrap').owlCarousel({
+    items :3, //1 items above 1000px browser width
+    nav : false,
+    dots : false,
+    loop: false,
+    autoplay:false,
+    responsive: {
+      992: {
+        items: 3
+      },
+      544: {
+        items: 2
+      },
+      320: {
+        items: 1
+      },
+      100: {
+        items: 1
+      }
+    }
+  });
+</script>
+{% else %}
+<style>
+  #shopify-section-{{ section.id }} {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+</style>
+{% endif %}
+{% schema %}
+{
+"name": "Cms Blockbanner",
+"class": "index-section cms-blockbanner",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"max_blocks": 4,
+"settings":[
+],
+"blocks" : [
+{
+"type": "image",
+"name": "Slide",
+"settings": [
+{
+"type": "image_picker",
+"id": "banner_image1",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "banner_link1",
+"label": "Banner link"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default":"Kid's Corner"
+},
+{
+"type": "text",
+"id": "subtitle",
+"label": "Sub Title",
+"default":"Kid's Corner"
+},
+{
+"type": "text",
+"id": "desc",
+"label": "desc",
+"default":"Kid's Corner"
+},
+{
+"type": "text",
+"id": "price_desc",
+"label": "Price desc",
+"default":"Kid's Corner"
+},
+{
+"type": "text",
+"id": "price",
+"label": "price",
+"default":"Kid's Corner"
+},
+{
+"type": "select",
+"id": "text_position",
+"label": "Text Position",
+"options": [
+{
+"value": "left",
+"label": "left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "color",
+"id": "title_color",
+"label": "Title Color",
+"default":"#f12a43"
+},	
+{
+"type": "color",
+"id": "desc_color",
+"label": "Desc Color",
+"default":"#f12a43"
+},
+{
+"type": "color",
+"id": "desc_bgcolor",
+"label": "Desc Background Color",
+"default":"#fff"
+},
+{
+"type": "color",
+"id": "price_desc_color",
+"label": "Price Desc Color",
+"default":"#f12a43"
+},
+{
+"type": "color",
+"id": "price_color",
+"label": "Price Color",
+"default":"#f12a43"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Cms Blockbanner",
+"category": "Image"
+}
+]
+}
+{% endschema %}

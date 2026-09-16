@@ -1,0 +1,103 @@
+<style>
+  .cmstop-banner .cmstopbanner .cmstopbanner-content .title{color:{{ section.settings.banner_title_color }};}
+  .cmstop-banner .cmstopbanner .cmstopbanner-content .subtitle{color:{{ section.settings.banner_subtitle_color }};}
+  .cmstop-banner .cmstopbanner .cmstopbanner-content .price{color:{{ section.settings.banner_price_color }};}
+  .cmstop-banner .bottom-text{background:{{ section.settings.bottmtext_bg_color }};}
+  .cmstop-banner .bottom-text span{color:{{ section.settings.banner_bottomtxt_color }};}
+</style>
+<div class="container"> 
+  <div class="cmstopbanner">
+    {% if section.settings.banner_image != blank %}
+    <a href="{% if section.settings.banner_link != blank %}{{section.settings.banner_link }}{% else %}#{% endif %}"><img loading="lazy" src="{{  section.settings.banner_image | img_url: 'master' }}" alt="topheader-banner" /></a>
+    {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}     
+    <div class="cmstopbanner-content">
+      {% if section.settings.banner_title != blank %}<div class="title">{{ section.settings.banner_title }}</div>{% endif %}              
+      {% if section.settings.banner_subtitle != blank %}<div class="subtitle">{{ section.settings.banner_subtitle }}</div>{% endif %}      
+      {% if section.settings.banner_price != blank %}<div class="price">{{ section.settings.banner_price }}</div>{% endif %}              
+    </div>  
+  </div>
+  <div class="bottom-text"> 
+    <span>{{ section.settings.banner_bottomtxt }}</span>
+  </div>
+</div>
+{% schema %}
+{
+"name": "CMSTop Banner",
+"class": "index-section cmstop-banner",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "image_picker",
+"id": "banner_image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "banner_link",
+"label": "Banner link"
+},
+{
+"type": "color",
+"id": "banner_bg",
+"label": "banner background color",
+"default": "#f4f3f0"
+},
+{
+"type": "text",
+"id": "banner_title",
+"label": "Banner title"
+},
+{
+"type": "color",
+"id": "banner_title_color",
+"label": "Banner title color"
+},
+{
+"type": "text",
+"id": "banner_subtitle",
+"label": "Banner subtitle"
+},
+{
+"type": "color",
+"id": "banner_subtitle_color",
+"label": "Banner subtitle color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "banner_price",
+"label": "Banner Price"
+},
+{
+"type": "color",
+"id": "banner_price_color",
+"label": "Banner Price color"
+},
+{
+"type": "text",
+"id": "banner_bottomtxt",
+"label": "Banner Bottom Text"
+},
+{
+"type": "color",
+"id": "banner_bottomtxt_color",
+"label": "Banner Bottom Text color"
+},
+{
+"type": "color",
+"id": "bottmtext_bg_color",
+"label": "Banner Bottom Background color"
+}
+],
+"presets": [
+{
+"name": "CMSTop Banner",
+"category": "Image"
+}
+]
+}
+{% endschema %}

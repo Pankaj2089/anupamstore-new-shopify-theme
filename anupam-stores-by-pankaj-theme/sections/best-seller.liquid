@@ -1,0 +1,132 @@
+{%- assign collection = collections[section.settings.collection] -%}
+{% if template.name == 'collection' %}
+<style>
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }} .collection-bestsellers {
+    background: #ffffff !important;
+  }
+</style>
+<section class="section collection-bestsellers" id="collection-bestsellers" data-slider aria-labelledby="best-seller-title" style="background:#ffffff;">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title" id="best-seller-title">{{ section.settings.title | default: 'Best Seller' | escape }}</h2>
+      <div class="section-controls">
+        <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous best sellers">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+        </button>
+        <button class="slider-btn next" type="button" data-slider-next aria-label="Next best sellers">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    {% if collection != blank %}
+    <div class="slider-wrapper">
+      <div class="slider-track collection-best-track" data-slider-track>
+        {% for product in collection.products limit: 8 %}
+          {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'collection' %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% else %}
+<section class="section bestsellers" id="bestsellers">
+  <div class="container">
+    <div class="section-head">
+      {% if section.settings.title != blank %}
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      {% endif %}
+      {% if collection != blank and collection.url != blank %}
+      <a class="section-link" href="{{ collection.url }}">See All <span aria-hidden="true">→</span></a>
+      {% endif %}
+    </div>
+    {% if collection != blank %}
+    <div class="bestseller-layout">
+      <div class="bestseller-grid">
+        {% for product in collection.products limit: 4 %}
+          {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'bestseller' %}
+        {% endfor %}
+      </div>
+      {% for product in collection.products offset: 4 limit: 1 %}
+        {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'bestseller', featured_card: true %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+{% schema %}
+{
+"name": "bestseller collection",
+"class": "index-section bestseller-collection best-sellers-section",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "color",
+"id": "background_color",
+"label": "Set background color"
+},
+    
+{
+"type": "range",
+"id": "padd_top",
+"min": 0,
+"max": 50,
+"step": 10,
+"label": "Margin above/below the bestseller product section.",
+"default": 40
+},
+{
+"type": "text",
+"id": "class",
+"label": "Add Class",
+"default": "bestproduct"
+},
+{
+"type": "checkbox",
+"id": "product_rows",
+"label": "2 Rows Product"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "bestseller collection"
+},	
+{
+"id": "collection",
+"type": "collection",
+"label": "Collection"
+},
+     {
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 4
+},
+
+
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 1
+}
+],
+"presets": [
+{
+"name": "bestseller collection",
+"category": "Collection"
+}
+]
+}
+{% endschema %}

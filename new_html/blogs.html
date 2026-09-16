@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs | Anupam Stores</title>
+    <meta name="description" content="Guides, checklists and store stories from Anupam Stores — Jaipur’s home décor and household supermart.">
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/collection.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body class="blog-page">
+    <div data-component="header"></div>
+    <div data-component="mobile-drawer"></div>
+
+    <main>
+        <section class="blog-listing" aria-labelledby="blog-listing-title">
+            <div class="container">
+                <nav class="collection-crumb blog-crumb" aria-label="Breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                    <span aria-current="page">Blogs</span>
+                </nav>
+                <h1 class="sr-only" id="blog-listing-title">Blogs</h1>
+                <div class="blog-list" data-blog-list></div>
+                <nav class="collection-pagination blog-pagination" data-pagination aria-label="Blog pagination"></nav>
+            </div>
+        </section>
+
+        <div data-component="newsletter"></div>
+    </main>
+
+    <div data-component="follow-rail"></div>
+    <div data-component="footer"></div>
+    <div data-component="quickview"></div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/blogs-data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>

@@ -53,7 +53,7 @@
         const loop = Boolean(options.loop);
 
         const amount = () => {
-            const item = track.querySelector('[data-slider-item], .product-card, .category-item, .brand-card, .hero-slide, .promo-slide');
+            const item = track.querySelector('[data-slider-item], .product-card, .blog-card, .category-item, .brand-card, .hero-slide, .promo-slide');
             if (!item) return track.clientWidth * 0.8;
             const style = getComputedStyle(track);
             const gap = parseFloat(style.columnGap || style.gap) || 16;
@@ -343,4 +343,15 @@
     });
 
     updateBadges();
+
+    window.AnupamUI = {
+        initSlider,
+        toast,
+        addToCart(name, qty = 1) {
+            const count = Math.max(1, Number(qty) || 1);
+            for (let i = 0; i < count; i += 1) cart.push(name);
+            updateBadges();
+            toast(count > 1 ? `${name} ×${count} added to cart` : `${name} added to cart`);
+        }
+    };
 })();

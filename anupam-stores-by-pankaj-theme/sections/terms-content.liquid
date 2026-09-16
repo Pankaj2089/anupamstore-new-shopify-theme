@@ -1,0 +1,93 @@
+<div class="terms-container" style="
+  max-width: {{ section.settings.max_width }}px;
+  color: {{ section.settings.text_color }};
+  background: {{ section.settings.background_color }};
+  padding: 40px 20px;
+  margin: 0 auto;
+">
+
+  {% if section.settings.show_title %}
+    <h1>{{ page.title }}</h1>
+  {% endif %}
+
+  {% if section.settings.show_last_updated %}
+    <p style="font-size: 13px; opacity: 0.7;">
+      Last updated: {{ section.settings.last_updated }}
+    </p>
+  {% endif %}
+
+  <div class="terms-content">
+    {{ page.content }}
+  </div>
+
+  {% if section.settings.show_disclaimer %}
+    <div class="terms-disclaimer" style="margin-top: 30px; font-size: 13px; opacity: 0.8;">
+      {{ section.settings.disclaimer_text }}
+    </div>
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Terms & Conditions",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show Page Title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_last_updated",
+      "label": "Show Last Updated Date",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last Updated Date",
+      "default": "April 2026"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content Width (px)",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "default": 800
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_disclaimer",
+      "label": "Show Disclaimer",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer_text",
+      "label": "Disclaimer Text",
+      "default": "This document is for informational purposes only and may be updated without notice."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terms & Conditions"
+    }
+  ]
+}
+{% endschema %}

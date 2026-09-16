@@ -1,0 +1,136 @@
+{% if section.blocks.size > 0 %}
+<section class="promo-banner store-fronts" data-slider aria-label="Store banners">
+  <div class="slider-track promo-track" data-slider-track>
+    {% for block in section.blocks %}
+    {% if block.settings.banner1_img != blank %}
+    <a class="promo-slide" data-slider-item href="{% if block.settings.banner1_url != blank %}{{ block.settings.banner1_url }}{% else %}#{% endif %}" {{ block.shopify_attributes }}>
+      <img class="promo-slide-img" loading="lazy" src="{{ block.settings.banner1_img | img_url: 'master' }}" alt="{{ block.settings.banner1_title | default: shop.name | escape }}">
+      {% if block.settings.banner1_title != blank or block.settings.banner1_desc != blank or block.settings.banner1_subtitle != blank %}
+      <div class="promo-copy">
+        {% if block.settings.banner1_subtitle != blank %}<p>{{ block.settings.banner1_subtitle }}</p>{% endif %}
+        {% if block.settings.banner1_title != blank %}<h3 class="promo-title">{{ block.settings.banner1_title }}</h3>{% endif %}
+        {% if block.settings.banner1_desc != blank %}<p>{{ block.settings.banner1_desc }}</p>{% endif %}
+      </div>
+      {% endif %}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="promo-nav">
+    <button class="promo-arrow prev" type="button" data-slider-prev aria-label="Previous promo">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+    </button>
+    <button class="promo-arrow next" type="button" data-slider-next aria-label="Next promo">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    </button>
+  </div>
+</section>
+{% endif %}
+{% schema %}
+{
+"name": "CMS Banner",
+"class": "index-section cmsbanner",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"max_blocks": 3,
+"settings": [
+],
+"blocks" : [
+{
+"type": "image",
+"name": "Slide",
+"settings": [
+{
+"type": "image_picker",
+"id": "banner1_img",
+"label": "Banner1 image"
+},
+{
+"type": "url",
+"id": "banner1_url",
+"label": "Banner1 url"
+},
+{
+"type": "select",
+"id": "text1_position",
+"label": "Text Position",
+"options": [
+{
+"value": "left",
+"label": "left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "text",
+"id": "banner1_desc",
+"label": "Banner1 desc"
+},
+{
+"type": "text",
+"id": "banner1_subtitle",
+"label": "Banner1 Sub Title"
+},
+{
+"type": "text",
+"id": "banner1_title",
+"label": "Banner1 title"
+},
+{
+"type": "text",
+"id": "banner1_price_desc",
+"label": "Banner1 price desc"
+},
+{
+"type": "text",
+"id": "banner1_price",
+"label": "Banner1 price"
+},
+{
+"type": "color",
+"id": "title_color",
+"label": "Banner title color"
+},
+{
+"type": "color",
+"id": "desc_color",
+"label": "Banner desc color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "desc_bgcolor",
+"label": "Banner desc background color",
+"default": "#fff"
+},
+{
+"type": "color",
+"id": "price_desc_color",
+"label": "Banner price desc color"
+},
+{
+"type": "color",
+"id": "price_color",
+"label": "Banner price color",
+"default": "#000"
+}
+]
+}
+],
+"presets": [
+{
+"name": "CMS Banner",
+"category": "TT CMS section"
+}
+]
+}
+{% endschema %}

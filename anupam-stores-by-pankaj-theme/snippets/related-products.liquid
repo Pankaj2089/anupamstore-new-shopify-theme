@@ -1,0 +1,43 @@
+{% assign number_of_products = 8 %}
+{% assign number_of_products_to_fetch = number_of_products | plus: 1 %}
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+{% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+{% assign found_a_collection = true %}
+{% assign collection = c %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if collection and collection.products_count > 1 %}
+<section class="section collection-bestsellers pdp-products" id="related" data-slider aria-labelledby="related-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title" id="related-title">Related Products</h2>
+      <div class="section-controls">
+        <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous related products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+        </button>
+        <button class="slider-btn next" type="button" data-slider-next aria-label="Next related products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    <div class="slider-wrapper">
+      <div class="slider-track collection-best-track" data-slider-track>
+        {% assign current_product = product %}
+        {% assign current_product_found = false %}
+        {% for product in collection.products limit: number_of_products_to_fetch %}
+        {% if product.handle == current_product.handle %}
+        {% assign current_product_found = true %}
+        {% else %}
+        {% unless current_product_found == false and forloop.last %}
+        {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'collection' %}
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

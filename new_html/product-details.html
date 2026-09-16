@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Anupam Stores</title>
+    <meta name="description" content="Shop luxury home décor from Anupam Stores.">
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/collection.css">
+    <link rel="stylesheet" href="css/product-details.css">
+</head>
+<body class="product-page">
+    <div data-component="header"></div>
+    <div data-component="mobile-drawer"></div>
+
+    <main>
+        <section class="pdp" aria-labelledby="pdp-title">
+            <div class="container">
+                <nav class="collection-crumb pdp-crumb" aria-label="Breadcrumb" data-pdp-crumb></nav>
+                <div class="pdp-layout">
+                    <div class="pdp-gallery" data-gallery></div>
+                    <div class="pdp-info" data-pdp-info></div>
+                </div>
+            </div>
+        </section>
+
+        <div data-component="promo-banner"></div>
+
+        <section class="section collection-bestsellers pdp-products" id="related" aria-labelledby="related-title">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title" id="related-title">Related Products</h2>
+                    <div class="section-controls">
+                        <button class="slider-btn prev" type="button" data-related-prev aria-label="Previous related products">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                        </button>
+                        <button class="slider-btn next" type="button" data-related-next aria-label="Next related products">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="slider-wrapper" data-related-slider>
+                    <div class="slider-track collection-best-track" data-slider-track data-related-track></div>
+                </div>
+            </div>
+        </section>
+
+        <div data-component="brands"></div>
+
+        <section class="section collection-bestsellers pdp-products" id="recently-viewed" aria-labelledby="recent-title">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title" id="recent-title">Recently Viewed Products</h2>
+                    <div class="section-controls">
+                        <button class="slider-btn prev" type="button" data-recent-prev aria-label="Previous recently viewed products">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                        </button>
+                        <button class="slider-btn next" type="button" data-recent-next aria-label="Next recently viewed products">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="slider-wrapper" data-recent-slider>
+                    <div class="slider-track collection-best-track" data-slider-track data-recent-track></div>
+                </div>
+            </div>
+        </section>
+
+        <div data-component="newsletter"></div>
+    </main>
+
+    <div data-component="follow-rail"></div>
+    <div data-component="footer"></div>
+    <div data-component="quickview"></div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product-details.js"></script>
+</body>
+</html>

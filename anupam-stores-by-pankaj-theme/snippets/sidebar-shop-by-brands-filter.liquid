@@ -1,0 +1,50 @@
+{% if section.settings.enable_shop_by_brands_filter and section.settings.shop_by_brands_filter_menu != blank %}
+    <div id="shopify-section-sidebar-category" class="shopify-section">
+        <div class="widget widget_product_categories widget_shop_by_brands_filter">
+            {% if section.settings.shop_by_brands_title %}
+                <h4>{{ section.settings.shop_by_brands_title }} </h4>  
+            {% endif %}
+            {% if linklists[section.settings.shop_by_brands_filter_menu].links.size > 0 %}
+                <ul class="product-categories dt-sc-toggle-frame-set shop-by-brands-filter">
+                    {% for link in linklists[section.settings.shop_by_brands_filter_menu].links %}
+                        {% comment %} 
+                            DYNAMIC HIGHLIGHT CHECK: Matches the current page URL parameter 
+                            against the menu item URL to track the clicked filter state.
+                        {% endcomment %}
+                        {% assign is_link_active = false %}
+                        {% if request.path == link.url or request.path contains link.url %}
+                            {% assign is_link_active = true %}
+                        {% endif %}
+
+                        {% if link and link.links != blank  %}
+                            <li class="cat-item cat-item-39 cat-parent first">
+                                <a href="{{ link.url }}" class="dt-sc-toggle {% if is_link_active %}active{% endif %}">{{ link.title }} </a> 
+                            </li>
+                        {% else %}
+                            <li class="cat-item cat-item-39 cat-parent">
+                                <i></i><a href="{{ link.url }}" class="{% if is_link_active %}active{% endif %}">{{ link.title }} </a> 
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif  %}
+        </div>
+    </div>
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Check if there is an active link inside the smart savings filter
+        var $activeLink = $('.shop-by-brands-filter a.active');
+        
+        if ($activeLink.length > 0) {
+            // 1. Keep the inner menu container visible
+            $activeLink.closest('.widget_shop_by_brands_filter').addClass('active');
+                    
+            // 2. Fallback for desktop/mobile theme toggle frame wrappers if needed
+            $activeLink.closest('.shop-by-brands-filter').show();
+        } else {
+            $activeLink.closest('.widget_shop_by_brands_filter').removeClass('active');
+        }
+    });
+</script>

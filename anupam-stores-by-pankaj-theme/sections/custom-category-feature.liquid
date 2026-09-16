@@ -1,0 +1,170 @@
+<section class="section categories" id="categories">
+  <div class="container">
+    <div class="section-head">
+      {% if section.settings.title != blank %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      <a class="section-link" href="{{ routes.collections_url }}">View All Categories <span aria-hidden="true">→</span></a>
+    </div>
+    {% if section.blocks.size > 0 %}
+    <div class="slider-wrapper category-slider" data-slider>
+      <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous categories">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+      </button>
+      <div class="slider-track category-track" data-slider-track>
+        {% for block in section.blocks %}
+          {% if block.settings.collection_title != blank %}
+            {%- assign collection = collections[block.settings.collection_cat_id] -%}
+            <a class="category-item" data-slider-item href="{{ collection.url }}" {{ block.shopify_attributes }}>
+              <span class="category-thumb">
+                {% if block.settings.image_1 != blank %}
+                <img loading="lazy" src="{{ block.settings.image_1 | img_url: '1920x' }}" alt="{{ block.settings.collection_title | escape }}" width="220" height="220">
+                {% elsif collection.image %}
+                <img loading="lazy" src="{{ collection.image | img_url: '1920x' }}" alt="{{ collection.title | escape }}" width="220" height="220">
+                {% endif %}
+              </span>
+              <span class="category-name">{{ block.settings.collection_title }}</span>
+            </a>
+          {% endif %}
+          {% if block.settings.collection_title2 != blank %}
+            {%- assign collection2 = collections[block.settings.collection_cat_id2] -%}
+            <a class="category-item" data-slider-item href="{{ collection2.url }}">
+              <span class="category-thumb">
+                {% if block.settings.image_2 != blank %}
+                <img loading="lazy" src="{{ block.settings.image_2 | img_url: '1920x' }}" alt="{{ block.settings.collection_title2 | escape }}" width="220" height="220">
+                {% elsif collection2.image %}
+                <img loading="lazy" src="{{ collection2.image | img_url: '1920x' }}" alt="{{ collection2.title | escape }}" width="220" height="220">
+                {% endif %}
+              </span>
+              <span class="category-name">{{ block.settings.collection_title2 }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <button class="slider-btn next" type="button" data-slider-next aria-label="Next categories">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Category Feature",
+"class": "category-featured index-section",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings":[
+{
+"type": "color",
+"id": "background_color",
+"label": "Set background color"
+},
+    
+{
+"type": "range",
+"id": "padd_top",
+"min": 0,
+"max": 50,
+"step": 10,
+"label": "Margin above/below the category section.",
+"default": 40
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+},
+    {
+"type": "select",
+"id": "category_row",
+"label": "Select Category Row",
+"options": [
+{
+"value": "1",
+"label": "1 Row"
+},
+{
+"value": "2",
+"label": "2 Row"
+}
+],
+"default": "2"
+},
+    
+      {
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 9
+},
+
+
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 2
+}
+],
+"blocks": [
+{
+"type": "text_collection",
+"name": "collection cms",
+"settings": [
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Image",
+"info": "Size: 200x280"
+},
+{
+"type": "collection",
+"id": "collection_cat_id",
+"label": "Select collection"
+},
+{
+"type": "text",
+"id": "collection_title",
+"label": "Title"
+},
+{
+"type": "image_picker",
+"id": "image_2",
+"label": "Image",
+"info": "Size: 200x280"
+},
+{
+"type": "collection",
+"id": "collection_cat_id2",
+"label": "Select collection"
+},
+{
+"type": "text",
+"id": "collection_title2",
+"label": "Title"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Custom Category Feature",
+"category": "Collection",
+"blocks": [
+{
+"type": "text_collection"
+}     
+
+]
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,104 @@
+{% if settings.popup_newsletter_show %}
+{% assign message = 'newsletter.popup_newsletter.message' | t %}
+<div class="modal fade"  id="newsletterModal" data-pause="{{ settings.popup_newsletter_delay_first }}">
+  <div class="modal-dialog white-modal center-center">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
+      </div>
+      <div class="modal-block">
+          {% if settings.popup_newsletter_img != blank %}
+            <div class="modal-img col-sm-12"> 
+              <img loading="lazy" src="{{ 'newsletter-bg.png' | asset_img_url:'master' }}" alt="newsletter-bg" class="img-responsive">
+            </div>
+          {% endif %}
+
+        {% comment %} {% if settings.popup_newsletter_img != blank %}
+            <div class="modal-img col-sm-6"> 
+              <img loading="lazy" src="{{ 'newsletter-bg.png' | asset_img_url:'master' }}" alt="newsletter-bg" class="img-responsive">
+            </div>
+          {% endif %}
+        
+        <div class="modal-newsletter col-sm-6">          
+          <div class="title">{{ settings.newsletter_title }}</div>  
+          <div class="desc">{{ settings.popup_newsletter_description }}</div>
+        
+        
+      {% form 'customer' %}
+     
+      {% if form.posted_successfully? %}
+    	<input type="hidden" name="contact[tags]" value="newsletter">
+    	<div class="newsletter-input row-subscibe float-start w-100 position-relative">
+          <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocapitalize="off">
+          
+        <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+          <span class="input-group-btns">
+            <button type="submit" class="btn icon-fallback-text" name="commit" id="subscribe" aria-label="Name">             
+              <span class="subscribe">{{ 'general.newsletter_form.submit' | t }}</span>
+            </button>
+          </span>
+        </div>
+      {% else %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-input row-subscibe float-start w-100 position-relative">
+          <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocapitalize="off">
+          
+     {{ form.errors | default_errors }}
+          <span class="input-group-btns">
+            <button type="submit" class="btn icon-fallback-text" name="commit" id="subscribe" aria-label="Name">              
+              <span class="subscribe">{{ 'general.newsletter_form.submit' | t }}</span>
+            </button>
+          </span>
+        </div>
+      {% endif %}
+      
+    {% endform %}
+            <div class="checkbox-group form-group-top clearfix">
+              <input type="checkbox" id="checkBox">
+              <label for="checkBox"> 
+                <span class="check"></span>
+                <span class="box"></span>
+                {{ 'newsletter.popup_newsletter.question' | t }}
+              </label>
+            </div>
+            <div class="news-social">
+              <div class="social-sharing" data-permalink="{{ permalinkURL }}">
+                {% if settings.share_facebook %}
+                <a target="_blank" href="{{ settings.social_facebook_link }}" class="share-facebook">
+                  <i class="mdi mdi-facebook"></i>
+                  <span class="visuallyhidden">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
+                </a>
+                {% endif %}
+                {% if settings.share_twitter %}
+                <a target="_blank" href="{{ settings.social_twitter_link }}" class="share-twitter">
+                  <i class="mdi mdi-twitter"><svg class="icon icon-twitter" viewBox="0 0 20 20" style="width: 14px;height: auto; align-items: center;justify-content: center;display: inline-block;margin: 0;">
+  <path fill="currentColor" fill-rule="evenodd" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z" clip-rule="evenodd"></path>
+</svg></i>
+                  <span class="visuallyhidden">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
+                </a>
+                {% endif %} 
+                {% if settings.share_instagram %}
+                <a target="_blank" href="{{ settings.social_instagram_link }}" class="share-instagram">
+                  <i class="mdi mdi-instagram"></i>
+                  <span class="visuallyhidden">{{ 'general.social.alt_text.share_on_instagram' | t }}</span>
+                </a>
+                {% endif %}
+                {% if settings.share_pinterest %}
+                <a target="_blank" href="{{ settings.social_pinterest_link }}" class="share-pinterest">
+                  <i class="mdi mdi-pinterest"></i>
+                  <span class="visuallyhidden">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
+                </a>
+                {% endif %}
+              </div>
+            </div> 
+        </div>     {% endcomment %}
+      </div>   
+    </div>
+  </div>
+</div> 
+
+<script>(function(e){var obj={init:function(){try
+{if(e.cookie('popupNewsletter')!='disable'){this.checkboxEvent();var pause=e('#newsletterModal').attr('data-pause');setTimeout(function(){e('#newsletterModal').modal('show');var date=new Date();var minutes={{settings.popup_newsletter_delay}};date.setTime(date.getTime()+(minutes*60*1000));e.cookie('popupNewsletter','disable',{expires:date,path:'/'})},pause)}}
+                                              catch(err){}},checkboxEvent:function(){e('#checkBox').change(function(){if(e(this).is(':checked')){e(this).addClass('active');e(this).parent().addClass('active');e.cookie('popupNewsletter','disable',{expires:1,path:'/'})}else{e(this).removeClass('active');e(this).parent().removeClass('active');e.cookie("popupNewsletter",null,{path:'/'})}})}};e(document).ready(function(){obj.init()})})(jQuery)
+</script>
+{% endif %}

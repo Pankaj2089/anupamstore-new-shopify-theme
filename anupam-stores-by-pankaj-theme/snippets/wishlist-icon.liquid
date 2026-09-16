@@ -1,0 +1,13 @@
+<div class="add-to-wishlist pro_btn">     
+  <div class="show">
+    <div class="default-wishbutton-{{ product.handle }} loading"><a class="add-in-wishlist-js btn" href="{{ product.handle | handleize }}" title="Wishlist">
+      <svg class="repeat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="tooltip-label">{{ 'products.wishlist.add_to_wishlist' | t }}</span></a></div>
+    <div class="loadding-wishbutton-{{ product.handle }} loading" style="display: none; pointer-events: none"><a class="add_to_wishlist" href="{{ product.handle | handleize }}">
+      <svg class="cached" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rotate-cw"><polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg><span class="tooltip-label">{{ 'products.wishlist.add_to_wishlist' | t }}</span></a></div>
+    <div class="added-wishbutton-{{ product.handle }} loading" style="display: none;"><a class="added-wishlist add_to_wishlist btn" href="/pages/wishlist" title="added in wishlist">
+      <svg class="repeat-once" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="tooltip-label">{{ 'products.wishlist.view_wishlist' | t }}</span></a></div>
+  </div>
+</div>

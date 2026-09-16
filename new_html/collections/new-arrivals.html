@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Arrivals | Anupam Stores</title>
+    <meta name="description" content="Shop New Arrivals from Anupam Stores — curated home décor, clocks, religious idols and gifting pieces.">
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/collection.css">
+</head>
+<body class="collection-page">
+    <div data-component="header"></div>
+    <div data-component="mobile-drawer"></div>
+
+    <main>
+        <section class="collection-listing" aria-labelledby="collection-title">
+            <div class="container">
+                <header class="collection-top">
+                    <nav class="collection-crumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                        <span aria-current="page">New Arrivals</span>
+                    </nav>
+                    <h1 class="collection-title" id="collection-title">New Arrivals</h1>
+                    <div class="collection-toolbar">
+                        <div class="collection-sort">
+                            <button class="collection-sort-toggle" type="button" data-sort-toggle aria-haspopup="listbox" aria-expanded="false" aria-controls="sort-menu">
+                                <span data-sort-label>Sort by</span>
+                                <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                            </button>
+                            <div class="collection-sort-menu" id="sort-menu" role="listbox" data-sort-menu hidden>
+                                <button type="button" class="collection-sort-option is-active" role="option" data-sort="featured">Featured</button>
+                                <button type="button" class="collection-sort-option" role="option" data-sort="best-selling">Best Selling</button>
+                                <button type="button" class="collection-sort-option" role="option" data-sort="price-asc">Price: Low to High</button>
+                                <button type="button" class="collection-sort-option" role="option" data-sort="price-desc">Price: High to Low</button>
+                                <button type="button" class="collection-sort-option" role="option" data-sort="newest">Newest</button>
+                            </div>
+                        </div>
+                        <button class="collection-tool-btn" type="button" data-filter-open aria-haspopup="dialog" aria-controls="filter-drawer" aria-expanded="false">
+                            Filters
+                            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="collection-grid" data-collection-grid></div>
+                <nav class="collection-pagination" data-pagination aria-label="Product pagination"></nav>
+            </div>
+        </section>
+
+        <div data-component="promo-banner"></div>
+
+        <section class="section collection-bestsellers" id="collection-bestsellers" aria-labelledby="best-seller-title">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title" id="best-seller-title">Best Seller</h2>
+                    <div class="section-controls">
+                        <button class="slider-btn prev" type="button" data-bestseller-prev aria-label="Previous best sellers">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                        </button>
+                        <button class="slider-btn next" type="button" data-bestseller-next aria-label="Next best sellers">
+                            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="slider-wrapper" data-bestseller-slider>
+                    <div class="slider-track collection-best-track" data-slider-track data-bestseller-track></div>
+                </div>
+            </div>
+        </section>
+
+        <div data-component="brands"></div>
+        <div data-component="newsletter"></div>
+    </main>
+
+    <div data-component="follow-rail"></div>
+    <div data-component="footer"></div>
+    <div data-component="quickview"></div>
+
+    <div class="filter-overlay" data-filter-overlay aria-hidden="true"></div>
+    <aside class="filter-drawer" id="filter-drawer" data-filter-drawer role="dialog" aria-modal="true" aria-labelledby="filter-title" aria-hidden="true" inert>
+        <div class="filter-drawer-head">
+            <h2 class="filter-title" id="filter-title">FILTERS</h2>
+            <button class="icon-btn filter-close" type="button" data-filter-close aria-label="Close filters">
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            </button>
+        </div>
+        <div class="filter-content">
+            <div class="filter-group is-open" data-filter-accordion>
+                <button class="filter-group-toggle" type="button" aria-expanded="true">
+                    Category
+                    <span class="filter-group-icon" aria-hidden="true">−</span>
+                </button>
+                <div class="filter-group-body">
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Artificial Flowers &amp; Plants"> Artificial Flowers &amp; Plants</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Clocks"> Clocks</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Decorative Bowls &amp; Plates"> Decorative Bowls &amp; Plates</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Decorative Figures"> Decorative Figures</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Flameless Candles"> Flameless Candles</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Religious Items"> Religious Items</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Fountains &amp; Ponds"> Fountains &amp; Ponds</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Cookware &amp; Bakeware"> Cookware &amp; Bakeware</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Storage Containers"> Storage Containers</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Drinkware &amp; Serving"> Drinkware &amp; Serving</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Tea Sets"> Tea Sets</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Measuring Cups"> Measuring Cups</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="category" value="Coasters"> Coasters</label>
+                </div>
+            </div>
+
+            <div class="filter-group" data-filter-accordion>
+                <button class="filter-group-toggle" type="button" aria-expanded="false">
+                    Smart Savings
+                    <span class="filter-group-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="filter-group-body">
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="savings" value="on-sale"> On Sale</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="savings" value="best-discount"> Best Discount</label>
+                </div>
+            </div>
+
+            <div class="filter-group" data-filter-accordion>
+                <button class="filter-group-toggle" type="button" aria-expanded="false">
+                    Brands
+                    <span class="filter-group-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="filter-group-body">
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Anupam"> Anupam</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Bajaj"> Bajaj</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Borosil"> Borosil</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Cello"> Cello</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Havells"> Havells</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Hawkins"> Hawkins</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Milton"> Milton</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Pigeon"> Pigeon</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="brand" value="Prestige"> Prestige</label>
+                </div>
+            </div>
+
+            <div class="filter-group" data-filter-accordion>
+                <button class="filter-group-toggle" type="button" aria-expanded="false">
+                    Availability
+                    <span class="filter-group-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="filter-group-body">
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="availability" value="in-stock"> In Stock</label>
+                    <label class="filter-check-row"><input class="filter-checkbox" type="checkbox" name="availability" value="out-of-stock"> Out of Stock</label>
+                </div>
+            </div>
+
+            <div class="filter-group" data-filter-accordion>
+                <button class="filter-group-toggle" type="button" aria-expanded="false">
+                    Price
+                    <span class="filter-group-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="filter-group-body">
+                    <div class="filter-price">
+                        <div class="filter-price-values">
+                            <span>Min <strong data-price-min-label>₹120.00</strong></span>
+                            <span>Max <strong data-price-max-label>₹27,140.00</strong></span>
+                        </div>
+                        <div class="filter-range">
+                            <label class="sr-only" for="price-min">Minimum price</label>
+                            <input id="price-min" type="range" min="120" max="27140" value="120" data-price-min>
+                            <label class="sr-only" for="price-max">Maximum price</label>
+                            <input id="price-max" type="range" min="120" max="27140" value="27140" data-price-max>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-footer">
+            <button class="filter-clear" type="button" data-filter-clear>
+                Clear All
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </button>
+        </div>
+    </aside>
+
+    <script src="../js/shared.js"></script>
+    <script src="../js/products.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/collection.js"></script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<html  lang="{{ shop.locale }}" class="no-js{% if shop.locale == 'ar' or shop.locale == 'he' or shop.locale == 'ur' %} rtl {% endif %}"> <!--<![endif]-->
+  <head>
+    <meta name="p:domain_verify" content="2c3536e5a4be66d057c0af15a04e2154"/>
+    <!-- Basic page needs ================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="theme-color" content="">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <meta name="google-site-verification" content="aRUexk9YClD4QH2OsCAhC2OXdLPdRX0eyttGuu5WvAE" />
+    {% if settings.favicon %}
+    <link rel="icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/png">
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/png">
+    {% else %}
+    <link rel="icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+    {% endif %}
+    <!-- Title and description ================================================== -->
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <!-- Social meta ================================================== -->
+    {% render 'social-meta-tags' %}
+    <!-- Helpers ================================================== -->
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% render 'css-variables' %}
+
+    <!-- CSS ================================================== -->
+    {% comment %} Preload the icon font file aggressively to declare font-display behavior and avoid layout shifts {% endcomment %}
+    {{ 'materialdesignicons-webfont.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+
+    {{ 'materialdesignicons.min.css' | asset_url | stylesheet_tag }}
+
+    {{ 'magnific-popup.min.css' | asset_url | stylesheet_tag }}
+
+    {{ 'animate.css' | asset_url | stylesheet_tag }} 
+
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} 
+    {{ 'owl.carousel.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'home.min.css' | asset_url | stylesheet_tag }}
+    {{ 'dark.css' | asset_url | stylesheet_tag }}
+    {% if settings.enable_animation != blank %}
+    {{ 'aos.css' | asset_url | stylesheet_tag }}
+      {% endif %}
+    {% render 'google-fonts' %}
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+    <!-- Header hook for plugins ================================================== -->
+    {{ content_for_header }}
+    {% render 'oldIE-js' %}  
+    {% if template.directory == 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+    {% endif %}
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'modernizr.min.js' | asset_url }}" defer="defer"></script>  
+    <script src="{{ 'jquery.min.js' | asset_url  }}" ></script>  
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    {% if settings.enable_animation != blank %}
+    <script src="{{ 'aos.js' | asset_url  }}" defer="defer"></script>  
+    {% endif %}
+    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'jquery-cookie.min.js' | asset_url }}" defer="defer"></script>  
+    <script src="{{ 'bootstrap.min.js' | asset_url  }} " defer="defer"></script>  
+    <script src="{{ 'api.jquery.js' | shopify_asset_url  }}" defer="defer"></script>  
+    <script src="{{ 'jquery.history.js' | asset_url }} " defer="defer"></script> 
+    <script src="{{ 'countdown.js' | asset_url }}" async="async" defer="defer"></script>
+    <script src="{{ 'owl.carousel.min.js' | asset_url }}" ></script>  
+    <script src="{{ 'slick.min.js' | asset_url }}" ></script> 
+    {{ 'slick.min.css' | asset_url | stylesheet_tag }}  
+    <script src="{{ 'magnific-popup.min.js' | asset_url  }}" defer="defer"></script>
+    <script src="{{ 'threesixty.min.js' | asset_url}} " defer="defer"></script>
+    <script src="{{ 'imagesLoaded.min.js' | asset_url }} " defer="defer"></script> 
+    <script src="{{ 'parallax.min.js' | asset_url }}" defer="defer"></script> 
+    <script src="{{ 'shop.js' | asset_url }}" defer="defer"></script> 
+    <script src="{{ 'ResizeSensor.min.js' | asset_url }}   " defer="defer"></script> 
+    <script src="{{ 'theia-sticky-sidebar.min.js' | asset_url}}" defer="defer"></script>     
+    <script src="{{ 'inview.js' | asset_url  }} " defer="defer"></script>      
+    <script src="{{ 'custom-js.js' | asset_url }}" defer="defer"></script>  
+    {% if shop.locale == 'ar' or shop.locale == 'he' or shop.locale == 'ur' %} 
+    {{ 'rtl.css' | asset_url | stylesheet_tag }} 
+    <script>window.rtltrue = "rtltrue";</script>  
+    <style>.customNavigation .navigation_wrap,.customNavigation,.owl-carousel .owl-wrapper-outer,.flexslider .slides,.owl-carousel,.flexslider .slides>li,.flexslider{direction: ltr !important;}</style>
+    {% endif %}
+    <script>window.money_format = "{{shop.money_with_currency_format}}";window.shop_currency = "{{ shop.currency }}";window.show_multiple_currencies = {{settings.enable_multiple_currencies}};window.many_in_stock="{{ 'products.product.many_in_stock' | t  }}";window.out_of_stock="{{ 'products.product.out_of_stock' | t  }}";window.in_stock="{{ 'products.product.in_stock' | t  }}";window.unavailable="{{ 'products.product.unavailable' | t  }}";</script>  
+    <style>.ttloader {background-color:  {{ settings.preloader_bg }};height: 100%;left: 0;position: fixed;top: 0; width: 100%; z-index: 999999;}.rotating {background-image: url("{{ settings.pre_loader_img | img_url: "master" }}");}.rotating {background-position: center center;background-repeat: no-repeat;bottom: 0;height: auto;left: 0;margin: auto;position: absolute;right: 0; top: 0; width: 100%; }</style>
+    <script>
+      if (window.MSInputMethodContext && document.documentMode) {
+        var scripts = document.getElementsByTagName('script')[0];
+        var polyfill = document.createElement("script");
+        polyfill.defer = true;
+        polyfill.src = "{{ 'ie11CustomProperties.min.js' | asset_url }}";
+        scripts.parentNode.insertBefore(polyfill, scripts);
+      }
+    </script>
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    {{ 'anupam-homepage.css' | asset_url | stylesheet_tag }}
+    {{ 'anupam-chrome.css' | asset_url | stylesheet_tag }}
+    {% if template.name == 'collection' or template contains 'product' %}
+    {{ 'anupam-collection.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template.name == 'product' or template contains 'product' %}
+    {{ 'anupam-product.css' | asset_url | stylesheet_tag }}
+    {{ 'anupam-pdp-html.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    <script src="{{ 'custom-helper.js' | asset_url }}" defer="defer"></script>
+    
+    <script 
+      type="text/javascript"
+      src="https://d3mkw6s8thqya7.cloudfront.net/integration-plugin.js"
+      id="aisensy-wa-widget"
+      widget-id="aabmgt"
+    >
+    </script>
+	
+  </head>
+  <body id="{{ page_title | handle }}" class="{% if settings.dark != blank %} darkmode darklayout{% endif %} {{ settings.toggle_menu_position }} hover_{{ settings.product_hover_btn }} {% if settings.display_toogle_menu == false %}menu-content{% endif %} {% if shop.locale == 'ar' or shop.locale == 'he' or shop.locale == 'ur' %}rtl {% endif %}{{ settings.header_icon_color }} {{ page_title | handle }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.display_toogle_menu  == false %} left-menu{% else %} toggle-menu{% endif %}">
+    {% render 'modal-box' %}
+    <div class="quick-view"></div> 
+    <div class="compare-model">
+      <div class="modal fade" id="modalCompare1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog white-modal modal-sm">
+          <div class="modal-content">              
+            <div class="modal-body">
+              <div class="modal-header">
+                <p class="max_compare">
+                  Maximum products to compare. Limit is 3!
+                </p>  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span class="mdi mdi-close"></span>
+                </button>
+              </div>
+              <div class="compare-button">
+                <a class="compare btn" href="{% if shop.locale != 'en' %}/{{ shop.locale }}{% endif %}/pages/compare" title="{{ 'products.compare.compare_name' | t }}">{{ 'products.compare.compare_name' | t }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if settings.display_preloader != blank %}
+  {% if settings.preloader_pages == blank and template == 'index' %}
+  <div class="ttloader">
+    <span class="rotating"></span>
+  </div>
+  {% elsif settings.preloader_pages != blank %}
+      <div class="ttloader">
+    <span class="rotating"></span>
+  </div>
+  {% endif %}
+  {% endif %}
+    <input type="hidden" name="type" value="{{shop.url}}" id="shop-url">
+    <div class="page-wrapper page-element">
+      {% if settings.sticky_icon_enabled %}
+      <div class="main-social-icon">
+        <div class="social-icon-content col-sm-4">
+          <ul>
+            {% if settings.social_twitter_link != blank %}
+            <li>
+              <a class="social-icon twitter" target="_blank" href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                <span class="mdi mdi-twitter" aria-hidden="true">
+  <svg class="icon icon-twitter" viewBox="0 0 20 20" style="width: 16px;height: auto;margin-left: 4px;align-items: center;justify-content: center;display: inline-block;">
+  <path fill="currentColor" fill-rule="evenodd" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z" clip-rule="evenodd"></path>
+</svg>
+</span>
+                <span class="social-text">Twitter</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if settings.social_facebook_link != blank %}
+            <li>
+              <a class="social-icon facebook" target="_blank" href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                <span class="mdi mdi-facebook" aria-hidden="true"></span>
+                <span class="social-text">Facebook</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if settings.social_pinterest_link != blank %}
+            <li>
+              <a class="social-icon pinterest" target="_blank" href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                <span class="mdi mdi-pinterest" aria-hidden="true"></span>
+                <span class="social-text">Pinterest</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if settings.social_instagram_link != blank %}
+            <li>
+              <a class="social-icon instagram" target="_blank" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                <span class="mdi mdi-instagram" aria-hidden="true"></span>
+                <span class="social-text">Instagram</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if settings.social_tumblr_link != blank %}
+            <li>
+              <a class="social-icon tumblr" target="_blank" href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                <span class="mdi mdi-tumblr" aria-hidden="true"></span>
+                <span class="social-text">Tumblr</span>
+              </a>
+            </li>
+            {% endif %}
+
+                                                   {% if settings.social_whatsapp_link != blank %}
+            <li>
+              <a class="social-icon whatsapp"  target="_blank" href="https://wa.me/{{ settings.social_whatsapp_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'whatsapp' }}">
+                <span class="mdi mdi-whatsapp"></span>
+                <span class="social-text">whatsapp</span>
+              </a>
+            </li>
+            {% endif %}
+                            {% if settings.social_linkdin_link != blank %}
+            <li>
+              <a class="social-icon linkdin" target="_blank" href="{{ settings.social_linkdin_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'linkdin' }}">
+                <span class="mdi mdi-linkedin-box"></span>
+                <span class="social-text">Linkdin</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      {% if settings.cart_icon_enabled %}
+      <div class="sticky-link-icon">
+        <ul class="link-icon-content">
+          <li>
+            <a href="/cart" class="mycart"> 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span class="text">{{ 'customer.account.check_out' | t }}</span>
+            </a>
+          </li>
+          <li>
+            <a class="myaccount" href="/account/login">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="text">{{ 'customer.account.title1' | t }}</span>
+            </a>
+          </li>
+          <li>
+            <a class="wishlist" href="/pages/wishlist" title="{{ 'products.wishlist.wishlist_name' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><div class="wishlist-icon text">{{ 'products.wishlist.wishlist_name' | t }}</div></a>
+          </li>
+          <li>
+            <a class="compare" href="{% if shop.locale != 'en' %}/{{ shop.locale }}{% endif %}/pages/compare" title="{{ 'products.compare.compare_name' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-ccw"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg><div class="text">{{ 'products.compare.compare_name' | t }} - (<span class="compare-count"></span>)</div></a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+      {% sections 'header-group' %}
+      <main class="main-content" role="main">
+          {% if settings.enable_breadcrumb %}
+        {% unless template.name == 'product' or template.name == 'collection' %}
+        {% render 'breadcrumb' %}
+        {% endunless %}
+  {% endif %}
+        <div class="pagecontent">
+          {{ content_for_layout }}
+        </div>
+      </main>
+      {% sections 'footer-group' %}
+      {% render 'site-cookie' %}
+      <script>
+        window.ajax_cart = {{ settings.use_ajax_cart }};
+        jQuery(window).on('load', function() {       
+          jQuery(".ttloader").fadeOut(500); 
+          jQuery(".ttloader .rotating").addClass("load-open");  
+        });
+      </script>  
+      {% render 'quick-veiw' %}
+      {% if template == 'index' %}
+      {% render 'popup-newsletter' %}
+      {% endif %}
+      <a href="#" id="GotoTop" title="go to top"><span id="toTopHover"></span><i class="mdi mdi-arrow-up"></i></a>
+    </div>
+    <script>/* Product Tag Filters - Good for any number of filters on any type of collection pages */var collFilters = jQuery('.coll-filter');collFilters.change(function() {var newTags = [];collFilters.each(function() {if (jQuery(this).val()) {newTags.push(jQuery(this).val());}});if (newTags.length) {var query = newTags.join('+');window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('/' + 'tag', '/' + query);}else {
+          {% if collection.handle %}window.location.href = '/collections/{{ collection.handle }}';{% elsif collection.products.first.type == collection.title %}window.location.href = '{{ collection.title | url_for_type }}';{% elsif collection.products.first.vendor == collection.title %}window.location.href = '{{ collection.title | url_for_vendor }}';{% endif %}}});</script>    
+    <script>jQuery(document).ready(function() {	"use strict";/* ------------ Start TemplateTrip Parallax JS ------------ */var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);if(!isMobile) {if(jQuery(".parallex").length){jQuery(".parallex:not(.invert_true)").sitManParallex({ invert: false});};  if(jQuery(".parallex.invert_true").length){jQuery(".parallex").sitManParallex({ invert: true});}; }else{jQuery(".parallex:not(.invert_true)").sitManParallex({invert: true});jQuery(".parallex.invert_true").sitManParallex({invert: true});}	/* ------------ End TemplateTrip Parallax JS ------------ */});</script>
+    {% comment %} Comment currencies.js javascript included twice in theme header file {% endcomment %}
+    {% comment %} {% render 'currencies' %}    {% endcomment %}
+      {{ 'anupam-homepage.js' | asset_url | script_tag }}
+      {% if template.name == 'collection' %}
+      {{ 'anupam-collection.js' | asset_url | script_tag }}
+      {% endif %}
+      {% if template.name == 'product' or template contains 'product' %}
+      {{ 'anupam-product.js' | asset_url | script_tag }}
+      {% endif %}
+      {% render 'custom-search-autocomplete' %}
+    {% if template contains 'product' %}
+    <script>Shopify.Products.recordRecentlyViewed();</script>
+    {% endif %}
+    <link rel="alternate" hreflang ="{{ request.locale.iso_code }}" href="{{canonical_url}}" />
+    <script>
+      jQuery(function() {
+        jQuery('.swatch :radio').change(function() {
+          var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+          var optionValue = jQuery(this).val();
+          jQuery(this)
+          .closest('form')
+          .find('.single-option-selector')
+          .eq(optionIndex)
+          .val(optionValue)
+          .trigger('change');
+        });
+      });
+    </script>
+    <script>
+      theme.moneyFormat = {{ shop.money_format | json }};
+    </script>
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}'
+      };
+      window.cartStrings = {
+        error: `{{ 'cart.general.cart_error' | t }}`
+      }
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      }
+      window.accessibilityStrings = {
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+      }
+    </script>
+  </body>
+</html>

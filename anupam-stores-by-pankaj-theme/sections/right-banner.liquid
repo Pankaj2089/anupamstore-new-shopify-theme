@@ -1,0 +1,115 @@
+<style>
+  .right-banner .rightbanner-block .banner-description .title{color:{{ section.settings.title_color }};}
+  .right-banner .rightbanner-block .banner-description .subtitle{color:{{ section.settings.subtitle_color }};background:{{ section.settings.subtitle_bg_color }};}
+</style>
+<div class="rightbanner-block" {% if settings.enable_animation != blank %} data-aos="fade-up" {% endif %}>
+  <a href="#"><img loading="lazy" src="{{ section.settings.right_banner | img_url : 'master' }}"/></a>
+  <div class="banner-description">
+    {% if section.settings.title !="" %}
+    <div class="title">{{ section.settings.title }}</div>
+    {% endif %}
+    {% if section.settings.subtitle !="" %}
+    <div class="subtitle">{{ section.settings.subtitle }}</div>
+    {% endif %}        
+    <div class="banner-button">
+      <a href="{{ section.settings.btn_link }}" class="btn">{{ section.settings.btn_txt }}</a>
+    </div>
+  </div> 
+</div>
+{% schema %}
+{
+"name": "right Banner",
+"class": "right-banner col-sm-2 col-xs-2",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "image_picker",
+"id": "right_banner",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default":"exclusive"
+},
+{
+"type": "text",
+"id": "subtitle",
+"label": "Sub Title",
+"default":"exclusive"
+},
+{
+"type": "text",
+"id": "price_desc",
+"label": "Price Description",
+"default":"from"
+},
+{
+"type": "text",
+"id": "price",
+"label": "Price"
+},
+{
+"type": "color",
+"id": "title_color",
+"label": "Title Color",
+"default":"#111"
+},
+{
+"type": "color",
+"id": "subtitle_color",
+"label": "sub Title Color",
+"default":"#111"
+},
+{
+"type": "color",
+"id": "subtitle_bg_color",
+"label": "Sub Title Background Color",
+"default":"#111"
+},
+{
+"type": "text",
+"id": "btn_txt",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "btn_link",
+"label": "button link"
+},
+{
+"type": "color",
+"id": "btn_bg_color",
+"label": "button background Color",
+"default":"#EB3039"
+},
+{
+"type": "color",
+"id": "btn_txt_color",
+"label": "Button text Color",
+"default":"#fff"
+},
+{
+"type": "color",
+"id": "btn_border_color",
+"label": "button hover background Color",
+"default":"#fff"
+},
+{
+"type": "color",
+"id": "btn_hovertxt_color",
+"label": "Button hover text Color",
+"default":"#fff"
+}
+],
+"presets": [
+{
+"name": "right Banner",
+"category": "right Banner"
+}
+]
+}
+{% endschema %}

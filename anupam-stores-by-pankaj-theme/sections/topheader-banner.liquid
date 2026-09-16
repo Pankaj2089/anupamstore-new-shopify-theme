@@ -1,0 +1,97 @@
+{% if section.settings.show_topbanner %}
+<div class="announcement" role="region" aria-label="Store highlights">
+  <div class="container announcement-inner">
+    <a class="announcement-mail" href="mailto:{{ shop.email | default: 'info@anupamstores.com' }}">
+      <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+      {{ shop.email | default: 'info@anupamstores.com' }}
+    </a>
+    <ul class="announcement-highlights">
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">home</span>
+        {{ section.settings.banner_title | default: 'Premium Home Decor' }}
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+        {{ section.settings.banner_subtitle | default: 'Home Essentials' }}
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+        Secure Checkout
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">local_shipping</span>
+        {{ section.settings.banner_price | default: 'Free shipping and returns' }}
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+"name": "Topheader Banner",
+"class": "index-section topheader-banner",
+"enabled_on": {
+    "groups": ["header"]
+},
+"settings": [
+{
+"type": "checkbox",
+"id": "show_topbanner",
+"label": "Show Top Banner"
+},
+{
+"type": "image_picker",
+"id": "banner_image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "banner_link",
+"label": "Banner link"
+},
+{
+"type": "color",
+"id": "banner_bg",
+"label": "banner background color",
+"default": "#f4f3f0"
+},
+{
+"type": "text",
+"id": "banner_title",
+"label": "Banner title"
+},
+{
+"type": "color",
+"id": "banner_title_color",
+"label": "Banner title color"
+},
+{
+"type": "text",
+"id": "banner_subtitle",
+"label": "Banner subtitle"
+},
+{
+"type": "color",
+"id": "banner_subtitle_color",
+"label": "Banner subtitle color",
+"default": "#000"
+},
+{
+"type": "text",
+"id": "banner_price",
+"label": "Banner Price"
+},
+{
+"type": "color",
+"id": "banner_price_color",
+"label": "Banner Price color"
+}
+],
+"presets": [
+{
+"name": "Topheader Banner",
+"category": "Image"
+}
+]
+}
+{% endschema %}

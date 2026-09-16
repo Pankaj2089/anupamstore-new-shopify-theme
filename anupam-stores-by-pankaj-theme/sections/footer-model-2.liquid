@@ -1,0 +1,547 @@
+<style>
+  .block_newsletter form .input-group .input-group-btn .btn{
+    background: {{ section.settings.btn_bg_color }};
+    color: {{ section.settings.btn_txt_color }};
+  }
+  .block_newsletter form .input-group .input-group-btn .btn::after{
+    background:{{ section.settings.btn_hoverbg_color }};
+  }
+  .block_newsletter form .input-group .input-group-btn .btn:hover,
+  .block_newsletter form .input-group .input-group-btn .btn:focus,
+  .block_newsletter form .input-group .input-group-btn .btn:active{
+    color: {{ section.settings.btn_hovertxt_color }};
+  }
+  .block_newsletter form .input-group .input-group-btn .btn .icon{
+    color: {{ section.settings.btn_txt_color }};
+    display:inline-block;
+  }
+  .block_newsletter form .input-group .input-group-btn .btn:hover .icon{
+    color: {{ section.settings.btn_hovertxt_color }};
+  }
+  .footer_style_2 .Newsletter-content{background: {{ section.settings.newsletter_bg }};}
+  .footer_style_2 .Newsletter-content .widget-title{color: {{ section.settings.newsletter_title_color }};}
+  .footer_style_2 .Newsletter-content .news-desc{color: {{ section.settings.newsletter_desc_color }};}
+</style>
+{% capture borderWidth %}{{ settings.border_width }}px{% endcapture %}
+{% capture colorBorder %}{{ settings.color_borders }}{% endcapture %}
+{% if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_fancy_link != blank %}
+{% assign show_social_icons = true %}
+{% else %}{% assign show_social_icons = false %}{% endif %}
+{% assign flexifooter = 0 %}
+{% if show_social_icons %}{% assign flexifooter = flexifooter | plus: 1 %}{% endif %}
+{% if section.settings.newsletter_desc != blank %}{% assign class = 'has_desc' %}{% else %}{% assign class = '' %}{% endif %}
+<footer class="site-footer text-left" data-section-id="{{ section.id }}" >
+  <div class="footer-container">
+    <div class="footer-wrapper">
+      <div class="footer-wrap">
+      {% if section.settings.newsletter_enable != blank %}
+        <div class="Newsletter-content">         
+          <div class="container">
+            <div class="block_newsletter footer-column">
+              <h5 class="widget-title">{{ section.settings.newsletter_title }}</h5>
+              <div class="news-desc">{{ section.settings.newsletter_desc }}</div>
+              <div class="newsletter-bottom-cotent">	
+                {% render 'newsletter-form' %}
+              </div>
+              {% if show_social_icons %}
+              <div class="follow-us-outer">
+                {% if show_social_icons %}
+                {% comment %}
+                Loop through the social network links
+                {% endcomment %}
+                <ul class="inline-list social-icons">
+                  {% if settings.social_facebook_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                      <span class="mdi mdi-facebook" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_twitter_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                      <span class="mdi mdi-twitter" aria-hidden="true">
+  <svg class="icon icon-twitter" viewBox="0 0 20 20" style="width: 16px;height: 40px;align-items: center;justify-content: center;display: inline-block;">
+      <path fill="currentColor" fill-rule="evenodd" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z" clip-rule="evenodd"></path>
+  </svg>
+</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_pinterest_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                      <span class="mdi mdi-pinterest" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_instagram_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                      <span class="mdi mdi-instagram" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_tumblr_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                      <span class="mdi mdi-tumblr" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_snapchat_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_snapchat_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
+                      <span class="mdi mdi-snapchat" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_youtube_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                      <span class="mdi mdi-youtube" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_vimeo_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                      <span class="mdi mdi-vimeo" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if settings.social_fancy_link != blank %}
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                      <span class="mdi mdi-led-variant-outline" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>          
+        </div>
+       {% endif %} 
+        <div class="container">
+          <div class="text-left grid grid-content"> 
+          {% if section.settings.contactus_enable != blank %}
+            <div class="col-sm-4 footer-column contactus {% if section.settings.foote-toggle != blank %} yescall {% endif %}">
+              <h5 class="widget-title">{{ section.settings.footer_contact_title }}</h5>
+              <h5 class="widget-title {% if section.settings.foote-toggle == blank %} toggle {% endif %}">{{ section.settings.footer_contact_title }}</h5>
+              <div class="contact-us inline-list nav-secondary">
+                <div class="contact">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                  </svg>
+                  <div class="contact-text">
+                    <span class="contact-desc">{{ section.settings.contact_desc }}</span>
+                    <a class="phone" href="tel:{{ section.settings.contact_no }}">{{ section.settings.contact_no }}</a>
+                  </div></div>
+                <ul class="list-unstyled" style="display: block;">
+                  <li class="contact-detail">
+                    <div class="address">	
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      <div class="contact-address">{{ section.settings.contact_address }}</div>
+                    </div>
+                  </li>                    
+                  <li class="email">                      
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="email-address"><a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a></span></li>
+                </ul>                                  
+       {% if section.settings.display_app %}                                 
+                <div class=" dwld-app">
+                  {% if section.settings.dwld_app1 != blank %}
+                  <a class="app-img" href="{{section.settings.dwld_app_url1}}"><img loading="lazy" src="{{  section.settings.dwld_app1 | img_url: "master" }}" alt="dwld-app" /></a>
+                  {% endif %}
+                  {% if section.settings.dwld_app2 != blank %}
+                  <a class="app-img" href="{{section.settings.dwld_app_url2}}"><img loading="lazy" src="{{  section.settings.dwld_app2 | img_url: "master" }}" alt="dwld-app" /></a>
+                  {% endif %}          
+                </div>
+                {% endif %}
+              </div>
+            </div> 
+            {% endif %}
+            <div class="col-sm-8 footer-section">
+
+              {% if section.settings.foot_col_1 %}
+              <div class="col-sm-3 footer-column {% if section.settings.foote-toggle != blank %} yescall {% endif %}">
+                {% if section.settings.footer_col_title_1 != blank %}
+                <h5 class="widget-title">{{ section.settings.footer_col_title_1 }}</h5>
+                <h5 class="widget-title {% if section.settings.foote-toggle == blank %} toggle {% endif %}">{{ section.settings.footer_col_title_1 }}</h5>{% endif %}
+                {% if linklists[section.settings.col_1_menu].links != blank %}
+                <ul class="inline-list nav-secondary">
+                  {% for link in linklists[section.settings.col_1_menu].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+     {% endif %}
+
+               {% if section.settings.foot_col_2 %}
+              <div class="col-sm-4 footer-column {% if section.settings.foote-toggle != blank %} yescall {% endif %}">
+                {% if section.settings.footer_col_title_2 != blank %}
+                <h5 class="widget-title">{{ section.settings.footer_col_title_2 }}</h5>
+                <h5 class="widget-title {% if section.settings.foote-toggle == blank %} toggle {% endif %}">{{ section.settings.footer_col_title_2 }}</h5>{% endif %}
+                {% if linklists[section.settings.col_2_menu].links != blank %}
+                <ul class="inline-list nav-secondary">
+                  {% for link in linklists[section.settings.col_2_menu].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              {% endif %}
+
+  {% if section.settings.popular-item_enable != blank %}
+              <div class="col-sm-5 footer-column popular-item {% if section.settings.foote-toggle != blank %} yescall {% endif %}">
+                {% if section.settings.footer_col_title_3 != blank %}
+                <h5 class="widget-title">{{ section.settings.footer_col_title_3 }}</h5>
+                <h5 class="widget-title {% if section.settings.foote-toggle == blank %} toggle {% endif %}">{{ section.settings.footer_col_title_3 }}</h5>{% endif %}
+                {% if linklists[section.settings.col_3_menu].links != blank %}
+                <ul class="inline-list nav-secondary">
+                  {% for link in linklists[section.settings.col_3_menu].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+   {% endif %}
+            </div>
+          </div>
+          <div class="bottom-footer-section">
+            {% if section.settings.security_show != blank %}
+            <div class="cms-security">       
+            {% if section.settings.security_img1 != blank %}
+            <a class="security-img" href="{{ section.settings.security_img1_url }}"><img loading="lazy" src="{{ section.settings.security_img1 | img_url: "master" }}" alt="security-image" /></a>
+            {% endif %}
+            {% if section.settings.security_img2 != blank %}
+            <a class="security-img" href="{{ section.settings.security_img2_url }}"><img loading="lazy" src="{{ section.settings.security_img2 | img_url: "master"}}" alt="security-image" /></a>
+            {% endif %}
+            {% if section.settings.security_img3 != blank %}
+            <a class="security-img" href="{{ section.settings.security_img3_url }}"><img loading="lazy" src="{{ section.settings.security_img3 | img_url: "master"}}" alt="security-image" /></a>    
+            {% endif %}
+            {% if section.settings.security_img4 != blank %}       
+            <a class="security-img" href="{{ section.settings.security_img4_url }}"><img loading="lazy" src="{{ section.settings.security_img4 | img_url: "master"}}" alt="security-image" /></a>      
+            {% endif %}
+          </div>
+            {% endif %}
+          </div>
+      
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom-wrap">
+      <div class="container">
+        <div class="footer-bottom">
+          <div class="col-sm-6 copyright">
+            <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}</small> {{ shop.name | link_to: '/' }} | {{ powered_by_link }}
+          </div> 
+          <div class="col-sm-6 text-right payment-icon">
+            {% unless shop.enabled_payment_types == empty %}
+            {% assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
+            <div class="footer-links">
+              <div class="inline-list payment_logo_block">
+                <ul class="payment-icons">
+                  {%- for type in shop.enabled_payment_types -%}
+                  <li>
+                    {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+"name": "footer-model-2",
+"class": "footer_style_2",
+"enabled_on": {
+    "groups": ["footer"]
+},
+"settings": [
+
+        {
+"type": "checkbox",
+"id": "foote-toggle",
+"label": "Disable Toggle Mobile and Tab",
+"default": true
+},
+  
+{
+"type": "header",
+"content": "Newsletter"
+},
+
+
+  {
+"type": "checkbox",
+"id": "newsletter_enable",
+"label": "Show Footer Newsletter",
+"default": true
+},
+  
+{
+"type": "color",
+"id": "newsletter_bg",
+"label": "newsletter Background Color"
+},
+{
+"type": "text",
+"id": "newsletter_title",
+"label": "Newsletter Title",
+"default": "Sign Up For Newsletter"
+},
+{
+"type": "color",
+"id": "newsletter_title_color",
+"label": "Newsletter Title Color",
+"default": "#ffffff"
+},
+{
+"type": "text",
+"id": "newsletter_desc",
+"label": "Newletter description"
+},
+{
+"type": "color",
+"id": "newsletter_desc_color",
+"label": "Newletter description Color",
+"default": "#ffffff"
+},
+{
+"type": "color",
+"id": "btn_txt_color",
+"label": "Button Text Color",
+"default": "#ffffff"
+},
+{
+"type": "color",
+"id": "btn_bg_color",
+"label": "Button Background Color",
+"default": "#000000"
+},
+{
+"type": "color",
+"id": "btn_hovertxt_color",
+"label": "Button Hover Text Color",
+"default": "#000000"
+},
+{
+"type": "color",
+"id": "btn_hoverbg_color",
+"label": "Button Hover Background Color",
+"default": "#fdd413"
+},
+{
+"type": "header",
+"content": "Contact Information"
+},
+
+  
+
+    {
+"type": "checkbox",
+"id": "contactus_enable",
+"label": "Show Footer Contactus",
+"default": true
+},
+{
+"type": "text",
+"id": "contact_desc",
+"label": "Contact Description"
+},
+{
+"type": "text",
+"id": "contact_no",
+"label": "Contact Text",
+"default": "0123-456-789"
+},
+{
+"type": "text",
+"id": "footer_contact_title",
+"label": "Contact Title",
+"default": "store information"
+},
+{
+"type": "richtext",
+"id": "contact_address",
+"label": "Address",
+"default": "<p>My Company, 42 Puffin street 12345 Puffinville France</p>"
+},	
+{
+"type": "text",
+"id": "contact_email",
+"label": "Email Id",
+"default": "sales@yourcompany.com"
+},
+{
+"type": "header",
+"content": "Download App"
+},
+
+      {
+"type": "checkbox",
+"id": "display_app",
+"label": "Show Footer App",
+"default": true
+},
+  
+{
+"type": "image_picker",
+"id": "dwld_app1",
+"label": "download image1"
+},
+{
+"type": "url",
+"id": "dwld_app_url1",
+"label": "App1 url"
+},
+{
+"type": "image_picker",
+"id": "dwld_app2",
+"label": "download image2"
+},
+{
+"type": "url",
+"id": "dwld_app_url2",
+"label": "App2 url"
+},
+{
+"type": "header",
+"content": "Menu links"
+},
+          {
+"type": "checkbox",
+"id": "foot_col_1",
+"label": "Show Footer Menu 1",
+"default": true
+},
+{
+"type": "text",
+"id": "footer_col_title_1",
+"label": "Heading",
+"default": "Footer Title 1"
+},	
+{
+"type": "link_list",
+"id": "col_1_menu",
+"label": "Footer Column 1"
+},
+
+          {
+"type": "checkbox",
+"id": "foot_col_2",
+"label": "Show Footer Menu 2",
+"default": true
+},
+  
+{
+"type": "text",
+"id": "footer_col_title_2",
+"label": "Heading",
+"default": "Footer Title 2"
+},	
+
+
+  
+{
+"type": "link_list",
+"id": "col_2_menu",
+"label": "Footer Column 2"
+},
+
+  
+
+      {
+"type": "checkbox",
+"id": "popular-item_enable",
+"label": "Show Footer popular-item",
+"default": true
+},
+{
+"type": "text",
+"id": "footer_col_title_3",
+"label": "Heading",
+"default": "Footer Title 3"
+},	
+{
+"type": "link_list",
+"id": "col_3_menu",
+"label": "Footer Column 3"
+},
+
+
+  
+{
+"type": "header",
+"content": "Security Store"
+},
+
+            {
+"type": "checkbox",
+"id": "security_show",
+"label": "Show Footer Security Store",
+"default": true
+},
+{
+            "type": "image_picker",
+            "id": "security_img1",
+            "label": "Security logo 1"
+            },
+              {
+            "type": "url",
+            "id": "security_img1_url",
+            "label": "Security logo 1 URL"
+            },
+            {
+            "type": "image_picker",
+            "id": "security_img2",
+            "label": "Security logo 2"
+            },
+              {
+            "type": "url",
+            "id": "security_img2_url",
+            "label": "Security logo 2 URL"
+            },
+            {
+            "type": "image_picker",
+            "id": "security_img3",
+            "label": "Security logo 3"
+            },
+              {
+            "type": "url",
+            "id": "security_img3_url",
+            "label": "Security logo 3 URL"
+            },
+            {
+            "type": "image_picker",
+            "id": "security_img4",
+            "label": "Security logo 4"
+            },
+              {
+            "type": "url",
+            "id": "security_img4_url",
+            "label": "Security logo 4 URL"
+            }
+
+],
+"presets": [
+{
+"name": "footer-model-2",
+"category": "footer"
+}
+]
+}
+{% endschema %}

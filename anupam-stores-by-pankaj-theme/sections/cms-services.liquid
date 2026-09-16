@@ -1,0 +1,136 @@
+{% if section.blocks.size > 0 %}
+<section class="features" aria-label="Store benefits" id="ttcmsservices">
+  <div class="container">
+    <div class="features-grid">
+      {% for block in section.blocks %}
+      <article class="feature-card" {{ block.shopify_attributes }}>
+        <div class="feature-icon">
+          {% if block.settings.service_icon != blank %}
+          <img loading="lazy" src="{{ block.settings.service_icon | img_url: '1920x' }}" alt="{{ block.settings.title | escape }}">
+          {% endif %}
+        </div>
+        <div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.desc }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% schema %}
+{
+"name": "CMS Services",
+"class":"index-section ttservices",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "header",
+"content": "Services"
+},
+{
+"type": "color",
+"id": "bg_color",
+"label": "background Color",
+"default":"#000"
+},
+{
+"type": "color",
+"id": "title_color",
+"label": "Title Color",
+"default":"#000"
+},
+{
+"type": "color",
+"id": "title_hover_color",
+"label": "Title Hover Color",
+"default":"#fc9f22"
+},
+{
+"type": "color",
+"id": "desc_color",
+"label": "Description Color",
+"default":"#666"
+},
+        {
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 5
+},
+
+
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 2
+}
+],
+"blocks": [
+{
+"type": "s_text",
+"name": "services",
+"settings": [
+{
+"type": "image_picker",
+"id": "service_icon",
+"label": "Service Icon",
+"info": "Size: 65x65"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "desc",
+"label": "Description"
+}
+]
+}
+],
+"presets": [
+{
+"name": "CMS Services",
+"category": "TT CMS section",
+"blocks": [
+{
+"type": "s_text",
+"settings": {
+"title": "FREE SHIPPING"
+}
+},
+{
+"type": "s_text",
+"settings": {
+"title": "24/7 SUPPORT"
+}
+},
+{
+"type": "s_text",
+"settings": {
+"title": "BIG SAVING"
+}
+},      
+{
+"type": "s_text",
+"settings": {
+"title": "ONLINE PAYMENT"
+}
+} 
+]
+}
+]
+}
+{% endschema %}

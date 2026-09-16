@@ -1,0 +1,163 @@
+<style>
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }} .section.brands {
+    background: {{ section.settings.bg_color | default: '#ffffff' }} !important;
+  }
+</style>
+<section class="section brands" id="brands" style="background: {{ section.settings.bg_color | default: '#ffffff' }};">
+  <div class="container">
+    {% if section.settings.title != blank %}
+    <div class="section-head">
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+    </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+    <div class="slider-wrapper brand-slider" data-slider>
+      <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous brands">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+      </button>
+      <div class="slider-track brand-track" data-slider-track>
+        {% for block in section.blocks %}
+          {% assign brand_label = block.settings.brand_name | strip %}
+          {% if brand_label == blank and block.settings.image.alt != blank %}
+            {% assign brand_label = block.settings.image.alt | strip %}
+          {% endif %}
+          {% if brand_label == blank and block.settings.image != blank %}
+            {% assign img_src = block.settings.image.src %}
+            {% if img_src == blank %}{% assign img_src = block.settings.image | img_url: 'master' %}{% endif %}
+            {% assign img_file = img_src | split: '/' | last | split: '?' | first %}
+            {% assign brand_label = img_file | replace: '_1x1', '' | replace: '-1x1', '' | replace: '_logo', '' | replace: '-logo', '' | split: '.' | first | replace: '_', ' ' | replace: '-', ' ' | replace: '1x1', '' | strip %}
+          {% endif %}
+          {% if brand_label == blank %}{% assign brand_label = 'Brand' %}{% endif %}
+          {% assign brand_handle = brand_label | handleize | replace: '1x1', '' | replace: '--', '-' | strip %}
+          {% case brand_handle %}
+            {% when 'cello' %}{% assign brand_label = 'CELLO' %}
+            {% when 'borosil' %}{% assign brand_label = 'BOROSIL' %}
+            {% when 'hawkins' %}{% assign brand_label = 'HAWKINS' %}
+            {% when 'milton' %}{% assign brand_label = 'milton' %}
+            {% when 'havells' %}{% assign brand_label = 'HAVELLS' %}
+            {% when 'bajaj' %}{% assign brand_label = 'BAJAJ' %}
+            {% when 'jaypee' %}{% assign brand_label = 'JAYPEE' %}
+            {% when 'suncasa' %}{% assign brand_label = 'SUNCASA' %}
+            {% when 'pigeon' %}{% assign brand_label = 'Pigeon' %}
+            {% when 'prestige' %}{% assign brand_label = 'Prestige' %}
+            {% when 'bergner' %}{% assign brand_label = 'BERGNER' %}
+            {% when 'richcraft' %}{% assign brand_label = 'RICHCRAFT' %}
+            {% when 'supreme' %}{% assign brand_label = 'SUPREME' %}
+          {% endcase %}
+          {% assign brand_link = block.settings.link %}
+          {% if brand_link == '#' %}{% assign brand_link = '' %}{% endif %}
+          <article class="brand-card" data-slider-item aria-label="{{ brand_label | escape }}" {{ block.shopify_attributes }}>
+            {% if brand_link != blank %}<a href="{{ brand_link }}">{% endif %}
+            <span class="brand-mark brand-{{ brand_handle }}">{{ brand_label | escape }}</span>
+            {% if brand_link != blank %}</a>{% endif %}
+          </article>
+        {% endfor %}
+      </div>
+      <button class="slider-btn next" type="button" data-slider-next aria-label="Next brands">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+"name": "Brand list",
+"class": "index-section brand-logo",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"max_blocks": 20,
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Our Brands"
+},
+{
+"type": "text",
+"id": "addclass",
+"label": "Add Class",
+"default": "brands"
+},
+{
+"type": "color",
+"id": "bg_color",
+"label": "Background color",
+"default": "#ffffff"
+},
+{
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 6
+},
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 2
+}
+],
+"blocks": [
+{
+"type": "brand_image",
+"name": "Brand",
+"settings": [
+{
+"type": "text",
+"id": "brand_name",
+"label": "Brand name",
+"info": "Shown as text like the HTML. If empty, the name is taken from the image file."
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image",
+"info": "Not shown. Used only to guess the brand name if Brand name is empty."
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link",
+"info": "Optional"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Brand list",
+"category": "Image",
+"blocks": [
+{
+"type": "brand_image"
+},
+{
+"type": "brand_image"
+},
+{
+"type": "brand_image"
+},
+{
+"type": "brand_image"
+},
+{
+"type": "brand_image"
+},
+{
+"type": "brand_image"
+}
+]
+}
+]
+}
+{% endschema %}

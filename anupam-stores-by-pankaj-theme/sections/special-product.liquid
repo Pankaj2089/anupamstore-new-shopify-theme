@@ -1,0 +1,96 @@
+{%- assign collection = collections[section.settings.collection] -%}
+{%- assign deal_themes = 'sage,night,cocoa,olive' | split: ',' -%}
+<section class="section deals" id="deals">
+  <div class="container">
+    <div class="section-head">
+      {% if section.settings.title != blank %}
+      <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+      {% endif %}
+      <div class="section-controls">
+        <button class="slider-btn prev" type="button" data-deals-prev aria-label="Previous deals">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+        </button>
+        <button class="slider-btn next" type="button" data-deals-next aria-label="Next deals">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    {% if settings.enable_countdown %}
+    {% assign my_fields = collection.metafields.custom %}
+    {% if my_fields.countdown != nil %}
+    <div class="flip-countdown simple-countdown"><div class="count-title">Ends in : </div><div class="countdown-container flip-countdown" data-countdown="{{ my_fields.countdown.value | date: "%Y/%m/%d %H:%M:%S" }}"></div></div>
+    {% endif %}
+    {% endif %}
+    {% if collection != blank %}
+    <div class="slider-wrapper deals-slider" data-slider>
+      <div class="slider-track deals-track" data-slider-track>
+        {% for product in collection.products limit: 12 %}
+          {%- assign theme_index = forloop.index0 | modulo: 4 -%}
+          {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'deal', deal_theme: deal_themes[theme_index] %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+"name": "Special collection",
+"class": "special-collection index-section deals-of-the-day-section",
+  "disabled_on": {
+    "groups": ["header","footer"]
+},
+"settings": [
+{
+"type": "text",
+"id": "class",
+"label": "Add Class",
+"default": "specialproduct"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Special collection"
+},	
+{
+"id": "collection",
+"type": "collection",
+"label": "Collection"
+},
+
+              {
+"type": "checkbox",
+"id": "proavail_enable",
+"label": "Enable Product  Available"
+},
+
+        {
+"type": "range",
+"id": "product_col_desktop_pro",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Desktop",
+"default": 3
+},
+
+
+{
+"type": "range",
+"id": "product_col_mobile_pro",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of columns on Mobile",
+"default": 1
+}
+],
+"presets": [
+{
+"name": "Special collection",
+"category": "Collection"
+}
+]
+}
+{% endschema %}

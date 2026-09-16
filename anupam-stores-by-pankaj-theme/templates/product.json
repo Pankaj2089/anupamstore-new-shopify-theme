@@ -1,0 +1,255 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template",
+      "blocks": {
+        "4b5cd151-1d12-4b24-aeca-7b0c62bb7a0d": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "ef95cb54-4a46-401d-babd-f01d5a1ec73a": {
+          "type": "Custom_Tab",
+          "settings": {
+            "tab_title": "Shipping",
+            "tab_content": "<p>Anupam Furniture Unlimited delivers across India through trusted transport partners and an in-house team, with localized delivery and installation services available within Jaipur. Estimated delivery timelines vary by product availability: in-stock items take 3–7 business days within Jaipur and 7–14 business days across the rest of India, while brand-ordered or oversized items require 2–6 weeks or a custom timeline confirmed at purchase. Customers can choose between Standard Delivery (brought only to the ground floor or building entrance) and White-Glove Delivery, which includes doorstep-to-room delivery, unpacking, assembly, and packaging removal, though showroom pickup is also an option. Delivery charges are calculated based on size, weight, and destination, with potential extra manual-carrying fees for upper-floor deliveries lacking a service lift. Before scheduling a delivery slot, customers must ensure that all doorways, corridors, and destination rooms can accommodate the packed furniture dimensions. For wall-mounted installations, customers are solely responsible for ensuring wall suitability and verifying the absence of concealed electrical wiring or plumbing. Upon arrival, an authorized adult must thoroughly inspect the furniture; any visible issues must be noted immediately on the delivery slip. If packaging arrives damaged or tampered with, customers should refuse delivery or document the damage on the slip, taking clear photos and notifying customer care within 24 hours at info@anupamstores.com or +91 9929994251 to arrange a replacement, repair, or refund. Please note that international shipping is not currently supported.</p>"
+          }
+        },
+        "53a4acd3-acd4-482c-adf9-d74670a43870": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "make_collapsible_row": false
+          }
+        }
+      },
+      "block_order": [
+        "4b5cd151-1d12-4b24-aeca-7b0c62bb7a0d",
+        "share",
+        "ef95cb54-4a46-401d-babd-f01d5a1ec73a",
+        "53a4acd3-acd4-482c-adf9-d74670a43870"
+      ],
+      "settings": {
+        "product_layout": "design_2",
+        "tab_text_color": "#7b818f",
+        "tab_text_hover_color": "#111111",
+        "shipping_tab_enable": true,
+        "enable_progressbar": true,
+        "show_reviews": true,
+        "addtocart_sticky_bar": true,
+        "product_vendor_enable": false,
+        "product_collection": false,
+        "product_type_enable": true,
+        "product_availibility_enable": true,
+        "product_image_zoom_enable": true,
+        "related_products_enable": true,
+        "product_qty_enable": true,
+        "share_enable": true,
+        "enable_payment_button": true,
+        "print_enable": false,
+        "pro_img_widthheight": "709x780",
+        "pro_thumb_img_widthheight": "77x85",
+        "thumb_position": "vertical_left",
+        "number_of_thumb": "4",
+        "sizechart_enable": false,
+        "sizechart_lable": "Size Chart",
+        "pro_facebook": true,
+        "pro_twitter": true,
+        "pro_linkedin": true,
+        "pro_pinterest": true,
+        "pro_tumblr": false,
+        "pro_email": false,
+        "pro_whatsapp": false,
+        "payment_title": "Payment & Security",
+        "payment_subtitle": "Payment methods",
+        "payment_desc": "Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.",
+        "security_title": "Security",
+        "sec_title1": "FREE SHIPPING",
+        "sec_subtitle1": "WORLDWIDE",
+        "sec_title2": "BIG SAVING ON",
+        "sec_subtitle2": "WEEKENDS",
+        "sec_title3": "24H SUPPORT",
+        "sec_subtitle3": "CONTACT US"
+      }
+    },
+    "177640700771b3dbee": {
+      "type": "apps",
+      "settings": {}
+    },
+    "1656410869d8814fd8": {
+      "type": "cms-subbanner",
+      "settings": {
+        "banner1_img": "shopify://shop_images/Web_banner1_resize_jpg.webp",
+        "banner1_url": "shopify://collections/tabletop-vases-and-pots",
+        "text1_position": "right",
+        "banner1_subtitle": "",
+        "banner1_subtitle_color": "#ffffff",
+        "banner1_title": "",
+        "banner1_title_color": "#ffffff",
+        "banner1_desc": "",
+        "banner1_desc_color": "#222222",
+        "banner1_pricedesc": "",
+        "banner1_pricedesc_color": "#ffffff",
+        "banner1_price": "",
+        "banner2_img": "shopify://shop_images/Web_banner3_resize.webp",
+        "banner2_url": "shopify://collections/decorative-figures",
+        "text2_position": "right",
+        "banner2_subtitle": "",
+        "banner2_subtitle_color": "#313c46",
+        "banner2_title": "",
+        "banner2_title_color": "#313c46",
+        "banner2_desc": "",
+        "banner2_desc_color": "#ffffff",
+        "banner2_pricedesc": "",
+        "banner2_pricedesc_color": "#313c46",
+        "banner2_price": "",
+        "banner3_img": "shopify://shop_images/Web_banner2_resize_jpg.webp",
+        "banner3_url": "shopify://collections/home-decor-showpieces",
+        "text3_position": "right",
+        "banner3_subtitle": "",
+        "banner3_subtitle_color": "#ffffff",
+        "banner3_title": "",
+        "banner3_title_color": "#ffffff",
+        "banner3_desc": "",
+        "banner3_desc_color": "#222222",
+        "banner3_pricedesc": "",
+        "banner3_pricedesc_color": "#ffffff",
+        "banner3_price": ""
+      }
+    },
+    "related-products": {
+      "type": "anupam-related-products",
+      "settings": {}
+    },
+    "our_brand": {
+      "type": "our_brand",
+      "blocks": {
+        "brand_image_NAKXYn": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/suncasa_logo.png",
+            "link": "shopify://collections/premium-suncasa-kitchen-utilities"
+          }
+        },
+        "brand_image_VAE7Ag": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/richcraft_logo.png",
+            "link": ""
+          }
+        },
+        "brand_image_ppFN93": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/jaypee_logo.png",
+            "link": ""
+          }
+        },
+        "brand_image_7Mag8m": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/milton_logo.png",
+            "link": ""
+          }
+        },
+        "1605783755d6d9f598-2": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/cello_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-1": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/bergner_logo.png",
+            "link": "shopify://collections/premium-bergner-kitchen-appliances"
+          }
+        },
+        "1605783755d6d9f598-3": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/borosil_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-4": {
+          "type": "brand_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/trueware_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-5": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/havells_logo.png",
+            "link": "#"
+          }
+        },
+        "fe3f5195-5da5-4a16-b714-43fb3e5da4bd": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/prestige_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-0": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/supreme_logo.png",
+            "link": "#"
+          }
+        },
+        "brand_image_Cyipkt": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/hawkins_logo.png",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "brand_image_NAKXYn",
+        "brand_image_VAE7Ag",
+        "brand_image_ppFN93",
+        "brand_image_7Mag8m",
+        "1605783755d6d9f598-2",
+        "1605783755d6d9f598-1",
+        "1605783755d6d9f598-3",
+        "1605783755d6d9f598-4",
+        "1605783755d6d9f598-5",
+        "fe3f5195-5da5-4a16-b714-43fb3e5da4bd",
+        "1605783755d6d9f598-0",
+        "brand_image_Cyipkt"
+      ],
+      "settings": {
+        "title": "Our Brands",
+        "addclass": "brands",
+        "bg_color": "#ffffff",
+        "product_col_desktop_pro": 6,
+        "product_col_mobile_pro": 2
+      }
+    },
+    "recently-viewed": {
+      "type": "anupam-recently-viewed",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "1656410869d8814fd8",
+    "related-products",
+    "our_brand",
+    "recently-viewed",
+    "177640700771b3dbee"
+  ]
+}

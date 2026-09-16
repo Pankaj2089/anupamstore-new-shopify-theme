@@ -1,0 +1,94 @@
+{% assign products_per_page = settings.products_per_page | default: 8 %}
+{%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+<div id="ProductGridContainer">
+  {% paginate collection.products by products_per_page %}
+  <div class="collection_template" id="product-grid" data-id="{{ section.id }}">
+    <header class="collection-top">
+      <nav class="collection-crumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        <span aria-current="page">{{ collection.title }}</span>
+      </nav>
+      <h1 class="collection-title" id="collection-title">{{ collection.title }}</h1>
+      <div class="collection-toolbar">
+        {%- if enable_sorting -%}
+        <div class="collection-sort">
+          <button class="collection-sort-toggle" type="button" data-sort-toggle aria-haspopup="listbox" aria-expanded="false" aria-controls="sort-menu">
+            <span data-sort-label>
+              {%- for option in results.sort_options -%}
+                {%- if option.value == sort_by -%}{{ option.name | escape }}{%- endif -%}
+              {%- endfor -%}
+            </span>
+            <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+          </button>
+          <div class="collection-sort-menu" id="sort-menu" role="listbox" data-sort-menu hidden>
+            {%- for option in results.sort_options -%}
+            <button type="button" class="collection-sort-option{% if option.value == sort_by %} is-active{% endif %}" role="option" data-sort="{{ option.value | escape }}">{{ option.name | escape }}</button>
+            {%- endfor -%}
+          </div>
+          <facet-filters-form class="facets facet-hide anupam-sort-form">
+            <form id="FacetSortForm" class="facets__form collection-sorting">
+              <div class="facet-filters sorting caption">
+                <div class="filter-sortby facet-filters__field">
+                  <label class="facet-filters__label caption-large visually-hidden" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
+                  <div class="select sorting-section">
+                    <select name="sort_by" class="facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                      {%- for option in results.sort_options -%}
+                      <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </facet-filters-form>
+        </div>
+        {%- endif -%}
+        {% if section.settings.show_filter %}
+        <button class="collection-tool-btn" type="button" data-filter-open aria-haspopup="dialog" aria-controls="filter-drawer" aria-expanded="false">
+          Filters
+          <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+        </button>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="products-grid-view collection-grid" data-collection-grid>
+      {% for product in collection.products %}
+        {% if product.type == 'PPLR_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+        {% render 'anupam-hp-product-card', collection: collection, product: product, card_style: 'collection' %}
+      {% else %}
+        {% if collection.handle == 'all' %}
+          {% render 'onboarding-empty-collection' %}
+        {% else %}
+          <p class="collection-empty">{{ 'collections.general.no_matches' | t }}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+    <nav class="collection-pagination" data-pagination aria-label="Product pagination">
+      {% if paginate.previous %}
+      <a class="page-btn" href="{{ paginate.previous.url }}">Previous</a>
+      {% else %}
+      <button class="page-btn" type="button" disabled>Previous</button>
+      {% endif %}
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a class="page-btn" href="{{ part.url }}">{{ part.title }}</a>
+        {% elsif part.title == paginate.current_page %}
+          <span class="page-btn is-active" aria-current="page">{{ part.title }}</span>
+        {% else %}
+          <span class="page-btn">{{ part.title }}</span>
+        {% endif %}
+      {% endfor %}
+      {% if paginate.next %}
+      <a class="page-btn" href="{{ paginate.next.url }}">Next</a>
+      {% else %}
+      <button class="page-btn" type="button" disabled>Next</button>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
+  {% endpaginate %}
+</div>

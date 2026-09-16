@@ -1,0 +1,110 @@
+{{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+{{ 'jQuery.products.min.js' | asset_url | script_tag }}
+{%- assign grid_image_width = '600x600' -%}
+{%- assign viewed_products_item = 6 -%}
+<div id="recently-viewed-products-wrap" class="section collection-bestsellers pdp-products" style="display:none" data-slider>
+  <div class="container">
+  <div class="section-head">
+    <h2 class="section-title" id="recent-title">Recently Viewed Products</h2>
+    <div class="section-controls">
+      <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous recently viewed products">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+      </button>
+      <button class="slider-btn next" type="button" data-slider-next aria-label="Next recently viewed products">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+  </div>
+    <div class="slider-wrapper">
+    <div id="recently-viewed-products" class="slider-track collection-best-track" data-slider-track>
+  </div>
+  </div>
+  </div>
+</div>
+
+{% raw %}
+<div class="recentveiw">
+  <script id="recently-viewed-product-template"  type="text/x-jquery-tmpl">
+          <div id="product-${handle}" class="product product-layouts item-row col-xs-12">
+            <div class="product-container" itemtype="https://schema.org/Product">
+              <div class="product-wrapper">              
+                  <div class="thumbs product-thumb">
+                    <a href="${url}">
+                      <!-- <img loading="lazy" src="${Shopify.Products.resizeImage(featured_image, "376x489")}" alt="featured-image"/> -->
+                      <img loading="lazy" src="${CustomHelper.resizeImage(featured_image, "376x489")}" alt="featured-image"/>
+
+    </a>
+                {{if available}}
+
+          {{else}}
+              <div class="sold-out-tag text-center">
+                    <span class="tag">Sold out</span>
+    </div>
+          {{/if}}
+    </div>
+                  <div class="product-description">      
+                      <span class="h4 grid-view-item__title">
+                      <a class="grid-view-item__link grid-link__title" href="${url}">${title}</a>
+    </span>
+    <div class="spr-badges grid-item-meta"> 
+                    <span class="shopify-product-reviews-badge" data-id="${id}"></span>
+    </div>
+                      <div class="content_price">
+                          <div class="product-price-and-shipping">
+
+                            {{if price_varies}}                            
+                              <span itemprop="price" class="price"><span class="money">${price_min}</span></span>
+                                 {{if compare_at_price > price}}
+                              <span class="price-regular"><span class="money">${compare_at_price}</span></span>
+                              {{/if}}
+                           {{else}}
+                                <span  itemprop="price" class="price"><span class="money">${price_min}</span></span>
+                            {{/if}}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </script>
+</div>
+{% endraw %}
+<script type="text/javascript">
+  var viewed_number_of = 6;
+  var viewed_products_item = {{viewed_products_item}};
+  Shopify.Products.showRecentlyViewed( { 
+    howManyToShow: viewed_number_of,
+    onComplete: function() {
+      var listPrice = jQuery('#recently-viewed-products .product .money');
+      listPrice.each(function() {
+        var $this = jQuery(this);
+        var $price = Shopify.formatMoney($this.html(), window.money_format);
+        $this.html($price);
+      });
+      (function () {
+        var wrap = document.getElementById('recently-viewed-products-wrap');
+        var track = document.getElementById('recently-viewed-products');
+        if (!wrap || !track) return;
+        var prev = wrap.querySelector('[data-slider-prev]');
+        var next = wrap.querySelector('[data-slider-next]');
+        var go = function (dir) {
+          var item = track.querySelector('.product, .product-card, .item-row');
+          var width = item ? item.getBoundingClientRect().width + 16 : 280;
+          track.scrollBy({ left: dir * width, behavior: 'smooth' });
+        };
+        if (prev) prev.addEventListener('click', function () { go(-1); });
+        if (next) next.addEventListener('click', function () { go(1); });
+      })();      
+
+      jQuery('#recently-viewed-wrapper').show();
+      if(window.show_multiple_currencies){
+        Currency.convertAll(
+          shopCurrency, 
+          jQuery('[name=currencies]').val(), 
+          '#recently-viewed-products span.money'
+        );
+      }
+    } 
+  });
+</script>
