@@ -1252,3 +1252,325 @@ body.template-product .pdp-qty .quantity__input {
         grid-template-columns: 1fr 1fr !important;
     }
 }
+
+body.template-product .page-wrapper,
+body.template-product .main-content,
+body.template-product .product-template__container,
+body.template-product [id^="ProductSection-"],
+body.template-product .pdp,
+body.template-product .pdp > .container,
+body.template-product #product-sticky.pdp-layout,
+body.template-product .pdp-layout,
+body.template-product .pdp-info,
+body.template-product .product-information.pdp-info,
+body.template-product .pdp-info .product-information-inner,
+body.template-product .pdp-info .fixed-product-block,
+body.template-product .pdp-info .fixed-content,
+body.template-product .shopify-section.anupam-related-products,
+body.template-product .shopify-section.anupam-recently-viewed {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+}
+
+body.template-product .design_2 .product-information,
+body.template-product .design_2 .pdp-info,
+body.template-product .design_2 .product-wrapper-owlslider,
+body.template-product .design_2 .additinal-product {
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+}
+
+body.template-product .pdp-acc,
+body.template-product .pdp-acc-item,
+body.template-product .pdp-acc-item.is-open .pdp-acc-panel {
+    display: block !important;
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    float: none !important;
+}
+
+body.template-product .pdp-acc-panel {
+    display: none !important;
+    position: static !important;
+    float: none !important;
+}
+
+body.template-product .shopify-section.anupam-related-products,
+body.template-product .pdp-products,
+body.template-product .collection-bestsellers.pdp-products,
+body.template-product #related {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    float: none !important;
+    clear: both !important;
+    width: 100% !important;
+    max-width: none !important;
+    position: relative !important;
+    z-index: 2 !important;
+    grid-column: 1 / -1 !important;
+}
+
+body.template-product .shopify-section.anupam-recently-viewed,
+body.template-product #recently-viewed-products-wrap {
+    float: none !important;
+    clear: both !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 2 !important;
+    grid-column: 1 / -1 !important;
+}
+
+body.template-product .pdp-products .section-head,
+body.template-product .pdp-products-head,
+body.template-product .collection-bestsellers.pdp-products .section-head,
+body.template-product #related .section-head,
+body.template-product #recently-viewed-products-wrap .section-head {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 42px !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 3 !important;
+    margin: 0 0 18px !important;
+    float: none !important;
+}
+
+body.template-product .pdp-products .section-title,
+body.template-product .pdp-products-title,
+body.template-product .collection-bestsellers.pdp-products .section-title,
+body.template-product #related .section-title,
+body.template-product #related-title,
+body.template-product #recent-title {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    float: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    clip: auto !important;
+    transform: none !important;
+    text-indent: 0 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(26px, 3vw, 36px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #462D20 !important;
+    margin: 0 !important;
+    flex: 0 1 auto !important;
+    text-align: left !important;
+    white-space: normal !important;
+}
+
+body.template-product #recently-viewed-products-wrap,
+body.template-product .shopify-section.anupam-recently-viewed {
+    float: none !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    background: #ffffff !important;
+    text-align: left !important;
+}
+
+body.template-product #recently-viewed-products-wrap > .container,
+body.template-product #recently-viewed-products-wrap .container {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    float: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+}
+
+body.template-product #recently-viewed-products {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    float: none !important;
+}
+
+body.template-product #recently-viewed-products .product-card,
+body.template-product #recently-viewed-products-wrap .product-card {
+    flex: 0 0 calc(25% - 15px);
+    min-width: 0;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+body.template-product #recently-viewed-products .product-image {
+    background: #efe7de;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+body.template-product #recently-viewed-products .product-title a,
+body.template-product #recently-viewed-products a.grid-link__title {
+    display: inline !important;
+    -webkit-line-clamp: unset !important;
+    white-space: normal !important;
+    overflow: visible !important;
+}
+
+body.template-product #recently-viewed-products .product-rating,
+body.template-product #related .product-rating {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+}
+
+body.template-product #recently-viewed-products .stars,
+body.template-product #related .stars {
+    display: inline-flex !important;
+    color: #c4a15a !important;
+}
+
+body.template-product #recently-viewed-products .rating-meta:empty {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    body.template-product #recently-viewed-products .product-card,
+    body.template-product #related .product-card {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+body.template-product .shopify-section.subbanner,
+body.template-product .shopify-section.index-section.subbanner,
+body.template-product .promo-banner {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    float: none !important;
+    clear: both !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 420px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #3e2416 !important;
+}
+
+body.template-product .promo-banner .promo-track {
+    display: flex !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+}
+
+body.template-product .promo-banner .promo-slide {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    min-height: 420px !important;
+    height: auto !important;
+    overflow: hidden !important;
+}
+
+body.template-product .promo-banner .promo-slide-img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+}
+
+body.template-product .promo-banner .promo-copy {
+    position: relative !important;
+    z-index: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-block: 72px !important;
+    float: none !important;
+}
+
+body.template-product .promo-banner .promo-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(42px, 6vw, 80px) !important;
+    font-weight: 500 !important;
+    line-height: 1.08 !important;
+    color: #fff !important;
+    margin: 0 0 18px !important;
+}
+
+body.template-product .promo-banner .promo-copy p {
+    color: rgba(255, 247, 238, 0.86) !important;
+    margin: 0 0 32px !important;
+    font-size: 17px !important;
+}
+
+body.template-product .promo-banner .btn-promo {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 168px !important;
+    min-height: 48px !important;
+    padding: 0 28px !important;
+    background: transparent !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: 10px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+}
+
+@media (min-width: 1024px) {
+    body.template-product .shopify-section.subbanner,
+    body.template-product .promo-banner,
+    body.template-product .promo-banner .promo-slide {
+        min-height: 742px !important;
+    }
+}
+
+body.template-product .shopify-section.anupam-related-products,
+body.template-product .shopify-section.brand-logo,
+body.template-product .shopify-section.index-section.brand-logo,
+body.template-product .shopify-section.anupam-recently-viewed {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.template-product #related,
+body.template-product .pdp-products,
+body.template-product .section.collection-bestsellers,
+body.template-product .section.brands,
+body.template-product .shopify-section.brand-logo .section.brands,
+body.template-product #recently-viewed-products-wrap {
+    padding-block: clamp(16px, 2vw, 24px) !important;
+    padding-top: clamp(16px, 2vw, 24px) !important;
+    padding-bottom: clamp(16px, 2vw, 24px) !important;
+    margin: 0 !important;
+}
+
+body.template-product #related .section-head,
+body.template-product .brands .section-head,
+body.template-product .section.brands .section-head,
+body.template-product #recently-viewed-products-wrap .section-head,
+body.template-product .pdp-products .section-head {
+    margin-top: 0 !important;
+    margin-bottom: clamp(12px, 1.5vw, 18px) !important;
+}

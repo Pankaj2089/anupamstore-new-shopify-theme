@@ -836,7 +836,7 @@ body.template-product .pdp-products,
 body.template-product .shopify-section.brand-logo,
 body.template-product .section.brands,
 body.template-product #recently-viewed-products-wrap {
-    padding-block: clamp(16px, 2vw, 28px);
+    padding-block: clamp(16px, 2vw, 24px);
     background: #ffffff !important;
 }
 

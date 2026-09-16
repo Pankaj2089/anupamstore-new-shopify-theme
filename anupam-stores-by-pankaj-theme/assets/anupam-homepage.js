@@ -236,9 +236,11 @@
     });
   }
 
-  const promoSec = document.querySelector('.promo-banner')?.closest('.shopify-section');
-  const featuredEl = document.querySelector('.section.featured');
-  if (promoSec && featuredEl && featuredEl.parentNode) {
-    featuredEl.parentNode.insertBefore(promoSec, featuredEl);
+  if (document.body.classList.contains('template-index')) {
+    const promoSec = document.querySelector('.promo-banner')?.closest('.shopify-section');
+    const featuredEl = document.querySelector('.section.featured');
+    if (promoSec && featuredEl && featuredEl.parentNode) {
+      featuredEl.parentNode.insertBefore(promoSec, featuredEl);
+    }
   }
 })();

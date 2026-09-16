@@ -1,110 +1,161 @@
 {{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
 {{ 'jQuery.products.min.js' | asset_url | script_tag }}
-{%- assign grid_image_width = '600x600' -%}
 {%- assign viewed_products_item = 6 -%}
-<div id="recently-viewed-products-wrap" class="section collection-bestsellers pdp-products" style="display:none" data-slider>
+<section id="recently-viewed-products-wrap" class="section collection-bestsellers pdp-products" style="display:none" data-slider aria-labelledby="recent-title">
   <div class="container">
-  <div class="section-head">
-    <h2 class="section-title" id="recent-title">Recently Viewed Products</h2>
-    <div class="section-controls">
-      <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous recently viewed products">
-        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-      </button>
-      <button class="slider-btn next" type="button" data-slider-next aria-label="Next recently viewed products">
-        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-      </button>
+    <div class="section-head pdp-products-head">
+      <h2 class="section-title pdp-products-title" id="recent-title">Recently Viewed Products</h2>
+      <div class="section-controls">
+        <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous recently viewed products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+        </button>
+        <button class="slider-btn next" type="button" data-slider-next aria-label="Next recently viewed products">
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    <div class="slider-wrapper">
+      <div id="recently-viewed-products" class="slider-track collection-best-track" data-slider-track></div>
     </div>
   </div>
-    <div class="slider-wrapper">
-    <div id="recently-viewed-products" class="slider-track collection-best-track" data-slider-track>
-  </div>
-  </div>
-  </div>
-</div>
+</section>
 
 {% raw %}
-<div class="recentveiw">
-  <script id="recently-viewed-product-template"  type="text/x-jquery-tmpl">
-          <div id="product-${handle}" class="product product-layouts item-row col-xs-12">
-            <div class="product-container" itemtype="https://schema.org/Product">
-              <div class="product-wrapper">              
-                  <div class="thumbs product-thumb">
-                    <a href="${url}">
-                      <!-- <img loading="lazy" src="${Shopify.Products.resizeImage(featured_image, "376x489")}" alt="featured-image"/> -->
-                      <img loading="lazy" src="${CustomHelper.resizeImage(featured_image, "376x489")}" alt="featured-image"/>
-
-    </a>
-                {{if available}}
-
-          {{else}}
-              <div class="sold-out-tag text-center">
-                    <span class="tag">Sold out</span>
-    </div>
-          {{/if}}
-    </div>
-                  <div class="product-description">      
-                      <span class="h4 grid-view-item__title">
-                      <a class="grid-view-item__link grid-link__title" href="${url}">${title}</a>
-    </span>
-    <div class="spr-badges grid-item-meta"> 
-                    <span class="shopify-product-reviews-badge" data-id="${id}"></span>
-    </div>
-                      <div class="content_price">
-                          <div class="product-price-and-shipping">
-
-                            {{if price_varies}}                            
-                              <span itemprop="price" class="price"><span class="money">${price_min}</span></span>
-                                 {{if compare_at_price > price}}
-                              <span class="price-regular"><span class="money">${compare_at_price}</span></span>
-                              {{/if}}
-                           {{else}}
-                                <span  itemprop="price" class="price"><span class="money">${price_min}</span></span>
-                            {{/if}}
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-  </script>
-</div>
+<script id="recently-viewed-product-template" type="text/x-jquery-tmpl">
+<div class="rv-data" data-handle="${handle}"></div>
+</script>
 {% endraw %}
 <script type="text/javascript">
-  var viewed_number_of = 6;
-  var viewed_products_item = {{viewed_products_item}};
-  Shopify.Products.showRecentlyViewed( { 
-    howManyToShow: viewed_number_of,
-    onComplete: function() {
-      var listPrice = jQuery('#recently-viewed-products .product .money');
-      listPrice.each(function() {
-        var $this = jQuery(this);
-        var $price = Shopify.formatMoney($this.html(), window.money_format);
-        $this.html($price);
-      });
-      (function () {
-        var wrap = document.getElementById('recently-viewed-products-wrap');
-        var track = document.getElementById('recently-viewed-products');
-        if (!wrap || !track) return;
-        var prev = wrap.querySelector('[data-slider-prev]');
-        var next = wrap.querySelector('[data-slider-next]');
-        var go = function (dir) {
-          var item = track.querySelector('.product, .product-card, .item-row');
-          var width = item ? item.getBoundingClientRect().width + 16 : 280;
-          track.scrollBy({ left: dir * width, behavior: 'smooth' });
-        };
-        if (prev) prev.addEventListener('click', function () { go(-1); });
-        if (next) next.addEventListener('click', function () { go(1); });
-      })();      
+  (function () {
+    var LIMIT = {{ viewed_products_item }};
+    var wrap = document.getElementById('recently-viewed-products-wrap');
+    var track = document.getElementById('recently-viewed-products');
+    if (!wrap || !track) return;
 
-      jQuery('#recently-viewed-wrapper').show();
-      if(window.show_multiple_currencies){
-        Currency.convertAll(
-          shopCurrency, 
-          jQuery('[name=currencies]').val(), 
-          '#recently-viewed-products span.money'
-        );
+    var starSvg = '<svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" focusable="false"><path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+    var starsHtml = '<span class="stars" aria-hidden="true">' + new Array(6).join(starSvg) + '</span>';
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function handlesFromCookie() {
+      if (window.Shopify && Shopify.Products && Shopify.Products.getConfig) {
+        try {
+          var cookieName = Shopify.Products.getConfig().name || 'shopify_recently_viewed';
+        } catch (err) {}
       }
-    } 
-  });
+      var name = 'shopify_recently_viewed=';
+      var parts = document.cookie.split(';');
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].replace(/^\s+/, '');
+        if (part.indexOf(name) === 0) {
+          return decodeURIComponent(part.slice(name.length)).split(' ').filter(Boolean);
+        }
+      }
+      return [];
+    }
+
+    function imageUrl(product) {
+      var src = product.featured_image || (product.images && product.images[0]) || '';
+      if (src && typeof src === 'object') src = src.src || '';
+      if (window.CustomHelper && CustomHelper.resizeImage && src) {
+        return CustomHelper.resizeImage(src, '600x600') || src;
+      }
+      return src;
+    }
+
+    function money(cents) {
+      var n = Number(cents) || 0;
+      if (window.Shopify && Shopify.formatMoney && window.money_format) {
+        return Shopify.formatMoney(n, window.money_format);
+      }
+      return '₹' + (n / 100).toFixed(2);
+    }
+
+    function cardHtml(product) {
+      var handle = product.handle || '';
+      var id = product.id || '';
+      var url = product.url || ('/products/' + handle);
+      var title = product.title || '';
+      var image = imageUrl(product);
+      var price = Number(product.price != null ? product.price : product.price_min) || 0;
+      var compare = Number(product.compare_at_price != null ? product.compare_at_price : product.compare_at_price_min) || 0;
+      var available = product.available !== false;
+      var variantId = (product.variants && product.variants[0] && product.variants[0].id) || '';
+      var save = (compare > price && compare > 0) ? Math.round((compare - price) * 100 / compare) : 0;
+      var sold = available ? '' : ' product-price--sold-out';
+      var badge = save > 0 ? '<span class="badge-sale">Save -' + save + '%</span>' : '';
+      var compareHtml = save > 0 ? '<span class="price-was">' + money(compare) + '</span>' : '';
+      return '' +
+        '<article class="product-card item-row product-layouts' + sold + '" id="product-' + escapeHtml(handle) + '" data-id="product-' + escapeHtml(id) + '" data-col="' + escapeHtml(id) + '">' +
+          '<form action="/cart/add" method="post" class="variants cart-form-' + escapeHtml(id) + '" hidden><input type="hidden" name="id" value="' + escapeHtml(variantId) + '"></form>' +
+          '<div class="product-image">' +
+            '<a class="product-media" href="' + escapeHtml(url) + '"><img class="featured-image" src="' + escapeHtml(image) + '" alt="' + escapeHtml(title) + '" width="400" height="400" loading="lazy"></a>' +
+            badge +
+            '<div class="product-actions">' +
+              '<span class="default-wishbutton-' + escapeHtml(handle) + '"><a class="action-btn add-in-wishlist-js" href="' + escapeHtml(handle) + '" aria-label="Add to wishlist"><span class="material-symbols-outlined" aria-hidden="true">favorite</span></a></span>' +
+              '<a class="action-btn quick-view-text for-home" href="javascript:void(0)" data-id="' + escapeHtml(handle) + '" aria-label="Quick view"><span class="material-symbols-outlined" aria-hidden="true">visibility</span></a>' +
+              (available ? '<a class="action-btn add-cart-btn" href="javascript:void(0)" aria-label="Add to cart"><span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span></a>' : '') +
+            '</div>' +
+          '</div>' +
+          '<div class="product-body">' +
+            '<h3 class="product-title"><a class="grid-link__title" href="' + escapeHtml(url) + '">' + escapeHtml(title) + '</a></h3>' +
+            '<div class="product-rating">' + starsHtml + '</div>' +
+            '<div class="product-price grid-view-item__meta">' + compareHtml + '<span class="price-sale">' + money(price) + '</span></div>' +
+            (available ? '<a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>' : '') +
+          '</div>' +
+        '</article>';
+    }
+
+    function show(products) {
+      if (!products.length) return;
+      track.innerHTML = products.map(cardHtml).join('');
+      wrap.style.setProperty('display', 'block', 'important');
+      var prev = wrap.querySelector('[data-slider-prev]');
+      var next = wrap.querySelector('[data-slider-next]');
+      var go = function (dir) {
+        var item = track.querySelector('.product-card');
+        var width = item ? item.getBoundingClientRect().width + 20 : 280;
+        track.scrollBy({ left: dir * width, behavior: 'smooth' });
+      };
+      if (prev) prev.onclick = function () { go(-1); };
+      if (next) next.onclick = function () { go(1); };
+    }
+
+    function load() {
+      var handles = handlesFromCookie().slice(0, LIMIT);
+      if (!handles.length) return;
+      var products = [];
+      var index = 0;
+      function next() {
+        if (index >= handles.length || products.length >= LIMIT) {
+          show(products);
+          return;
+        }
+        var handle = handles[index++];
+        var req = new XMLHttpRequest();
+        req.open('GET', '/products/' + handle + '.js', true);
+        req.onreadystatechange = function () {
+          if (req.readyState !== 4) return;
+          if (req.status >= 200 && req.status < 300) {
+            try { products.push(JSON.parse(req.responseText)); } catch (err) {}
+          }
+          next();
+        };
+        req.send();
+      }
+      next();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', load);
+    } else {
+      load();
+    }
+  })();
 </script>

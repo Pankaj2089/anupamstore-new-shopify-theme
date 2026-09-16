@@ -87,24 +87,28 @@
   }
 
   function initAccordions() {
-    document.addEventListener('click', (event) => {
-      const toggle = event.target.closest('.pdp-acc-toggle');
-      if (!toggle) return;
-      event.preventDefault();
-      const item = toggle.closest('.pdp-acc-item');
-      const open = item.classList.contains('is-open');
-      document.querySelectorAll('.pdp-acc-item').forEach((row) => {
-        row.classList.remove('is-open');
-        row.querySelector('.pdp-acc-toggle')?.setAttribute('aria-expanded', 'false');
-        const icon = row.querySelector('.pdp-acc-toggle .material-symbols-outlined');
-        if (icon) icon.textContent = 'add';
+    document.querySelectorAll('.pdp-acc').forEach((acc) => {
+      acc.addEventListener('click', (event) => {
+        const toggle = event.target.closest('.pdp-acc-toggle');
+        if (!toggle || !acc.contains(toggle)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const item = toggle.closest('.pdp-acc-item');
+        if (!item) return;
+        const open = item.classList.contains('is-open');
+        acc.querySelectorAll('.pdp-acc-item').forEach((row) => {
+          row.classList.remove('is-open');
+          row.querySelector('.pdp-acc-toggle')?.setAttribute('aria-expanded', 'false');
+          const icon = row.querySelector('.pdp-acc-toggle .material-symbols-outlined');
+          if (icon) icon.textContent = 'add';
+        });
+        if (!open) {
+          item.classList.add('is-open');
+          toggle.setAttribute('aria-expanded', 'true');
+          const icon = toggle.querySelector('.material-symbols-outlined');
+          if (icon) icon.textContent = 'remove';
+        }
       });
-      if (!open) {
-        item.classList.add('is-open');
-        toggle.setAttribute('aria-expanded', 'true');
-        const icon = toggle.querySelector('.material-symbols-outlined');
-        if (icon) icon.textContent = 'remove';
-      }
     });
   }
 

@@ -1,39 +1,42 @@
-<section class="promo-banner" data-slider aria-label="Collection promotions">
+{%- assign promo_title_1 = section.settings.banner1_title | default: 'Elevate Your Home Decor' -%}
+{%- assign promo_desc_1 = section.settings.banner1_desc | default: 'Elegant accents for beautiful living spaces' -%}
+{%- assign promo_title_2 = section.settings.banner2_title | default: 'Style Every Living Space' -%}
+{%- assign promo_desc_2 = section.settings.banner2_desc | default: 'Handcrafted pieces that bring warmth into your home' -%}
+{%- assign promo_title_3 = section.settings.banner3_title | default: 'Gifting Made Beautiful' -%}
+{%- assign promo_desc_3 = section.settings.banner3_desc | default: 'Thoughtful decor for every occasion' -%}
+<section class="promo-banner" id="gifting" data-slider aria-label="Home decor promotion">
   <div class="slider-track promo-track" data-slider-track>
     {% if section.settings.banner1_img != blank %}
-    <a class="promo-slide" data-slider-item href="{% if section.settings.banner1_url != blank %}{{ section.settings.banner1_url }}{% else %}#{% endif %}">
-      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner1_img | img_url: 'master' }}" alt="{{ section.settings.banner1_title | default: 'Promotion' | escape }}">
-      {% if section.settings.banner1_title != blank or section.settings.banner1_desc != blank or section.settings.banner1_subtitle != blank %}
-      <div class="promo-copy">
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner1_url != blank %}{{ section.settings.banner1_url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner1_img | img_url: 'master' }}" alt="{{ promo_title_1 | escape }}">
+      <div class="container promo-copy">
         {% if section.settings.banner1_subtitle != blank %}<p>{{ section.settings.banner1_subtitle }}</p>{% endif %}
-        {% if section.settings.banner1_title != blank %}<h3 class="promo-title">{{ section.settings.banner1_title }}</h3>{% endif %}
-        {% if section.settings.banner1_desc != blank %}<p>{{ section.settings.banner1_desc }}</p>{% endif %}
+        <h2 class="promo-title">{{ promo_title_1 }}</h2>
+        <p>{{ promo_desc_1 }}</p>
+        <span class="btn btn-promo">Shop Now</span>
       </div>
-      {% endif %}
     </a>
     {% endif %}
     {% if section.settings.banner2_img != blank %}
-    <a class="promo-slide" data-slider-item href="{% if section.settings.banner2_url != blank %}{{ section.settings.banner2_url }}{% else %}#{% endif %}">
-      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner2_img | img_url: 'master' }}" alt="{{ section.settings.banner2_title | default: 'Promotion' | escape }}">
-      {% if section.settings.banner2_title != blank or section.settings.banner2_desc != blank or section.settings.banner2_subtitle != blank %}
-      <div class="promo-copy">
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner2_url != blank %}{{ section.settings.banner2_url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+      <img class="promo-slide-img promo-slide-img--vase" loading="lazy" src="{{ section.settings.banner2_img | img_url: 'master' }}" alt="{{ promo_title_2 | escape }}">
+      <div class="container promo-copy">
         {% if section.settings.banner2_subtitle != blank %}<p>{{ section.settings.banner2_subtitle }}</p>{% endif %}
-        {% if section.settings.banner2_title != blank %}<h3 class="promo-title">{{ section.settings.banner2_title }}</h3>{% endif %}
-        {% if section.settings.banner2_desc != blank %}<p>{{ section.settings.banner2_desc }}</p>{% endif %}
+        <h2 class="promo-title">{{ promo_title_2 }}</h2>
+        <p>{{ promo_desc_2 }}</p>
+        <span class="btn btn-promo">Shop Now</span>
       </div>
-      {% endif %}
     </a>
     {% endif %}
     {% if section.settings.banner3_img != blank %}
-    <a class="promo-slide" data-slider-item href="{% if section.settings.banner3_url != blank %}{{ section.settings.banner3_url }}{% else %}#{% endif %}">
-      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner3_img | img_url: 'master' }}" alt="{{ section.settings.banner3_title | default: 'Promotion' | escape }}">
-      {% if section.settings.banner3_title != blank or section.settings.banner3_desc != blank or section.settings.banner3_subtitle != blank %}
-      <div class="promo-copy">
+    <a class="promo-slide" data-slider-item href="{% if section.settings.banner3_url != blank %}{{ section.settings.banner3_url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+      <img class="promo-slide-img" loading="lazy" src="{{ section.settings.banner3_img | img_url: 'master' }}" alt="{{ promo_title_3 | escape }}">
+      <div class="container promo-copy">
         {% if section.settings.banner3_subtitle != blank %}<p>{{ section.settings.banner3_subtitle }}</p>{% endif %}
-        {% if section.settings.banner3_title != blank %}<h3 class="promo-title">{{ section.settings.banner3_title }}</h3>{% endif %}
-        {% if section.settings.banner3_desc != blank %}<p>{{ section.settings.banner3_desc }}</p>{% endif %}
+        <h2 class="promo-title">{{ promo_title_3 }}</h2>
+        <p>{{ promo_desc_3 }}</p>
+        <span class="btn btn-promo">Shop Now</span>
       </div>
-      {% endif %}
     </a>
     {% endif %}
   </div>

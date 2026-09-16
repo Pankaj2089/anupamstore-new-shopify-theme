@@ -9,11 +9,10 @@
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if collection and collection.products_count > 1 %}
 <section class="section collection-bestsellers pdp-products" id="related" data-slider aria-labelledby="related-title">
   <div class="container">
-    <div class="section-head">
-      <h2 class="section-title" id="related-title">Related Products</h2>
+    <div class="section-head pdp-products-head">
+      <h2 class="section-title pdp-products-title" id="related-title">Related Products</h2>
       <div class="section-controls">
         <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous related products">
           <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
@@ -25,6 +24,7 @@
     </div>
     <div class="slider-wrapper">
       <div class="slider-track collection-best-track" data-slider-track>
+        {% if collection and collection.products_count > 1 %}
         {% assign current_product = product %}
         {% assign current_product_found = false %}
         {% for product in collection.products limit: number_of_products_to_fetch %}
@@ -36,8 +36,8 @@
         {% endunless %}
         {% endif %}
         {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
 </section>
-{% endif %}
