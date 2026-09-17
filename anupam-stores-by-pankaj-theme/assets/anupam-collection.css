@@ -387,6 +387,8 @@ body.filter-open {
 .collection-grid .product-rating .shopify-product-reviews-badge,
 .collection-best-track .product-rating .shopify-product-reviews-badge {
     position: absolute;
+    left: 0;
+    top: 0;
     width: 1px;
     height: 1px;
     overflow: hidden;

@@ -134,6 +134,12 @@
     {% if template.name == 'cart' %}
     {{ 'anupam-cart.css' | asset_url | stylesheet_tag }}
     {% endif %}
+    {% if template == 'page' or template == 'page.terms' %}
+    {{ 'anupam-policy.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template contains 'faq' %}
+    {{ 'anupam-faq.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     <script src="{{ 'custom-helper.js' | asset_url }}" defer="defer"></script>
     
     <script 

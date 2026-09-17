@@ -1,0 +1,395 @@
+/* FAQ page - same design language as the about / policy pages.
+   Scoped to .faq-page because every page template shares body.template-page.
+   Tokens: Be Vietnam Pro headings, Inter body, brown #6f351d,
+   border #e5ddd6, heading #462d20, body text #4a3f39. */
+
+body:has(.faq-page),
+body:has(.faq-page) .page-wrapper,
+body:has(.faq-page) .main-content,
+body:has(.faq-page) .pagecontent,
+body:has(.faq-page) .pagecontent > .shopify-section {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+body:has(.faq-page) .follow-rail {
+    display: none !important;
+}
+
+/* ----- Page header band --------------------------------------------------- */
+body:has(.faq-page) .breadcrumb-wrap {
+    background: #ffffff !important;
+    border: 0 !important;
+    padding: 22px 0 !important;
+    margin: 0 !important;
+}
+
+/* the snippet prints the title before the breadcrumb, so three grid tracks
+   place them independently of source order */
+body:has(.faq-page) .breadcrumb-wrap .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 16px;
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .container::before,
+body:has(.faq-page) .breadcrumb-wrap .container::after {
+    content: none !important;
+    display: none !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .title {
+    grid-column: 2;
+    justify-self: center;
+    min-width: 0;
+    float: none !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(22px, 2.4vw, 32px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #462d20 !important;
+    text-align: center !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    min-width: 0;
+    float: none !important;
+    text-align: left !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb,
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb > span {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: #8a7c74 !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb .breadcrumb__sep {
+    font-size: 0 !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb .breadcrumb__sep::before {
+    font-size: 15px !important;
+    margin: 0 6px !important;
+    color: #c2b6ad !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb a {
+    color: #5c4e46 !important;
+}
+
+body:has(.faq-page) .breadcrumb-wrap .breadcrumb a:hover {
+    color: #6f351d !important;
+}
+
+/* ----- Shell -------------------------------------------------------------- */
+.faq-page {
+    display: block;
+    padding-bottom: clamp(44px, 6vw, 84px);
+    font-family: 'Inter', sans-serif;
+    color: #4a3f39;
+    background: #ffffff;
+}
+
+.faq-page .container {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    float: none !important;
+}
+
+.faq-page .container::before,
+.faq-page .container::after {
+    content: none;
+    display: none;
+}
+
+.faq-page .page-content-wrapper {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+/* ----- Intro -------------------------------------------------------------- */
+.faq-page .faq-intro {
+    max-width: 760px;
+    margin: 0 auto clamp(26px, 3.4vw, 44px);
+    text-align: center;
+}
+
+.faq-page .faq-kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9a7b64;
+}
+
+.faq-page .faq-title {
+    margin: 0 0 12px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(24px, 2.8vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #462d20;
+}
+
+.faq-page .faq-subtitle {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #6f6159;
+}
+
+.faq-page .faq-rte {
+    max-width: 860px;
+    margin: 0 auto clamp(24px, 3vw, 38px);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.faq-page .faq-rte a {
+    color: #6f351d;
+    text-decoration: underline;
+}
+
+/* ----- Accordion ---------------------------------------------------------- */
+.faq-page .faq-list {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.faq-page .tt-toggle-frame-set {
+    float: none;
+    width: auto;
+}
+
+.faq-page h5.tt-toggle-accordion {
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    border: 1px solid #e5ddd6 !important;
+    border-radius: 12px;
+    background: #ffffff !important;
+    color: #462d20 !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(15px, 1.5vw, 17px) !important;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.faq-page h5.tt-toggle-accordion:hover {
+    border-color: #d8c7ba !important;
+}
+
+/* the base theme draws its own chevron in ::before / ::after */
+.faq-page h5.tt-toggle-accordion::before,
+.faq-page h5.tt-toggle-accordion::after,
+.faq-page h5.tt-toggle-accordion a::before,
+.faq-page h5.tt-toggle-accordion a::after {
+    content: none !important;
+    display: none !important;
+}
+
+.faq-page h5.tt-toggle-accordion a {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    color: inherit !important;
+    font-weight: inherit;
+    text-decoration: none;
+    border: 0 !important;
+}
+
+.faq-page .faq-question {
+    min-width: 0;
+}
+
+.faq-page .faq-chevron {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f7f1eb;
+    color: #6f351d;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.25s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.faq-page h5.tt-toggle-accordion.active {
+    margin-bottom: 0 !important;
+    border-color: #dfd2c8 !important;
+    border-bottom-color: transparent !important;
+    border-radius: 12px 12px 0 0;
+    background: #faf6f2 !important;
+    color: #462d20 !important;
+}
+
+.faq-page h5.tt-toggle-accordion.active a {
+    color: #462d20 !important;
+}
+
+.faq-page h5.tt-toggle-accordion.active .faq-chevron {
+    transform: rotate(180deg);
+    background: #6f351d;
+    color: #ffffff;
+}
+
+.faq-page .tt-toggle-content {
+    margin: 0 0 12px;
+    padding: 0 22px 20px;
+    border: 1px solid #dfd2c8;
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+    background: #faf6f2;
+}
+
+.faq-page .tt-block {
+    padding-top: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #4a3f39;
+}
+
+.faq-page .tt-block p {
+    margin: 0 0 12px;
+}
+
+.faq-page .tt-block p:last-child {
+    margin-bottom: 0;
+}
+
+.faq-page .tt-block ul,
+.faq-page .tt-block ol {
+    margin: 0 0 12px;
+    padding-left: 22px;
+    float: none;
+    width: auto;
+}
+
+.faq-page .tt-block li {
+    margin: 0 0 8px;
+    float: none;
+    width: auto;
+    list-style: inherit;
+}
+
+.faq-page .tt-block a {
+    color: #6f351d;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+/* ----- Still need help ---------------------------------------------------- */
+.faq-page .faq-help {
+    display: block;
+    max-width: 960px;
+    margin: clamp(30px, 4vw, 52px) auto 0;
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: 14px;
+    background: #6f351d;
+    color: #f4e7dd;
+    text-align: center;
+}
+
+.faq-page .faq-help-title {
+    margin: 0 0 10px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #ffffff;
+}
+
+.faq-page .faq-help-text {
+    margin: 0 auto 20px;
+    max-width: 620px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #eeddd0;
+}
+
+.faq-page .faq-help-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 26px;
+}
+
+.faq-page .faq-help-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 30px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #6f351d !important;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.faq-page .faq-help-btn:hover {
+    background: #f3e3d6;
+}
+
+.faq-page .faq-help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.faq-page .faq-help-link i {
+    font-size: 19px;
+}
+
+.faq-page .faq-help-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .faq-page h5.tt-toggle-accordion a {
+        padding: 15px 16px;
+    }
+
+    .faq-page .tt-toggle-content {
+        padding: 0 16px 16px;
+    }
+
+    .faq-page .faq-subtitle,
+    .faq-page .tt-block,
+    .faq-page .faq-help-text {
+        font-size: 14px;
+    }
+}

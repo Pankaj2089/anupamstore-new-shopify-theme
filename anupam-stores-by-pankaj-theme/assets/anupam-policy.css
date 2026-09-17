@@ -1,0 +1,360 @@
+/* Static policy pages (terms, privacy, cancellation, shipping & delivery).
+   Only the outer chrome and typography are styled here - the page content
+   itself keeps whatever markup and inline styles the merchant entered.
+   Tokens follow anupam-about.css: Be Vietnam Pro headings, Inter body,
+   brown #6f351d, border #e5ddd6, text #3b2f29. */
+
+body:has(.terms-container),
+body:has(.terms-container) .page-wrapper,
+body:has(.terms-container) .main-content,
+body:has(.terms-container) .pagecontent,
+body:has(.terms-container) .pagecontent > .shopify-section,
+body:has(.page-content) .page-wrapper,
+body:has(.page-content) .main-content,
+body:has(.page-content) .pagecontent,
+body:has(.page-content) .pagecontent > .shopify-section {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+body:has(.terms-container) .follow-rail,
+body:has(.page-content) .follow-rail {
+    display: none !important;
+}
+
+/* ----- Merchant wrapper --------------------------------------------------- */
+/* The page body pasted into Shopify admin wraps everything in
+   .policy-container and ships its own <style> block (system font stack,
+   1200px cap, 24px padding, blue links). Flatten the wrapper and map its
+   .policy__* rules onto the theme tokens so the page keeps a single design. */
+.policy-container {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font: inherit !important;
+    color: inherit !important;
+}
+
+.policy-container .policy__header,
+.policy-container .policy__section {
+    text-align: left !important;
+}
+
+.policy-container .policy__section {
+    margin-bottom: clamp(26px, 3vw, 40px) !important;
+}
+
+.policy-container .policy__section h2 {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(19px, 1.9vw, 24px) !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: #462d20 !important;
+    margin-bottom: 12px !important;
+}
+
+.policy-container .policy__divider {
+    border-top-color: #e5ddd6 !important;
+    margin: clamp(18px, 2.4vw, 28px) 0 !important;
+}
+
+.policy-container a {
+    color: #6f351d !important;
+}
+
+.policy-container a:hover {
+    color: #44200f !important;
+}
+
+.policy-container .info-card {
+    background: #faf6f2 !important;
+    border-left-color: #6f351d !important;
+    border-radius: 10px !important;
+}
+
+.policy-container .info-card p {
+    color: #4a3f39 !important;
+}
+
+/* ----- Page header band --------------------------------------------------- */
+body:has(.terms-container) .breadcrumb-wrap,
+body:has(.page-content) .breadcrumb-wrap {
+    background: #ffffff !important;
+    border: 0 !important;
+    padding: 22px 0 !important;
+    margin: 0 0 clamp(18px, 3vw, 34px) !important;
+}
+
+/* breadcrumb on the left, title centred - the markup prints the title first,
+   so three grid tracks place them independently of source order */
+body:has(.terms-container) .breadcrumb-wrap .container,
+body:has(.page-content) .breadcrumb-wrap .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 16px;
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .container::before,
+body:has(.terms-container) .breadcrumb-wrap .container::after,
+body:has(.page-content) .breadcrumb-wrap .container::before,
+body:has(.page-content) .breadcrumb-wrap .container::after {
+    content: none !important;
+    display: none !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .title,
+body:has(.page-content) .breadcrumb-wrap .title {
+    grid-column: 2;
+    justify-self: center;
+    min-width: 0;
+    float: none !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(22px, 2.4vw, 32px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #462d20 !important;
+    text-align: center !important;
+    text-transform: capitalize !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    min-width: 0;
+    float: none !important;
+    text-align: left !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb,
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb > span,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb > span {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: #8a7c74 !important;
+    background: transparent !important;
+}
+
+/* the separator's text is a literal ">" hidden behind font-size 0, with the
+   chevron drawn by ::before - keep it that way or both would show */
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb .breadcrumb__sep,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb .breadcrumb__sep {
+    font-size: 0 !important;
+    color: #c2b6ad !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb .breadcrumb__sep::before,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb .breadcrumb__sep::before {
+    font-size: 15px !important;
+    margin: 0 6px !important;
+    color: #c2b6ad !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb a,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb a {
+    color: #5c4e46 !important;
+}
+
+body:has(.terms-container) .breadcrumb-wrap .breadcrumb a:hover,
+body:has(.page-content) .breadcrumb-wrap .breadcrumb a:hover {
+    color: #6f351d !important;
+}
+
+/* ----- Outer section ------------------------------------------------------ */
+/* the section prints max-width/padding inline, so these need !important */
+.terms-container,
+.page-content {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin: 0 auto clamp(40px, 6vw, 80px) !important;
+    padding: 0 !important;
+    float: none !important;
+    background: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #4a3f39;
+}
+
+.terms-container::after,
+.page-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.page-content > header {
+    margin: 0 0 clamp(18px, 2.4vw, 28px);
+}
+
+.page-content > header hr,
+.terms-container hr {
+    height: 1px;
+    margin: clamp(18px, 2.4vw, 28px) 0;
+    border: 0;
+    background: #e5ddd6;
+}
+
+.page-content .tt-innerpagetitle {
+    margin: 0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #462d20;
+    text-transform: none;
+}
+
+/* ----- Content typography ------------------------------------------------- */
+.terms-content,
+.page-content .rte {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #4a3f39;
+}
+
+.terms-content h1,
+.terms-content h2,
+.terms-content h3,
+.terms-content h4,
+.terms-content h5,
+.page-content .rte h1,
+.page-content .rte h2,
+.page-content .rte h3,
+.page-content .rte h4,
+.page-content .rte h5 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #462d20;
+}
+
+.terms-content h1,
+.page-content .rte h1 {
+    margin: 0 0 18px;
+    font-size: clamp(24px, 2.6vw, 34px);
+}
+
+.terms-content h2,
+.page-content .rte h2 {
+    margin: clamp(26px, 3vw, 40px) 0 12px;
+    font-size: clamp(19px, 1.9vw, 24px);
+}
+
+.terms-content h3,
+.page-content .rte h3 {
+    margin: clamp(20px, 2.4vw, 28px) 0 10px;
+    font-size: clamp(17px, 1.6vw, 20px);
+}
+
+.terms-content h4,
+.terms-content h5,
+.page-content .rte h4,
+.page-content .rte h5 {
+    margin: 20px 0 8px;
+    font-size: 16px;
+}
+
+.terms-content p,
+.page-content .rte p {
+    margin: 0 0 14px;
+}
+
+.terms-content ul,
+.terms-content ol,
+.page-content .rte ul,
+.page-content .rte ol {
+    margin: 0 0 16px;
+    padding-left: 22px;
+    float: none;
+    width: auto;
+}
+
+.terms-content li,
+.page-content .rte li {
+    margin: 0 0 8px;
+    float: none;
+    width: auto;
+    list-style: inherit;
+}
+
+.terms-content a,
+.page-content .rte a {
+    color: #6f351d;
+    font-weight: 500;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.terms-content a:hover,
+.page-content .rte a:hover {
+    color: #44200f;
+}
+
+.terms-content strong,
+.terms-content b,
+.page-content .rte strong,
+.page-content .rte b {
+    color: #392d27;
+    font-weight: 600;
+}
+
+.terms-content table,
+.page-content .rte table {
+    width: 100%;
+    margin: 0 0 18px;
+    border-collapse: collapse;
+}
+
+.terms-content th,
+.terms-content td,
+.page-content .rte th,
+.page-content .rte td {
+    padding: 10px 12px;
+    border: 1px solid #e5ddd6;
+    text-align: left;
+    vertical-align: top;
+}
+
+.terms-content th,
+.page-content .rte th {
+    background: #f7f1eb;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    color: #462d20;
+}
+
+.terms-disclaimer {
+    margin-top: clamp(26px, 3vw, 40px) !important;
+    padding: 16px 18px;
+    border: 1px solid #e5ddd6;
+    border-radius: 10px;
+    background: #faf6f2;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px !important;
+    line-height: 1.7;
+    color: #77706b;
+    opacity: 1 !important;
+}
+
+@media (max-width: 767px) {
+    .terms-container,
+    .page-content {
+        font-size: 14px;
+    }
+
+    .terms-content,
+    .page-content .rte {
+        font-size: 14px;
+    }
+}

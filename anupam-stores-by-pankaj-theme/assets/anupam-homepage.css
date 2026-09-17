@@ -1574,9 +1574,14 @@ body.template-index .bestsellers {
     font-size: 12px;
 }
 
+/* Inside a slider the nearest positioned ancestor is .slider-wrapper, so an
+   offset-less absolute badge keeps its static x far to the right of every
+   off-screen card and escapes the track's clipping - pin it to the origin. */
 .product-rating .spr-badges,
 .product-rating .shopify-product-reviews-badge {
     position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
     width: 1px !important;
     height: 1px !important;
     overflow: hidden !important;

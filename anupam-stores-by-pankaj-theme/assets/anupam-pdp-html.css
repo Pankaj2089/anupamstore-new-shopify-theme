@@ -604,9 +604,10 @@ body.template-product #recently-viewed .section-head {
         padding-right: 72px;
     }
 
+    /* keep the rail where the homepage puts it */
     body.template-product .follow-rail {
-        top: auto;
-        bottom: 40px;
+        top: 190px;
+        bottom: auto;
     }
 }
 

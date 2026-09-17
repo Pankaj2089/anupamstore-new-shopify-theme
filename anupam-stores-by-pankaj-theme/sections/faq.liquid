@@ -1,48 +1,144 @@
-<div class="container">
-  <div class="page-content-wrapper">
-    <div class="rte">
-      {{ page.content }}
-      <div class="page-width" data-section-id="{{ section.id }}" data-section-type="faq-section">
-        <div class="grid">
-          <div class="grid__item shortcodes-section">
-            <div class="tt-toggle-frame-set">
-              {% for block in section.blocks %}          
-              <h5 class="tt-toggle-accordion  {% if forloop.first == true %}active{% endif %}"><a href="#">{{ block.settings.title }}</a></h5>
-              <div class="tt-toggle-content" {% if forloop.first == true %}style="display:block;"{% endif %}>
-                <div class="tt-block">{{ block.settings.description }}</div>
-              </div>        
-              {% endfor %}           
-            </div>     
-          </div>
+<div class="faq-page">
+  <div class="container">
+    <div class="page-content-wrapper">
+
+      {% if section.settings.intro_title != blank or section.settings.intro_text != blank %}
+        <header class="faq-intro">
+          {% if section.settings.intro_kicker != blank %}
+            <span class="faq-kicker">{{ section.settings.intro_kicker }}</span>
+          {% endif %}
+          {% if section.settings.intro_title != blank %}
+            <h1 class="faq-title">{{ section.settings.intro_title }}</h1>
+          {% endif %}
+          {% if section.settings.intro_text != blank %}
+            <p class="faq-subtitle">{{ section.settings.intro_text }}</p>
+          {% endif %}
+        </header>
+      {% endif %}
+
+      {% if page.content != blank %}
+        <div class="rte faq-rte">{{ page.content }}</div>
+      {% endif %}
+
+      <div class="faq-list" data-section-id="{{ section.id }}" data-section-type="faq-section">
+        {%- comment -%}
+          The accordion behaviour comes from shop.js, which walks
+          .tt-toggle-frame-set and toggles the element right after each
+          .tt-toggle-accordion - so the heading and its panel must stay siblings.
+        {%- endcomment -%}
+        <div class="tt-toggle-frame-set">
+          {% for block in section.blocks %}
+            <h5 class="tt-toggle-accordion{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+              <a href="#">
+                <span class="faq-question">{{ block.settings.title }}</span>
+                <i class="mdi mdi-chevron-down faq-chevron" aria-hidden="true"></i>
+              </a>
+            </h5>
+            <div class="tt-toggle-content"{% if forloop.first %} style="display:block;"{% endif %}>
+              <div class="tt-block">{{ block.settings.description }}</div>
+            </div>
+          {% endfor %}
         </div>
       </div>
+
+      {% if section.settings.help_title != blank %}
+        <aside class="faq-help">
+          <h2 class="faq-help-title">{{ section.settings.help_title }}</h2>
+          {% if section.settings.help_text != blank %}
+            <p class="faq-help-text">{{ section.settings.help_text }}</p>
+          {% endif %}
+          <div class="faq-help-actions">
+            {% if section.settings.help_link != blank %}
+              <a class="faq-help-btn" href="{{ section.settings.help_link }}">{{ section.settings.help_link_text }}</a>
+            {% endif %}
+            {% if section.settings.help_phone != blank %}
+              <a class="faq-help-link" href="tel:{{ section.settings.help_phone | remove: ' ' }}">
+                <i class="mdi mdi-phone-outline" aria-hidden="true"></i>{{ section.settings.help_phone }}
+              </a>
+            {% endif %}
+          </div>
+        </aside>
+      {% endif %}
+
     </div>
   </div>
 </div>
 {% schema %}
 {
-"name": "FAQs",
-"max_blocks": 50,
-"settings": [],
-"blocks": [
-{
-"type": "text",
-"name": "FAQ",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"default": "Question",
-"label": "Question"
-},
-{
-"type": "textarea",
-"id": "description",
-"default": "Answer goes here...",
-"label": "Text"
-}
-]
-}
-]
+  "name": "FAQs",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "text",
+      "id": "intro_kicker",
+      "label": "Kicker",
+      "default": "Help centre"
+    },
+    {
+      "type": "text",
+      "id": "intro_title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Subtitle",
+      "default": "Everything you need to know about shopping with Anupam Stores - orders, delivery, payments and returns."
+    },
+    {
+      "type": "header",
+      "content": "Still need help card"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Title",
+      "default": "Still have a question?"
+    },
+    {
+      "type": "textarea",
+      "id": "help_text",
+      "label": "Text",
+      "default": "Our team is happy to help you pick the right product or track an existing order."
+    },
+    {
+      "type": "text",
+      "id": "help_link_text",
+      "label": "Button label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "help_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "help_phone",
+      "label": "Phone number",
+      "default": "+91 99299 94251"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "Answer goes here...",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
