@@ -1,149 +1,110 @@
-{%- assign blog_column = section.settings.blog_column -%} 
-<div class="row">
-  <div class="blog-section">
-    <aside class="sidebar left-sidebar col-xs-12 col-sm-3 col-md-3">
-      <div class="sidebar__inner">
-        {% render 'blog-sidebar' %}
-      </div>
-    </aside>
-  </div>
-  {% paginate blog.articles by section.settings.blogpage_article_limit %}
-  <div class="grid__item col-xs-12 col-sm-9  col-md-9 content-wrapper">
-    <div class="blog_masonry_left">
-      <div class="blog_content_wrap {{ blog_column }}">
-        {% for article in blog.articles %}
-        {% if blog_column =='col_2' %}
-        <div class="grid__item col-md-6 col-sm-6 col-xs-12 {% if section.settings.show_blog_masonry %} mb-item {% endif %}">
-          {% elsif blog_column =='col_3' %}
-          <div class="grid__item col-md-4 col-sm-4 col-xs-12 {% if section.settings.show_blog_masonry %} mb-item {% endif %}">
-            {% elsif blog_column =='col_4' %}
-            <div class="grid__item col-md-3 col-sm-3 col-xs-12 {% if section.settings.show_blog_masonry %} mb-item {% endif %}">
-              {% endif %}
-              <div class="article  tt-blog-content">
-                <div class="ttblog_image_holder blog_image_holder">
-                  {% if section.settings.show_blog_4_img %}
-                  {% if article.image %}
-                  {% assign image_alt = article.title | escape %}          
-                  <a href="{{ article.url }}" class="article__grid-image">
-                    {{ article | img_url: '463x', crop: 'center' | img_tag: article.title }}
-                  </a>
-                  <span class="bloglinks">
-                    <a class="icon zoom" data-lightbox="example-set" href="{{ article | img_url: 'master' }}" title="Click to view Full Image">
-                      <i class="mdi mdi-magnify"></i>
-                    </a> 
-                  </span>          
-                  {% else %}
-                  <img loading="lazy" src="{{ 'no-image.gif' | img_url: 'master' }}"/>
-                  {% endif %}
-                  {% endif %}
-                  <div class="blogs-sub-title">
-                    {% if section.settings.show_blog_4_date %}
-                    <p class="blog-date">
-                      <span data-datetime="{{ article.published_at | date: '%Y-%m-%d' }}"><i class="mdi mdi-calendar"></i><span class="date">{{ article.published_at | date: '%d' }} {{ article.published_at | date: '%b' }} , {{ article.published_at | date: '%Y' }}</span></span>             
-                    </p>
-                    {% endif %}
-                    {% if article.comments_enabled? %}
-                    {% assign number_of_comments = article.comments_count %}                
-                    <p class="comments-count"><i class="mdi mdi-comment-multiple" aria-hidden="true"></i> {{  number_of_comments }} <span> {{ 'blogs.comments.comments' | t }}</span></p>
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="tt-blog-description">
-                  <div class="home-blog-content blog-detail">				
-                    <h4 class="article__title"><a href="{{ article.url }}">{{ article.title }}</a></h4>
-                    {% if article.tags.size > 0 and section.settings.show_blog_4_tag %}
-                    <div class="blog-tag">
-                      <i class="mdi mdi-tag-multiple" aria-hidden="true"></i>
-                      {% for tag in article.tags %}
-                      <a class="blog-tags" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %} <span class="meta-sep">&#44;</span> {% endunless %}
-                      {% endfor %}
-                    </div>
-                    {% endif %}
-                    {% if section.settings.show_blog_4_content %}
-                    <p>{{ article.content | strip_html | truncate: 100 }}</p>
-                    {% endif %}
-                    {% if section.settings.show_blog_4_btn %}
-                    <div class="blog-btn">
-                      <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
-                    </div>
-                    {% endif %}
-                    {% if section.settings.show_linkedin_share or section.settings.show_facebook_share or section.settings.show_twitter_share or section.settings.show_mailto_share or section.settings.show_pinterest_share %}
-                    <div class="tt-social-share">
-                      {% if section.settings.show_facebook_share %}
-                      <div class="facebook">
-                        <a target="_blank" href="http://www.facebook.com/sharer.php?u={{ article.url }}"><i class="mdi mdi-facebook"></i></a>
-                      </div>
-                      {% endif %}
-                      {% if section.settings.show_twitter_share %}
-                      <div class="twitter">
-                        <a target="_blank" href="http://twitter.com/share?url={{ article.url }}">
-                         <i class="mdi mdi-twitter">
-                          <svg class="icon icon-twitter" viewBox="0 0 20 20" style="width: 16px;height: 30px;align-items: center;justify-content: center;display: inline-block;margin: 0;">
-                             <path fill="currentColor" fill-rule="evenodd" d="M7.273 2.8 10.8 7.822 15.218 2.8h1.768l-5.4 6.139 5.799 8.254h-4.658l-3.73-5.31-4.671 5.31H2.558l5.654-6.427L2.615 2.8zm6.242 13.125L5.07 4.109h1.405l8.446 11.816z" clip-rule="evenodd"></path>
-                           </svg>
-                            </i>
-                      </div>
-                      {% endif %}
-                      
-                      {% if section.settings.show_pinterest_share %}
-                      <div class="pinterest">
-                        <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ article.url }}"><i class="mdi mdi-pinterest"></i></a>
-                      </div>
-                      {% endif %}
-                      {% if section.settings.show_linkedin_share %}
-                      <div class="linkedin">
-                        <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url={{ article.url }}"><i class="mdi mdi-linkedin"></i></a>
-                      </div>
-                      {% endif %}
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endfor %}   
-          </div>
-          {% if paginate.pages > 1 %}
-          <div class="text-center pagination_wrap col-xs-12">
-            <ul class="pagination-custom text-center">
-              {% if paginate.previous %}
-              <li><a class="enable-arrow" href="{{ paginate.previous.url }}" title="{{ paginate.previous.title }}"><span class="mdi mdi-chevron-left"></span></a></li>
-              {% else %}
-              <li class="disabled"><span class="mdi mdi-chevron-left"></span></li>
-              {% endif %}
-              {% for part in paginate.parts %}
-              {% if part.is_link %}
-              <li>
-                <a href="{{ part.url }}" title="">{{ part.title }}</a>
-              </li>
-              {% else %}
-              {% if part.title == paginate.current_page %}
-              <li class="active"><span>{{ part.title }}</span></li>
-              {% else %}
-              <li><span>{{ part.title }}</span></li>
-              {% endif %}
-              {% endif %}
-              {% endfor %}
-              {% if paginate.next %}
-              <li><a class="enable-arrow" href="{{ paginate.next.url }}" title="{{ paginate.next.title }}"><span class="mdi mdi-chevron-right"></span></a></li>
-              {% else %}
-              <li class="disabled"><span class="mdi mdi-chevron-right"></span></li>
-              {% endif %}
-            </ul>
-          </div>
+{%- assign articles_per_page = section.settings.blogpage_article_limit | default: 6 -%}
+{% paginate blog.articles by articles_per_page %}
+<section class="blog-listing" aria-labelledby="blog-listing-title">
+  <div class="container">
+    <div class="blog-top">
+      <nav class="collection-crumb blog-crumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+        <span aria-current="page">{{ blog.title | default: 'Blogs' }}</span>
+      </nav>
+      <h1 class="blog-page-title" id="blog-listing-title">{{ blog.title | default: 'Blogs' }}</h1>
+    </div>
+
+    <div class="blog-list">
+      {% for article in blog.articles %}
+      {%- assign image_right = false -%}
+      {%- assign position = forloop.index0 | modulo: 2 -%}
+      {%- if position == 1 -%}{%- assign image_right = true -%}{%- endif -%}
+      <article class="blog-card{% if image_right %} blog-card--image-right{% else %} blog-card--image-left{% endif %}">
+        {% if section.settings.show_blog_4_img %}
+        <a class="blog-card-image" href="{{ article.url }}">
+          {% if article.image %}
+          <img src="{{ article.image | img_url: '800x500', crop: 'center' }}" alt="{{ article.title | escape }}" width="800" height="500"{% unless forloop.first %} loading="lazy"{% endunless %}>
+          {% else %}
+          <img src="{{ 'no-image.gif' | img_url: 'master' }}" alt="{{ article.title | escape }}" width="800" height="500" loading="lazy">
+          {% endif %}
+        </a>
+        {% endif %}
+        <div class="blog-card-body">
+          <h2 class="blog-card-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+          <p class="blog-card-meta">
+            {% if section.settings.show_blog_4_date %}
+            <span>
+              <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+              {{ article.published_at | date: '%d %b, %Y' }}
+            </span>
+            <span class="blog-meta-sep" aria-hidden="true">|</span>
+            {% endif %}
+            {% if article.author != blank %}
+            <span>
+              <span class="material-symbols-outlined" aria-hidden="true">person</span>
+              By: {{ article.author }}
+            </span>
+            {% endif %}
+            {% if article.tags.size > 0 and section.settings.show_blog_4_tag %}
+            <span class="blog-meta-sep" aria-hidden="true">|</span>
+            <span>
+              <span class="material-symbols-outlined" aria-hidden="true">article</span>
+              {% for tag in article.tags limit: 2 %}<a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}
+            </span>
+            {% endif %}
+            {% if article.comments_enabled? %}
+            <span class="blog-meta-sep" aria-hidden="true">|</span>
+            <span>
+              <span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span>
+              {{ article.comments_count }} {{ 'blogs.comments.comments' | t }}
+            </span>
+            {% endif %}
+          </p>
+          {% if section.settings.show_blog_4_content %}
+          <p class="blog-excerpt">
+            {%- if article.excerpt != blank -%}
+            {{ article.excerpt | strip_html | truncate: 320 }}
+            {%- else -%}
+            {{ article.content | strip_html | truncate: 320 }}
+            {%- endif -%}
+          </p>
+          {% endif %}
+          {% if section.settings.show_blog_4_btn %}
+          <a class="blog-read-more" href="{{ article.url }}">
+            {{ 'blogs.article.read_more' | t }}
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
           {% endif %}
         </div>
-      </div>
+      </article>
+      {% else %}
+      <p class="blog-excerpt">No articles have been published yet.</p>
+      {% endfor %}
     </div>
-  </div>
-  {% endpaginate %}
-</div>
 
-{% if section.settings.show_blog_masonry %}
-{{ 'masonry.js' | asset_url | script_tag }}
-<script>$(window).load(function(){var $container=$(".blog_content_wrap");$container.imagesLoaded(function(){$container.masonry({itemSelector:".mb-item",columnWidth:".mb-item",percentPosition:!0})})});</script>
-{% endif %}
-<style>.tt-blog-content span.bloglinks a {color:{{ section.settings.blog_btn_text }};}.tt-blog-content span.bloglinks a:hover{background-color:{{ section.settings.blog_btn_hover_bg }};color:{{ section.settings.blog_hover_btn_text }};border-color:{{ section.settings.blog_btn_hover_bg }};}</style>
+    {% if paginate.pages > 1 %}
+    <nav class="collection-pagination blog-pagination" aria-label="Blog pagination">
+      {% if paginate.previous %}
+      <a class="page-btn" href="{{ paginate.previous.url }}">Previous</a>
+      {% else %}
+      <button class="page-btn" type="button" disabled>Previous</button>
+      {% endif %}
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+        <a class="page-btn" href="{{ part.url }}">{{ part.title }}</a>
+        {% elsif part.title == paginate.current_page %}
+        <span class="page-btn is-active" aria-current="page">{{ part.title }}</span>
+        {% else %}
+        <span class="page-btn">{{ part.title }}</span>
+        {% endif %}
+      {% endfor %}
+      {% if paginate.next %}
+      <a class="page-btn" href="{{ paginate.next.url }}">Next</a>
+      {% else %}
+      <button class="page-btn" type="button" disabled>Next</button>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>
+{% endpaginate %}
 {% schema %}
 {
 "name": "Blog Page Inner Section",

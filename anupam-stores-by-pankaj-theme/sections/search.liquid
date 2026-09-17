@@ -1,84 +1,290 @@
-{% comment %}
-The {{ content_for_header }} in theme.liquid will output the following stylesheet just for this page:
-- <link rel="stylesheet" href="/global/search.css" type="text/css">
-It has a few helpers in there, but this theme writes its own styles so there are no dependencies or conflicts. You can ignore that file.
-Return only products or pages in results:
-- http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
-- Or manually add type=product or type=page to the search URL as a parameter
-{% endcomment %}
 {% comment %}Check to enforce respond.js{% endcomment %}
 {% assign respond_js_secret_key = shop.domain | md5 %}
 {% unless search.terms == respond_js_secret_key %}
+{% assign products_per_page = settings.products_per_page | default: 8 %}
+<style>
+  body.template-search .breadcrumb-wrap,
+  body.template-search .breadcrumb-wrapper,
+  body.template-search .collection-toolbar,
+  body.template-search .collection-sort,
+  body.template-search .collection-tool-btn,
+  body.template-search .filter-drawer,
+  body.template-search .filter-overlay,
+  body.template-search .pagecontent .search-bar,
+  body.template-search .pagecontent .input-group.search-bar,
+  body.template-search .search-products form.anupam-search-bar,
+  body.template-search .section-header__title {
+    display: none !important;
+  }
+  body.template-search,
+  body.template-search .page-wrapper,
+  body.template-search .main-content,
+  body.template-search .pagecontent,
+  body.template-search .collection-listing,
+  body.template-search .collection_template {
+    background: #ffffff !important;
+    float: none !important;
+    width: 100% !important;
+  }
+  body.template-search .collection-listing .container {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    float: none !important;
+  }
+  body.template-search .collection-top,
+  body.template-search .collection_template .collection-top {
+    position: relative !important;
+    z-index: 30 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: 72px !important;
+    overflow: visible !important;
+    float: none !important;
+    width: 100% !important;
+    padding: 22px 0 28px !important;
+    margin: 0 !important;
+  }
+  body.template-search .collection-crumb {
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    font-size: 14px !important;
+    color: #8a7c74 !important;
+  }
+  body.template-search .collection-crumb a { color: #5c4e46 !important; font-weight: 500 !important; }
+  body.template-search .collection-title {
+    margin: 0 !important;
+    text-align: center !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(26px, 2.4vw, 32px) !important;
+    font-weight: 700 !important;
+    color: #462D20 !important;
+    white-space: normal !important;
+    max-width: min(70%, 720px) !important;
+    line-height: 1.2 !important;
+  }
+  body.template-search .collection-grid {
+    position: relative !important;
+    z-index: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 28px 20px !important;
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  body.template-search .collection-grid .product-card,
+  body.template-search .collection-grid .product-layouts,
+  body.template-search .collection-grid .item-row {
+    float: none !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  body.template-search .collection-grid .product-image {
+    isolation: isolate !important;
+    background: #efe7de !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    float: none !important;
+    width: 100% !important;
+  }
+  body.template-search .collection-grid .product-media {
+    display: block !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+    position: relative !important;
+  }
+  body.template-search .collection-grid .product-media img,
+  body.template-search .collection-grid .featured-image {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    max-width: none !important;
+    float: none !important;
+  }
+  body.template-search .collection-grid .product-body {
+    padding: 12px 2px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    float: none !important;
+    width: 100% !important;
+  }
+  body.template-search .collection-grid .product-title,
+  body.template-search .collection-grid .product-title a,
+  body.template-search .collection-grid a.grid-link__title {
+    display: block !important;
+    float: none !important;
+    width: auto !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    -webkit-line-clamp: unset !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    color: #3b2f29 !important;
+    text-align: left !important;
+  }
+  body.template-search .collection-grid .product-rating,
+  body.template-search .collection-grid .stars {
+    display: flex !important;
+    align-items: center !important;
+    visibility: visible !important;
+    color: #c4a15a !important;
+  }
+  body.template-search .collection-grid .product-price,
+  body.template-search .collection-grid .grid-view-item__meta {
+    margin: 2px 0 0 !important;
+    float: none !important;
+  }
+  body.template-search .collection-grid .price-sale { color: #462D20 !important; font-weight: 700 !important; }
+  body.template-search .collection-empty {
+    grid-column: 1 / -1 !important;
+    padding: 48px 16px !important;
+    text-align: center !important;
+    color: #7a6e66 !important;
+  }
+  body.template-search .collection-pagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 18px !important;
+    padding: 36px 0 12px !important;
+  }
+  body.template-search .collection-pagination .page-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 12px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #462D20 !important;
+    font-weight: 600 !important;
+  }
+  body.template-search .collection-pagination .page-btn.is-active {
+    border-bottom: 2px solid #462D20 !important;
+  }
+  @media (max-width: 1023px) {
+    body.template-search .collection-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  }
+  @media (max-width: 767px) {
+    body.template-search .collection-top {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      padding: 12px 0 16px !important;
+    }
+    body.template-search .collection-crumb,
+    body.template-search .collection-title {
+      position: static !important;
+      transform: none !important;
+      max-width: 100% !important;
+      text-align: left !important;
+    }
+    body.template-search .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 18px 12px !important; }
+  }
+</style>
 {% if search.performed %}
-{% comment %}Avoid accessing search.results before the opening paginate tag.If you do, the pagination of results will be broken.{% endcomment %}
-{% paginate search.results by 20 %}
-{% comment %}We don't have any results to show. Feel free to show off featured products or suggested searches here.{% endcomment %}
-{% unless products_per_page  %}
-{% assign products_per_page = 10 %}
-{% endunless %}
-{% assign products_per_row = settings.collection_products_per_row %}
-{% case products_per_row %}
-{% when '2' %}
-{% assign grid_item_width = 'medium-up--one-third large-up--one-half' %}
-{% when '3' %}
-{% assign grid_item_width = 'medium-up--one-third large-up--one-third' %}
-{% when '4' %}
-{% assign grid_item_width = 'medium-up--one-third large-up--one-quarter' %}
-{% when '5' %}
-{% assign grid_item_width = 'medium-down--one-half large-up--one-fifth' %}
-{% when '6' %}
-{% assign grid_item_width = 'medium-down--one-half large-up--one-sixth' %}
-{% else %}
-{% assign grid_item_width = 'medium-up--one-third large-up--one-quarter' %}
-{% endcase %}
-<div class="search-products">
+{% paginate search.results by products_per_page %}
+<section class="collection-listing search-listing" aria-labelledby="collection-title">
   <div class="container">
-    {% if search.results_count == 0 %}
-    <h1 class="text--left section-header__title">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
-    {% render 'search-bar' %}
-    {% else %}
-    <h1 class="text--left section-header__title">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
-    {% render 'search-bar' %}
-    <div class="search-result-product collection_template">
-      <div class="grid-uniform product-grid col-main">
-        <div class="products-grid-view">
-          {% for item in search.results %}
-            {% if item.object_type == 'product' %}
-              {% if item.type == 'PPLR_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
-              <div class="grid-item product-grid {{ settings.product_hover_btn }} {{ grid_item_width }} {{ item.type }}">
-                {% render 'product-card-grid', product: item %}
-              </div>
-            {% else %}
-              {% render 'search-result-grid', item: item %}
-            {% endif %}
-          {% endfor %}
-        </div>
+    <div class="collection_template">
+      <div class="collection-top">
+        <nav class="collection-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          <span aria-current="page">{% if search.terms != blank %}{{ search.terms | escape }}{% else %}Search{% endif %}</span>
+        </nav>
+        <h1 class="collection-title" id="collection-title">{% if search.results_count == 0 %}{{ 'general.search.no_results_html' | t: terms: search.terms }}{% else %}{{ 'general.search.results_for_html' | t: terms: search.terms }}{% endif %}</h1>
       </div>
-    </div>
-    {% endif %}
-    {% if paginate.pages > 1 %}
-    <div class="text-center pagination-wrap">
-      {% render 'pagination-custom', paginate: paginate %}
-      <div class="showing">
-        <span class="show-txt">Showing</span> <span class="loadcount">{{ products_per_page }}</span> of {{ search.results_count }}
+      <div class="collection-grid" id="product-grid" data-collection-grid>
+        {% assign search_has_products = false %}
+        {% for item in search.results %}
+          {% if item.object_type == 'page' or item.object_type == 'article' %}{% continue %}{% endif %}
+          {% if item.type == 'PPLR_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+          {% assign search_has_products = true %}
+          {% render 'anupam-hp-product-card', product: item, card_style: 'collection' %}
+        {% endfor %}
+        {% unless search_has_products %}
+          <p class="collection-empty">{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+        {% endunless %}
       </div>
+      {% if paginate.pages > 1 %}
+      <nav class="collection-pagination" data-pagination aria-label="Product pagination">
+        {% if paginate.previous %}
+        <a class="page-btn" href="{{ paginate.previous.url }}">Previous</a>
+        {% else %}
+        <button class="page-btn" type="button" disabled>Previous</button>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a class="page-btn" href="{{ part.url }}">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="page-btn is-active" aria-current="page">{{ part.title }}</span>
+          {% else %}
+            <span class="page-btn">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+        <a class="page-btn" href="{{ paginate.next.url }}">Next</a>
+        {% else %}
+        <button class="page-btn" type="button" disabled>Next</button>
+        {% endif %}
+      </nav>
+      {% endif %}
     </div>
-    {% endif %}
-    {% endpaginate %}
   </div>
-</div>
+</section>
+{% endpaginate %}
 {% else %}
-{% comment %}
-If search.performed is false, someone either accessed the page without
-the q parameter, or it was blank.
-Be sure to show a search form here, along with anything else you want to showcase.
-{% endcomment %}
-<div class="container">
-  <h1 class="h2 left tt-innerpagetitle">{{ 'general.search.title' | t }}</h1>
-  {% render 'search-bar' %}
-</div>
+<section class="collection-listing search-listing" aria-labelledby="collection-title">
+  <div class="container">
+    <div class="collection_template">
+      <div class="collection-top">
+        <nav class="collection-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          <span aria-current="page">Search</span>
+        </nav>
+        <h1 class="collection-title" id="collection-title">{{ 'general.search.title' | t }}</h1>
+      </div>
+    </div>
+  </div>
+</section>
 {% endif %}
 {% else %}
 {% render 'respond' %}
 {% layout none %}
 {% endunless %}
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "search-section",
+  "settings": []
+}
+{% endschema %}

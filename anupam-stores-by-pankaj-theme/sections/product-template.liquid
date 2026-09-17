@@ -603,9 +603,7 @@
                           {%- form 'product', product, id: product_form_id, class: product_form_class, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                           {% if section.settings.product_layout == 'design_2' %}
                           <div class="pdp-actions-top">
-                            {% if settings.enable_wishlist != blank %}
-                            {% render 'wishlist-icon', product: product %}
-                            {% endif %}
+                            {% render 'wishlist-icon', product: product, chip_style: true %}
                           {% endif %}
                           {% if section.settings.product_qty_enable %}
                           <div class="product-qty pdp-qty {% if product.selected_or_first_available_variant.available == false %} hide{% endif %}" id="product-qty">

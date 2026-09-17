@@ -53,8 +53,7 @@ body.template-index img,
 .deals img,
 .new-products img,
 .featured img,
-.brands img,
-.promo-banner img {
+.brands img {
     max-width: 100%;
     height: auto;
     display: block;
@@ -1870,9 +1869,11 @@ body.template-index .bestsellers {
     min-width: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     min-height: 420px;
     scroll-snap-align: start;
     overflow: hidden;
+    text-align: left;
 }
 
 .promo-slide-img {
@@ -1904,18 +1905,39 @@ body.template-index .bestsellers {
     pointer-events: none;
 }
 
+.promo-banner .container.promo-copy,
 .promo-copy {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
+    align-self: stretch;
+    flex: 1 1 auto;
+    float: none;
+    width: min(100% - 32px, 1400px);
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
     padding-block: 72px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+}
+
+.promo-banner .promo-copy::before,
+.promo-banner .promo-copy::after {
+    display: none;
+    content: none;
 }
 
 .promo-title,
 .promo-copy p {
     max-width: 640px;
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 0;
 }
 
 .promo-title {
@@ -1926,6 +1948,7 @@ body.template-index .bestsellers {
     letter-spacing: -0.02em;
     color: #fff;
     margin-bottom: 18px;
+    text-align: left;
 }
 
 .promo-copy p {
@@ -1935,16 +1958,24 @@ body.template-index .bestsellers {
     font-weight: 400;
 }
 
+.promo-banner .btn.btn-promo,
 .btn-promo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     align-self: flex-start;
     min-width: 168px;
+    height: 48px;
     min-height: 48px;
     padding: 0 28px;
+    line-height: 1;
     background: transparent;
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     letter-spacing: 0.14em;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .btn-promo:hover {
@@ -3684,3 +3715,122 @@ body.template-index .hero-photo-link .hero-photo { width: 100%; }
   z-index: 60;
 }
 body.template-index .sortable-products-section .nav-tabs { display: none !important; }
+
+.promo-banner,
+.promo-banner .promo-slide {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.promo-banner .promo-slide-img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .promo-banner,
+    .promo-banner .promo-slide {
+        min-height: 520px;
+    }
+
+    .promo-banner .promo-nav {
+        left: 50%;
+        right: auto;
+        bottom: 28px;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 767px) {
+    .promo-banner,
+    .promo-banner .promo-slide {
+        min-height: 420px;
+        height: auto;
+    }
+
+    .promo-banner .promo-slide {
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+    .promo-banner .promo-slide-img {
+        object-position: 80% center !important;
+    }
+
+    .promo-banner .container.promo-copy,
+    .promo-banner .promo-copy {
+        width: min(100% - 24px, 1400px);
+        max-width: 1400px;
+        padding: 36px 0 88px;
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: center;
+    }
+
+    .promo-banner .promo-title,
+    .promo-banner .promo-copy p {
+        max-width: 100%;
+        align-self: center;
+        text-align: center;
+    }
+
+    .promo-banner .promo-title {
+        font-size: clamp(32px, 9vw, 42px);
+        line-height: 1.12;
+        margin-bottom: 12px;
+    }
+
+    .promo-banner .promo-copy p {
+        font-size: 14px;
+        line-height: 1.45;
+        margin-bottom: 20px;
+    }
+
+    .promo-banner .btn.btn-promo,
+    .promo-banner .btn-promo {
+        align-self: center;
+        min-width: 140px;
+        height: 42px;
+        min-height: 42px;
+        padding: 0 18px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+    }
+
+    .promo-banner .promo-nav {
+        left: 50%;
+        right: auto;
+        bottom: 16px;
+        transform: translateX(-50%);
+    }
+
+    .promo-banner .promo-arrow {
+        width: 44px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 479px) {
+    .promo-banner,
+    .promo-banner .promo-slide {
+        min-height: 380px;
+    }
+
+    .promo-banner .promo-title {
+        font-size: clamp(28px, 8.4vw, 36px);
+    }
+
+    .promo-banner .btn.btn-promo,
+    .promo-banner .btn-promo {
+        min-width: 0;
+        padding: 0 16px;
+    }
+}

@@ -2,8 +2,8 @@
 {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
 <div id="ProductGridContainer">
   {% paginate collection.products by products_per_page %}
-  <div class="collection_template" id="product-grid" data-id="{{ section.id }}">
-    <header class="collection-top">
+  <div class="collection_template">
+    <div class="collection-top">
       <nav class="collection-crumb" aria-label="Breadcrumb">
         <a href="{{ routes.root_url }}">Home</a>
         <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
@@ -51,9 +51,9 @@
         </button>
         {% endif %}
       </div>
-    </header>
+    </div>
 
-    <div class="products-grid-view collection-grid" data-collection-grid>
+    <div class="products-grid-view collection-grid" id="product-grid" data-id="{{ section.id }}" data-collection-grid>
       {% for product in collection.products %}
         {% if product.type == 'PPLR_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
         {% render 'anupam-hp-product-card', collection: collection, product: product, card_style: 'collection' %}

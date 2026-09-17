@@ -1,5 +1,5 @@
 (function () {
-  const page = document.body.classList.contains('template-collection');
+  const page = document.body.classList.contains('template-collection') || document.body.classList.contains('template-search');
   if (!page) return;
 
   const overlay = document.querySelector('[data-filter-overlay]');

@@ -1507,3 +1507,33 @@ body.template-product .pdp-whatsapp,
 body.template-product .pdp-crumb {
   visibility: visible !important;
 }
+
+body.template-search .collection-toolbar,
+body.template-search .collection-sort,
+body.template-search .collection-tool-btn,
+body.template-search .filter-drawer,
+body.template-search .filter-overlay,
+body.template-search .pagecontent .search-bar,
+body.template-search .section-header__title {
+  display: none !important;
+}
+
+body.template-search .collection-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 28px 20px !important;
+  float: none !important;
+}
+
+body.template-search .collection-grid .product-card,
+body.template-search .collection-grid .product-layouts {
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  body.template-search .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

@@ -1,5 +1,5 @@
 {%- assign collection = collections[section.settings.collection] -%}
-{% if template.name == 'collection' %}
+{% if template.name == 'collection' or template.name == 'search' %}
 <style>
   #shopify-section-{{ section.id }},
   #shopify-section-{{ section.id }} .collection-bestsellers {

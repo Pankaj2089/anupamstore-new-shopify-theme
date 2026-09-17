@@ -111,12 +111,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     {{ 'anupam-homepage.css' | asset_url | stylesheet_tag }}
     {{ 'anupam-chrome.css' | asset_url | stylesheet_tag }}
-    {% if template.name == 'collection' or template contains 'product' %}
+    {% if template.name == 'collection' or template.name == 'search' or template contains 'search' or template contains 'product' %}
     {{ 'anupam-collection.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {% if template.name == 'product' or template contains 'product' %}
     {{ 'anupam-product.css' | asset_url | stylesheet_tag }}
     {{ 'anupam-pdp-html.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template.name == 'blog' or template.name == 'article' %}
+    {{ 'anupam-blog.css' | asset_url | stylesheet_tag }}
     {% endif %}
     <script src="{{ 'custom-helper.js' | asset_url }}" defer="defer"></script>
     
@@ -264,7 +267,7 @@
       {% sections 'header-group' %}
       <main class="main-content" role="main">
           {% if settings.enable_breadcrumb %}
-        {% unless template.name == 'product' or template.name == 'collection' %}
+        {% unless template.name == 'product' or template.name == 'collection' or template.name == 'search' or template.name == 'blog' or template.name == 'article' %}
         {% render 'breadcrumb' %}
         {% endunless %}
   {% endif %}
@@ -293,7 +296,7 @@
     {% comment %} Comment currencies.js javascript included twice in theme header file {% endcomment %}
     {% comment %} {% render 'currencies' %}    {% endcomment %}
       {{ 'anupam-homepage.js' | asset_url | script_tag }}
-      {% if template.name == 'collection' %}
+      {% if template.name == 'collection' or template.name == 'search' %}
       {{ 'anupam-collection.js' | asset_url | script_tag }}
       {% endif %}
       {% if template.name == 'product' or template contains 'product' %}

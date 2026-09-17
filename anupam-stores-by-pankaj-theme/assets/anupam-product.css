@@ -472,19 +472,12 @@ body.template-product .pdp-info .add-to-wishlist .show {
     display: inline-flex !important;
 }
 
-body.template-product .pdp-info .add-to-wishlist .show > div {
+body.template-product .pdp-info .add-to-wishlist .show > [class*="loadding-wishbutton"],
+body.template-product .pdp-info .add-to-wishlist .show > [class*="added-wishbutton"] {
     display: none !important;
-    border: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    min-height: 0 !important;
-    width: auto !important;
-    float: none !important;
 }
 
-body.template-product .pdp-info .add-to-wishlist [class*="default-wishbutton"] {
+body.template-product .pdp-info .add-to-wishlist .show > [class*="default-wishbutton"] {
     display: inline-flex !important;
 }
 
@@ -541,7 +534,7 @@ body.template-product .pdp-info .add-to-wishlist .tooltip-label {
 }
 
 body.template-product .pdp-info .product-qty {
-    margin: 0 0 0 auto !important;
+    margin: 0 !important;
     float: none !important;
     width: auto !important;
 }
@@ -826,9 +819,12 @@ body.template-product .pdp-products .section-title,
 body.template-product .brands .section-title,
 body.template-product #recently-viewed-products-wrap .section-title,
 body.template-product #recently-viewed-products-wrap .tt-title {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
     font-size: clamp(26px, 3vw, 36px) !important;
     font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
     color: #462D20 !important;
 }
 

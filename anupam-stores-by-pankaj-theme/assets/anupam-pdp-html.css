@@ -377,7 +377,7 @@ body.template-product .product-title {
     display: inline-flex;
     align-items: center;
     overflow: hidden;
-    margin-left: auto;
+    margin-left: 0;
 }
 
 .pdp-qty button {
@@ -581,7 +581,10 @@ body.template-product .product-title {
 
 .pdp-products .section-title,
 body.template-product .brands .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(26px, 3vw, 36px);
+    font-weight: 700;
+    color: #462D20;
 }
 
 body.template-product #related,
@@ -891,7 +894,7 @@ body.template-product .pdp-info .product-info label {
 body.template-product .pdp-actions-top {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     flex-wrap: wrap !important;
     gap: 10px !important;
     width: 100% !important;
@@ -902,35 +905,47 @@ body.template-product .pdp-actions-top {
 body.template-product .pdp-actions-top .add-to-wishlist,
 body.template-product .pdp-actions-top .add-to-wishlist .show {
     display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     margin: 0 !important;
     width: auto !important;
+    height: auto !important;
     float: none !important;
     border: 0 !important;
     background: none !important;
     padding: 0 !important;
     min-height: 0 !important;
+    min-width: 0 !important;
     box-shadow: none !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 
-body.template-product .pdp-actions-top .add-to-wishlist .show > div {
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="loadding-wishbutton"],
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="added-wishbutton"] {
     display: none !important;
 }
 
-body.template-product .pdp-actions-top [class*="loadding-wishbutton"] {
-    display: none !important;
-}
-
-body.template-product .pdp-actions-top [class*="default-wishbutton"] {
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="default-wishbutton"] {
     display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-body.template-product .pdp-actions-top [class*="default-wishbutton"][style*="none"] {
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="default-wishbutton"][style*="none"] {
     display: none !important;
 }
 
-body.template-product .pdp-actions-top [class*="added-wishbutton"][style*="block"],
-body.template-product .pdp-actions-top [class*="added-wishbutton"][style*="inline"] {
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="added-wishbutton"][style*="block"],
+body.template-product .pdp-actions-top .add-to-wishlist .show > [class*="added-wishbutton"][style*="inline"] {
     display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 body.template-product .pdp-actions-top .show:has([class*="added-wishbutton"][style*="block"]) [class*="default-wishbutton"],
@@ -938,9 +953,11 @@ body.template-product .pdp-actions-top .show:has([class*="added-wishbutton"][sty
     display: none !important;
 }
 
+body.template-product .pdp-actions-top .pdp-chip,
 body.template-product .pdp-actions-top .add-in-wishlist-js,
 body.template-product .pdp-actions-top .added-wishlist {
     min-height: 42px !important;
+    height: 42px !important;
     padding: 0 16px !important;
     border: 1px solid #d7b48a !important;
     border-radius: 999px !important;
@@ -948,13 +965,45 @@ body.template-product .pdp-actions-top .added-wishlist {
     color: #6b4b2a !important;
     display: inline-flex !important;
     align-items: center !important;
+    justify-content: center !important;
     gap: 6px !important;
+    font-family: 'Inter', sans-serif !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: .06em !important;
     text-transform: uppercase !important;
     box-shadow: none !important;
     width: auto !important;
+    float: none !important;
+    line-height: 1 !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.template-product .pdp-actions-top .pdp-chip:hover,
+body.template-product .pdp-actions-top .pdp-chip.is-active,
+body.template-product .pdp-actions-top .added-wishlist {
+    background: #fbf7f3 !important;
+    color: #462D20 !important;
+}
+
+body.template-product .pdp-actions-top .pdp-chip .material-symbols-outlined {
+    font-size: 18px !important;
+    line-height: 1 !important;
+}
+
+body.template-product .pdp-actions-top .pdp-chip.is-active .material-symbols-outlined,
+body.template-product .pdp-actions-top .added-wishlist .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    color: #c0392b !important;
+}
+
+body.template-product .pdp-actions-top .pdp-chip::after,
+body.template-product .pdp-actions-top .add-in-wishlist-js::after,
+body.template-product .pdp-actions-top .added-wishlist::after {
+    display: none !important;
+    content: none !important;
 }
 
 body.template-product .add-to-wishlist .tooltip-label {
@@ -973,7 +1022,8 @@ body.template-product #product-qty.pdp-qty {
     align-items: center !important;
     overflow: hidden !important;
     min-height: 42px !important;
-    margin: 0 0 0 auto !important;
+    margin: 0 !important;
+    margin-left: 0 !important;
     border: 1px solid #d7b48a !important;
     border-radius: 999px !important;
     background: #fff !important;
@@ -1363,10 +1413,12 @@ body.template-product #recent-title {
     clip: auto !important;
     transform: none !important;
     text-indent: 0 !important;
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
     font-size: clamp(26px, 3vw, 36px) !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
     color: #462D20 !important;
     margin: 0 !important;
     flex: 0 1 auto !important;
@@ -1479,11 +1531,13 @@ body.template-product .promo-banner .promo-slide {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: flex-start !important;
     flex: 0 0 100% !important;
     min-width: 100% !important;
     min-height: 420px !important;
     height: auto !important;
     overflow: hidden !important;
+    text-align: left !important;
 }
 
 body.template-product .promo-banner .promo-slide-img {
@@ -1501,11 +1555,24 @@ body.template-product .promo-banner .promo-copy {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
+    justify-content: center !important;
+    align-self: stretch !important;
+    flex: 1 1 auto !important;
     width: min(100% - 32px, 1400px) !important;
     max-width: 1400px !important;
-    margin-inline: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     padding-block: 72px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     float: none !important;
+    text-align: left !important;
+}
+
+body.template-product .promo-banner .promo-copy::before,
+body.template-product .promo-banner .promo-copy::after {
+    display: none !important;
+    content: none !important;
 }
 
 body.template-product .promo-banner .promo-title {
@@ -1515,6 +1582,9 @@ body.template-product .promo-banner .promo-title {
     line-height: 1.08 !important;
     color: #fff !important;
     margin: 0 0 18px !important;
+    max-width: 640px !important;
+    text-align: left !important;
+    align-self: flex-start !important;
 }
 
 body.template-product .promo-banner .promo-copy p {
@@ -1528,14 +1598,18 @@ body.template-product .promo-banner .btn-promo {
     align-items: center !important;
     justify-content: center !important;
     min-width: 168px !important;
+    height: 48px !important;
     min-height: 48px !important;
     padding: 0 28px !important;
+    line-height: 1 !important;
     background: transparent !important;
     color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: 10px !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 }
 
 @media (min-width: 1024px) {
@@ -1543,6 +1617,80 @@ body.template-product .promo-banner .btn-promo {
     body.template-product .promo-banner,
     body.template-product .promo-banner .promo-slide {
         min-height: 742px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    body.template-product .shopify-section.subbanner,
+    body.template-product .promo-banner,
+    body.template-product .promo-banner .promo-slide {
+        min-height: 520px !important;
+    }
+
+    body.template-product .promo-banner .promo-nav {
+        left: 50% !important;
+        bottom: 28px !important;
+        transform: translateX(-50%) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body.template-product .shopify-section.subbanner,
+    body.template-product .promo-banner,
+    body.template-product .promo-banner .promo-slide {
+        min-height: 420px !important;
+        height: auto !important;
+    }
+
+    body.template-product .promo-banner .promo-slide {
+        align-items: flex-end !important;
+        justify-content: flex-start !important;
+    }
+
+    body.template-product .promo-banner .promo-slide-img {
+        object-position: 80% center !important;
+        height: 100% !important;
+        max-width: none !important;
+    }
+
+    body.template-product .promo-banner .promo-copy {
+        width: min(100% - 24px, 1400px) !important;
+        padding: 36px 0 88px !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    body.template-product .promo-banner .promo-title {
+        font-size: clamp(32px, 9vw, 42px) !important;
+        max-width: 100% !important;
+        margin: 0 0 12px !important;
+        line-height: 1.12 !important;
+        align-self: center !important;
+        text-align: center !important;
+    }
+
+    body.template-product .promo-banner .promo-copy p {
+        font-size: 14px !important;
+        margin: 0 0 20px !important;
+        max-width: 100% !important;
+        align-self: center !important;
+        text-align: center !important;
+    }
+
+    body.template-product .promo-banner .btn-promo {
+        align-self: center !important;
+        min-width: 140px !important;
+        height: 42px !important;
+        min-height: 42px !important;
+        padding: 0 18px !important;
+        font-size: 12px !important;
+    }
+
+    body.template-product .promo-banner .promo-nav {
+        left: 50% !important;
+        bottom: 16px !important;
+        transform: translateX(-50%) !important;
     }
 }
 
@@ -1573,4 +1721,140 @@ body.template-product #recently-viewed-products-wrap .section-head,
 body.template-product .pdp-products .section-head {
     margin-top: 0 !important;
     margin-bottom: clamp(12px, 1.5vw, 18px) !important;
+}
+
+body.template-product .section-title,
+body.template-product h2.section-title,
+body.template-product .pdp-products .section-title,
+body.template-product .pdp-products-title,
+body.template-product #related .section-title,
+body.template-product #related-title,
+body.template-product .brands .section-title,
+body.template-product .section.brands .section-title,
+body.template-product #recently-viewed-products-wrap .section-title,
+body.template-product #recent-title {
+    display: block !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(26px, 3vw, 36px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #462D20 !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+@media (max-width: 767px) {
+    body.template-product {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }
+
+    body.template-product .page-wrapper,
+    body.template-product .main-content,
+    body.template-product .product-template__container,
+    body.template-product [id^="ProductSection-"],
+    body.template-product .pdp,
+    body.template-product .shopify-section {
+        max-width: 100% !important;
+        overflow-x: clip !important;
+    }
+
+    body.template-product .pdp > .container,
+    body.template-product .pdp-products .container,
+    body.template-product #recently-viewed-products-wrap > .container,
+    body.template-product #recently-viewed-products-wrap .container,
+    body.template-product .product-template__container > .container {
+        width: min(100% - 24px, 1400px) !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    body.template-product .pdp .row,
+    body.template-product .pdp-layout .row,
+    body.template-product .pdp-info .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    body.template-product .pdp [class*="col-xs-"],
+    body.template-product .pdp [class*="col-sm-"],
+    body.template-product .pdp [class*="col-md-"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    body.template-product .pdp-title,
+    body.template-product .product-single__title,
+    body.template-product h1.product-single__title.pdp-title {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        float: none !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+    }
+
+    body.template-product .pdp-intro,
+    body.template-product .product-single__header,
+    body.template-product .pdp-info,
+    body.template-product .product-information.pdp-info,
+    body.template-product .pdp-info .product-information-inner,
+    body.template-product .pdp-gallery,
+    body.template-product .pdp-stage,
+    body.template-product .pdp-main {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        float: none !important;
+    }
+
+    body.template-product .pdp-crumb {
+        flex-wrap: wrap !important;
+        max-width: 100% !important;
+    }
+
+    body.template-product .pdp-crumb [aria-current="page"] {
+        max-width: 100% !important;
+    }
+
+    body.template-product .pdp img,
+    body.template-product .pdp-benefit img,
+    body.template-product .pdp-acc-panel img,
+    body.template-product .pdp-acc-panel table,
+    body.template-product .pdp-acc-panel iframe {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    body.template-product .pdp-acc-panel {
+        overflow-wrap: anywhere !important;
+    }
+
+    body.template-product .pdp-cta,
+    body.template-product .pdp-cta-row,
+    body.template-product .pdp-info .product-form__buttons,
+    body.template-product .pdp-info .shopify-payment-button,
+    body.template-product .pdp-info .shopify-payment-button__button,
+    body.template-product .pdp-info #AddToCart {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        float: none !important;
+    }
+
+    body.template-product .pdp-info .shopify-payment-button__button,
+    body.template-product .pdp-info #AddToCart {
+        white-space: normal !important;
+    }
 }

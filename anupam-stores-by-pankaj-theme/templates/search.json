@@ -1,1 +1,179 @@
-{"sections":{"main":{"type":"search","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "search",
+      "settings": {}
+    },
+    "1656410869d8814fd8": {
+      "type": "cms-subbanner",
+      "settings": {
+        "banner1_img": "shopify://shop_images/Web_banner1_resize_jpg.webp",
+        "banner1_url": "shopify://collections/tabletop-vases-and-pots",
+        "text1_position": "right",
+        "banner1_subtitle": "",
+        "banner1_subtitle_color": "#ffffff",
+        "banner1_title": "",
+        "banner1_title_color": "#ffffff",
+        "banner1_desc": "",
+        "banner1_desc_color": "#222222",
+        "banner1_pricedesc": "",
+        "banner1_pricedesc_color": "#ffffff",
+        "banner1_price": "",
+        "banner2_img": "shopify://shop_images/Web_banner3_resize.webp",
+        "banner2_url": "shopify://collections/decorative-figures",
+        "text2_position": "right",
+        "banner2_subtitle": "",
+        "banner2_subtitle_color": "#313c46",
+        "banner2_title": "",
+        "banner2_title_color": "#313c46",
+        "banner2_desc": "",
+        "banner2_desc_color": "#ffffff",
+        "banner2_pricedesc": "",
+        "banner2_pricedesc_color": "#313c46",
+        "banner2_price": "",
+        "banner3_img": "shopify://shop_images/Web_banner2_resize_jpg.webp",
+        "banner3_url": "shopify://collections/home-decor-showpieces",
+        "text3_position": "right",
+        "banner3_subtitle": "",
+        "banner3_subtitle_color": "#ffffff",
+        "banner3_title": "",
+        "banner3_title_color": "#ffffff",
+        "banner3_desc": "",
+        "banner3_desc_color": "#222222",
+        "banner3_pricedesc": "",
+        "banner3_pricedesc_color": "#ffffff",
+        "banner3_price": ""
+      }
+    },
+    "best-seller": {
+      "type": "best-seller",
+      "settings": {
+        "background_color": "#ffffff",
+        "padd_top": 40,
+        "class": "bestproduct",
+        "product_rows": true,
+        "title": "Best Seller",
+        "collection": "best-sellers",
+        "product_col_desktop_pro": 2,
+        "product_col_mobile_pro": 1
+      }
+    },
+    "our_brand": {
+      "type": "our_brand",
+      "blocks": {
+        "brand_image_NAKXYn": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/suncasa_logo.png",
+            "link": "shopify://collections/premium-suncasa-kitchen-utilities"
+          }
+        },
+        "brand_image_VAE7Ag": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/richcraft_logo.png",
+            "link": ""
+          }
+        },
+        "brand_image_ppFN93": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/jaypee_logo.png",
+            "link": ""
+          }
+        },
+        "brand_image_7Mag8m": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/milton_logo.png",
+            "link": ""
+          }
+        },
+        "1605783755d6d9f598-2": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/cello_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-1": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/bergner_logo.png",
+            "link": "shopify://collections/premium-bergner-kitchen-appliances"
+          }
+        },
+        "1605783755d6d9f598-3": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/borosil_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-4": {
+          "type": "brand_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/trueware_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-5": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/havells_logo.png",
+            "link": "#"
+          }
+        },
+        "fe3f5195-5da5-4a16-b714-43fb3e5da4bd": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/prestige_logo.png",
+            "link": "#"
+          }
+        },
+        "1605783755d6d9f598-0": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/supreme_logo.png",
+            "link": "#"
+          }
+        },
+        "brand_image_Cyipkt": {
+          "type": "brand_image",
+          "settings": {
+            "image": "shopify://shop_images/hawkins_logo.png",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "brand_image_NAKXYn",
+        "brand_image_VAE7Ag",
+        "brand_image_ppFN93",
+        "brand_image_7Mag8m",
+        "1605783755d6d9f598-2",
+        "1605783755d6d9f598-1",
+        "1605783755d6d9f598-3",
+        "1605783755d6d9f598-4",
+        "1605783755d6d9f598-5",
+        "fe3f5195-5da5-4a16-b714-43fb3e5da4bd",
+        "1605783755d6d9f598-0",
+        "brand_image_Cyipkt"
+      ],
+      "settings": {
+        "title": "Our Brands",
+        "addclass": "brands",
+        "bg_color": "#ffffff",
+        "product_col_desktop_pro": 6,
+        "product_col_mobile_pro": 2
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1656410869d8814fd8",
+    "best-seller",
+    "our_brand"
+  ]
+}
