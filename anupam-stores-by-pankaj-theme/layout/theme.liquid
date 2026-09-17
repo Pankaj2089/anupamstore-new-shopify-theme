@@ -121,6 +121,19 @@
     {% if template.name == 'blog' or template.name == 'article' %}
     {{ 'anupam-blog.css' | asset_url | stylesheet_tag }}
     {% endif %}
+    {% if template contains 'contact' %}
+    {{ 'anupam-contact.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template contains 'about' %}
+    {{ 'anupam-about.css' | asset_url | stylesheet_tag }}
+    {{ 'anupam-blog.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template contains 'wishlist' %}
+    {{ 'anupam-wishlist.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template.name == 'cart' %}
+    {{ 'anupam-cart.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     <script src="{{ 'custom-helper.js' | asset_url }}" defer="defer"></script>
     
     <script 
@@ -267,7 +280,7 @@
       {% sections 'header-group' %}
       <main class="main-content" role="main">
           {% if settings.enable_breadcrumb %}
-        {% unless template.name == 'product' or template.name == 'collection' or template.name == 'search' or template.name == 'blog' or template.name == 'article' %}
+        {% unless template.name == 'product' or template.name == 'collection' or template.name == 'search' or template.name == 'blog' or template.name == 'article' or template contains 'contact' or template contains 'about' or template contains 'wishlist' %}
         {% render 'breadcrumb' %}
         {% endunless %}
   {% endif %}
@@ -301,6 +314,9 @@
       {% endif %}
       {% if template.name == 'product' or template contains 'product' %}
       {{ 'anupam-product.js' | asset_url | script_tag }}
+      {% endif %}
+      {% if template contains 'contact' %}
+      {{ 'anupam-contact.js' | asset_url | script_tag }}
       {% endif %}
       {% render 'custom-search-autocomplete' %}
     {% if template contains 'product' %}

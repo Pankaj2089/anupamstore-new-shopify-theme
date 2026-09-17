@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-base="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | Anupam Stores</title>
+    <meta name="description" content="Your saved products at Anupam Stores — keep track of the clocks, décor and home essentials you love.">
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+</head>
+<body class="wishlist-page">
+    <div data-component="header"></div>
+    <div data-component="mobile-drawer"></div>
+
+    <main>
+        <section class="wishlist" aria-labelledby="wishlist-title">
+            <div class="container">
+                <nav class="wishlist-crumb" aria-label="Breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                    <span aria-current="page">My Wishlist</span>
+                </nav>
+
+                <h1 class="wishlist-title" id="wishlist-title">My Wishlist</h1>
+
+                <div class="wishlist-grid" data-wishlist-grid></div>
+
+                <p class="wishlist-empty" data-wishlist-empty hidden>
+                    Your wishlist is empty.
+                    <a href="collections/new-arrivals.html">Continue shopping</a>
+                </p>
+            </div>
+        </section>
+
+        <div data-component="newsletter"></div>
+    </main>
+
+    <div data-component="footer"></div>
+    <div data-component="quickview"></div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wishlist.js"></script>
+</body>
+</html>

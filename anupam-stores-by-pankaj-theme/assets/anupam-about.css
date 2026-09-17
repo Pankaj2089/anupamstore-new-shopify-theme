@@ -1,0 +1,541 @@
+/* Anupam about page UI (ported from new_html/css/about.css).
+   Scoped to .anupam-about because every page template shares body.template-page. */
+
+.anupam-about {
+    --font-body: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
+    display: block;
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    color: #3b2f29;
+    background: #ffffff !important;
+}
+
+body:has(.anupam-about),
+body:has(.anupam-about) .page-wrapper,
+body:has(.anupam-about) .main-content,
+body:has(.anupam-about) .pagecontent,
+body:has(.anupam-about) .pagecontent > .shopify-section {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+body:has(.anupam-about) .follow-rail,
+body:has(.anupam-about) .breadcrumb-wrap,
+body:has(.anupam-about) .breadcrumb-wrapper,
+body:has(.anupam-about) .ourteam_wrap,
+body:has(.anupam-about) .about-blog {
+    display: none !important;
+}
+
+.anupam-about h1,
+.anupam-about h2,
+.anupam-about h3 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.anupam-about .container {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    float: none !important;
+}
+
+.anupam-about .container::before,
+.anupam-about .container::after {
+    display: none;
+    content: none;
+}
+
+/* Hero */
+.anupam-about .about-hero {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: clamp(170px, 24vw, 340px);
+    overflow: hidden;
+    background: #241a14;
+}
+
+.anupam-about .about-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+}
+
+.anupam-about .about-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.anupam-about .about-hero-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(24px, 3.4vw, 46px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* Highlight bar */
+.anupam-about .about-usps {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(-56px, -4vw, -28px);
+}
+
+.anupam-about .usp-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 28px);
+    margin: 0;
+    padding: clamp(18px, 2vw, 26px) clamp(18px, 2.4vw, 32px);
+    list-style: none;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(50, 35, 25, 0.12);
+    float: none;
+    width: auto;
+}
+
+.anupam-about .usp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: none;
+    width: auto;
+    border: 0;
+}
+
+.anupam-about .usp-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #F7EBE1;
+    color: #b0894a;
+    font-size: 20px;
+}
+
+.anupam-about .usp-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #3b2a20;
+}
+
+.anupam-about .usp-item span:not(.usp-icon) {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #8a7c74;
+}
+
+/* Intro */
+.anupam-about .about-intro {
+    padding-block: clamp(28px, 4vw, 56px);
+}
+
+.anupam-about .about-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+}
+
+.anupam-about .about-intro-copy {
+    min-width: 0;
+}
+
+.anupam-about .about-heading {
+    margin: 0 0 6px;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #462D20;
+    text-transform: none;
+}
+
+.anupam-about .about-kicker {
+    margin: 0 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #b0894a;
+}
+
+.anupam-about .about-intro-copy p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #6b5c54;
+}
+
+.anupam-about .about-intro-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.anupam-about .about-poster {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #F8F5F1;
+}
+
+.anupam-about .about-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Quote */
+.anupam-about .about-quote {
+    padding-block: clamp(18px, 3vw, 34px);
+}
+
+.anupam-about .about-quote-text {
+    margin: 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.6vw, 20px);
+    line-height: 1.5;
+    color: #8a5a2b;
+}
+
+.anupam-about .about-quote-text p {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+/* Story timeline */
+.anupam-about .about-story {
+    padding-bottom: clamp(28px, 4vw, 52px);
+}
+
+.anupam-about .about-story-title {
+    margin: 0 0 clamp(24px, 3vw, 40px);
+    text-align: center;
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #3b2a20;
+}
+
+.anupam-about .story-timeline {
+    --story-gap: clamp(26px, 3.4vw, 44px);
+    --story-line: 50%;
+    display: grid;
+    gap: var(--story-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: none;
+    width: auto;
+}
+
+.anupam-about .story-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+    align-items: start;
+    column-gap: clamp(16px, 3vw, 40px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: none;
+    width: auto;
+    border: 0;
+}
+
+/* Connector running from the first year badge down to the last */
+.anupam-about .story-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: calc(-1 * var(--story-gap));
+    left: var(--story-line);
+    width: 1px;
+    transform: translateX(-50%);
+    background: #4a3a30;
+}
+
+.anupam-about .story-item:first-child::before {
+    top: 28px;
+}
+
+.anupam-about .story-item:last-child::before {
+    bottom: auto;
+    height: 28px;
+}
+
+.anupam-about .story-year {
+    position: relative;
+    z-index: 1;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #F7EBE1;
+    color: #a4752f;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.anupam-about .story-copy {
+    max-width: 520px;
+    min-width: 0;
+}
+
+.anupam-about .story-copy h3 {
+    margin: 0 0 10px;
+    font-size: clamp(17px, 1.8vw, 21px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #3b2a20;
+    text-transform: none;
+}
+
+.anupam-about .story-copy p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #6b5c54;
+}
+
+.anupam-about .story-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.anupam-about .story-item--left .story-copy {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    text-align: right;
+}
+
+.anupam-about .story-item--right .story-copy {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+    text-align: left;
+}
+
+.anupam-about .story-note {
+    margin: clamp(26px, 3.4vw, 44px) auto 0;
+    max-width: 640px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #3b2a20;
+}
+
+/* Flagship stores */
+.anupam-about .about-stores {
+    padding-bottom: clamp(28px, 4vw, 52px);
+}
+
+.anupam-about .about-stores-title {
+    margin: 0 0 6px;
+    font-size: clamp(19px, 2vw, 24px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #3b2a20;
+    text-transform: none;
+}
+
+.anupam-about .about-stores-sub {
+    margin: 0 0 clamp(16px, 2vw, 24px);
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b5c54;
+}
+
+.anupam-about .store-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 2.4vw, 28px);
+}
+
+.anupam-about .store-card-lite {
+    padding: clamp(18px, 2vw, 26px);
+    border-radius: 12px;
+    background: #F8F5F1;
+    min-width: 0;
+}
+
+.anupam-about .store-card-lite h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #3b2a20;
+    text-transform: none;
+}
+
+.anupam-about .store-card-lite address {
+    margin: 0 0 14px;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #6b5c54;
+}
+
+/* Recent articles slider reuses the blog card styles */
+.anupam-about .blog-recent {
+    padding-top: clamp(12px, 2vw, 24px);
+    padding-bottom: clamp(28px, 4vw, 48px);
+}
+
+.anupam-about .blog-recent .section-title {
+    font-size: clamp(26px, 3vw, 36px);
+}
+
+.anupam-about .blog-recent .slider-btn {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #4a2c1c;
+}
+
+.anupam-about .blog-recent-track {
+    gap: 20px;
+    align-items: stretch;
+}
+
+.anupam-about .blog-recent-track .blog-card--vertical {
+    flex: 0 0 calc((100% - 40px) / 3);
+    scroll-snap-align: start;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .anupam-about .blog-recent-track .blog-card--vertical {
+        flex: 0 0 calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 1023px) {
+    .anupam-about .usp-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .anupam-about .about-intro-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .anupam-about .about-poster {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 900px) {
+    .anupam-about .store-cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .anupam-about .container {
+        width: min(100% - 24px, 1400px) !important;
+        max-width: 100% !important;
+    }
+
+    .anupam-about .about-hero {
+        min-height: 150px;
+    }
+
+    .anupam-about .about-hero-title {
+        font-size: 24px;
+    }
+
+    .anupam-about .about-usps {
+        margin-top: 0;
+        padding-top: 18px;
+    }
+
+    .anupam-about .usp-bar {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .anupam-about .about-intro-copy p,
+    .anupam-about .about-stores-sub {
+        font-size: 14px;
+    }
+
+    .anupam-about .story-timeline {
+        --story-line: 24px;
+    }
+
+    .anupam-about .story-item,
+    .anupam-about .story-item--left,
+    .anupam-about .story-item--right {
+        grid-template-columns: 48px minmax(0, 1fr);
+        align-items: start;
+        column-gap: 14px;
+    }
+
+    .anupam-about .story-item:first-child::before {
+        top: 24px;
+    }
+
+    .anupam-about .story-item:last-child::before {
+        height: 24px;
+    }
+
+    .anupam-about .story-year {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+        width: 48px;
+        height: 48px;
+        font-size: 12px;
+    }
+
+    .anupam-about .story-copy {
+        max-width: none;
+    }
+
+    .anupam-about .story-item--left .story-copy,
+    .anupam-about .story-item--right .story-copy {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: stretch;
+        text-align: left;
+    }
+
+    .anupam-about .blog-recent-track .blog-card--vertical {
+        flex: 0 0 86%;
+    }
+}

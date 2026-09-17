@@ -837,6 +837,10 @@ body.template-index .btn,
 
 .hero-track {
     gap: 0;
+    /* stretch would pad shorter slides out to the tallest banner's height */
+    align-items: flex-start;
+    line-height: 0;
+    font-size: 0;
 }
 
 .hero-slide {
@@ -856,9 +860,33 @@ body.template-index .btn,
     object-position: center right;
 }
 
+/* Photo slides are sized by the banner itself - no fixed ratio, no cropping. */
 .hero-slide.is-photo {
     min-height: 0;
-    aspect-ratio: 1440 / 600;
+    aspect-ratio: auto;
+}
+
+.hero-slide.is-photo,
+.hero-slide.is-photo .hero-photo-link {
+    display: block;
+    width: 100%;
+    line-height: 0;
+    font-size: 0;
+}
+
+.hero-slide.is-photo .hero-photo {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    object-fit: fill;
+}
+
+/* the copy is absolutely positioned, so restore normal text metrics for it */
+.hero-slide.is-photo .hero-copy {
+    line-height: normal;
+    font-size: medium;
 }
 
 .hero-slide.is-photo .hero-photo {
@@ -1231,8 +1259,12 @@ body.template-index .bestsellers {
     overflow: hidden;
 }
 
+/* Bestseller thumbs keep their own proportions instead of being cropped. */
 .bestsellers .product-image img {
-    aspect-ratio: 4 / 3;
+    display: block;
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: fill;
 }
 .bestsellers .product-image::after {
     content: "";
@@ -2030,6 +2062,10 @@ body.template-index .bestsellers {
     background: #F8F3EF;
 }
 
+body.template-index .section.featured {
+    padding-bottom: 0 !important;
+}
+
 .featured .slider-btn {
     width: 36px;
     height: 36px;
@@ -2548,7 +2584,7 @@ body.template-index .bestsellers {
 
     .hero-slide.is-photo {
         aspect-ratio: auto;
-        min-height: 420px;
+        min-height: 0;
     }
 
     .hero-slide.is-photo::after {
@@ -2877,7 +2913,7 @@ body.template-index .bestsellers {
     .hero-slide.is-photo .hero-photo {
         width: 100%;
         max-width: none;
-        height: var(--hero-image-h);
+        height: auto;
         margin-left: 0;
         object-fit: cover;
         object-position: 80% 42%;

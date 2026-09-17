@@ -1,1 +1,120 @@
-{"wrapper":"div.container","sections":{"main":{"type":"aboutus-page-img","custom_css":[],"settings":{"about1_title_color":"#222222","about1_title":"","about1_desc_color":"#666666","about1_desc":"","about_icon_color":"#111111","about_title_icon_color":"#666666","about_title_icon1":"On - ear headphone","about_title_icon2":"Food Scale","about_title_icon3":"Weight Machine","about_title_icon4":"Canal Headphones","about1_btn_url":"#","about1_btn":"Shop Now","about1_us":"shopify:\/\/shop_images\/about-as-service-contact-information-concept.jpg","bg_color":"#f1f3f8","service_1":"shopify:\/\/shop_images\/02_63571784-fd72-4e08-b1f7-dc13c0927acd.png","service_title1_color":"#14345c","service_title1":"Big Saving Shop","service_desc1_color":"#777777","service_desc1":"Save big every order","service_2":"shopify:\/\/shop_images\/03_101cc00c-3b6f-4764-931f-6d1187d3c2a6.png","service_title2_color":"#14345c","service_title2":"24\/7 Assistance","service_desc2_color":"#777777","service_desc2":"24\/7 expert online support","service_3":"shopify:\/\/shop_images\/video_sales_service_final.png","service_title3_color":"#14345c","service_title3":"Video Sales Available","service_desc3_color":"#777777","service_desc3":"Boost revenue with video","about_main_title":"Blog","about_title_color":"#111111","about_desc_color":"#666666","about_img1":"shopify:\/\/shop_images\/Anupam_Web_Blog_jpg.jpg","about_title1":"Retail vs Wholesale: How to Shop Smart at Anupam Stores Sodala & Sukh Vrindavan","about_desc1":"Anupam Stores Sodala is the retail flagship — built for individual shoppers, and families. Sukh Vrindavan is the wholesale destination — built for businesses.","about_img2":"shopify:\/\/shop_images\/Anupam_Web_Blog2_jpg.jpg","about_title2":"Kitchen Essentials Every Indian Household Needs","about_desc2":"The Indian kitchen is one of the most demanding spaces in any home. It runs from early morning to late night, handles dishes from across regional cuisines.","about_img3":"shopify:\/\/shop_images\/Anupam_Web_Blog3_jpg.jpg","about_title3":"Why Anupam Stores Is Jaipur's One-Stop Shopping Destination","about_desc3":"From the busy lanes of Sodala to the wholesale corridors of Sukh Vrindavan, Anupam Stores has grown into something more than a retail destination.","video_url":"https:\/\/www.youtube.com\/embed\/Ls_dxo6vNTc","video_btn_color":"#222222","video_btn_hover_color":"#ffffff","video_btn_bg_color":"#ffcc00","video_btn_bg_hover_color":"#14345c"}},"team":{"type":"aboutus-team","blocks":{"1570173823217":{"type":"text","settings":{"image_heading":"Lisa John","author_name":"Lisa John","author_designation":"Packaking Girl","facebook":"","twitter":"","instagram":""}},"1570173875415":{"type":"text","settings":{"image_heading":"John Buffer","author_name":"John Buffer","author_designation":"Ceo Founder","facebook":"","twitter":"","instagram":""}},"1570173906227":{"type":"text","settings":{"image_heading":"Sandra Ellips","author_name":"Sandra Ellips","author_designation":"Support Boss","facebook":"","twitter":"","instagram":""}},"1570174004731":{"type":"text","settings":{"image_heading":"Craig Wilson","author_name":"Craig Wilson","author_designation":"Client Care","facebook":"","twitter":"","instagram":""}},"1570173938187":{"type":"text","settings":{"image_heading":"Sally Ramsey","author_name":"Sally Ramsey","author_designation":"Delivery Driver","facebook":"","twitter":"","instagram":""}},"1570174049687":{"type":"text","settings":{"image_1":"shopify:\/\/shop_images\/06.jpg","image_heading":"Willie Bradley","author_name":"Willie Bradley","author_designation":"manager","facebook":"","twitter":"","instagram":""}}},"block_order":["1570173823217","1570173875415","1570173906227","1570174004731","1570173938187","1570174049687"],"custom_css":[".ourteam_wrap,.about-blog {display: none !important;}"],"settings":{"title":"Our Team","title_color":"#222222","ourteam_column":"5"}}},"order":["main","team"]}
+{
+  "sections": {
+    "main": {
+      "type": "aboutus-page-img",
+      "blocks": {
+        "usp-1": {
+          "type": "usp",
+          "settings": {
+            "icon": "diversity_3",
+            "title": "Big Family Shop",
+            "subtitle": "Serving Jaipur since 1990"
+          }
+        },
+        "usp-2": {
+          "type": "usp",
+          "settings": {
+            "icon": "storefront",
+            "title": "150+ Trusted Brands",
+            "subtitle": "All under one roof"
+          }
+        },
+        "usp-3": {
+          "type": "usp",
+          "settings": {
+            "icon": "inventory_2",
+            "title": "Wide Range Available",
+            "subtitle": "2 lakh+ products in store"
+          }
+        },
+        "usp-4": {
+          "type": "usp",
+          "settings": {
+            "icon": "verified_user",
+            "title": "Hassle-Free Returns",
+            "subtitle": "Easy exchange support"
+          }
+        },
+        "story-1": {
+          "type": "story",
+          "settings": {
+            "year": "1990",
+            "title": "The Beginning",
+            "text": "<p>It started with a young man, a small home décor shop in Jaipur, and one stubborn belief — that even an ordinary family deserves to come home to something beautiful.</p><p>Bajrangi Ji Pareek didn't sell products. He sold the feeling of coming home. From a single rented shop, the seed of Anupam Stores was planted. Slowly — brand by brand, category by category — the shelves grew.</p>"
+          }
+        },
+        "story-2": {
+          "type": "story",
+          "settings": {
+            "year": "2000",
+            "title": "Adding Roots",
+            "text": "<p>Crockery, cookware and household essentials joined the shelves. Word of mouth did what advertising never could — Jaipur families began telling other Jaipur families: \"If it's for the home, go to Anupam.\"</p>"
+          }
+        },
+        "story-3": {
+          "type": "story",
+          "settings": {
+            "year": "2014",
+            "title": "The Big Leap",
+            "text": "<p>After two decades of building trust one shelf at a time, Anupam Stores expanded into a full-fledged household supermart. 150+ Indian and global brands came on board, transforming a neighbourhood favourite into a destination for every kind of home.</p>"
+          }
+        },
+        "story-4": {
+          "type": "story",
+          "settings": {
+            "year": "Today",
+            "title": "The Second Generation",
+            "text": "<p>The store carries his name. Anupam Pareek carries his father's promise — now scaled into a household supermart serving customers across four verticals: retail, B2B, e-commerce, and corporate gifting. The same warmth that brought your parents in. The same honest pricing. Now also one click away.</p>"
+          }
+        },
+        "store-1": {
+          "type": "store",
+          "settings": {
+            "title": "Store 1 · Anupam Stores",
+            "address": "68, Suraj Nagar West, opposite metro pillar 60, Civil Lines, Sodala Circle, Ajmer Road, Jaipur, Rajasthan 302006",
+            "link": "/pages/contact-us",
+            "link_text": "Visit Store"
+          }
+        },
+        "store-2": {
+          "type": "store",
+          "settings": {
+            "title": "Store 2 · Sukh Vrindavan (Wholesale Anupam Store)",
+            "address": "Plot No. 18, 19, 20, Ashok Nagar, Purani Chungi, near Ridhiraj World Business Center, Ajmer Road, Jaipur, Rajasthan 302019",
+            "link": "/pages/contact-us",
+            "link_text": "Visit Store"
+          }
+        }
+      },
+      "block_order": [
+        "usp-1",
+        "usp-2",
+        "usp-3",
+        "usp-4",
+        "story-1",
+        "story-2",
+        "story-3",
+        "story-4",
+        "store-1",
+        "store-2"
+      ],
+      "settings": {
+        "hero_title": "About Us",
+        "usp_label": "Why shoppers choose Anupam Stores",
+        "intro_title": "About Anupam Stores",
+        "intro_kicker": "Jaipur's Household Supermart — Since 1990",
+        "intro_text": "<p>Anupam Stores began as a single shop on Ajmer Road with a simple promise: honest prices, products that last, and staff who tell you the truth about what you are buying. Three decades later that promise has not changed — only the size of the shelf it sits on.</p><p>Today we stock more than 150 trusted brands and over 2 lakh products across eight categories — kitchen and cookware, home appliances, dinnerware, home décor, storage, personal care, gifting, and seasonal essentials. You can compare a Prestige cooker against a Hawkins one in your hands, ask the staff which dinner set survives a large family, and walk out with the whole list finished in one trip.</p><p>Two stores now carry the name. Anupam Stores Sodala is the retail flagship, built for families, gifting and home setups. Sukh Vrindavan is the wholesale destination, built for kirana stores, hostels, event planners and businesses buying at scale.</p>",
+        "show_intro_image": true,
+        "quote_text": "<p>\"We don't just sell products — we help Jaipur build its homes.\"</p>",
+        "quote_label": "What we believe",
+        "story_title": "Our Story — From a Single Shop to a Household Supermart",
+        "story_note": "Two generations. One promise. Beautiful homes for every family.",
+        "stores_title": "Visit Our Flagship Stores in Jaipur",
+        "stores_subtitle": "Two very different experiences under one name — pick the one that fits what you are shopping for.",
+        "recent_title": "Recent Articles",
+        "recent_blog": "news"
+      }
+    }
+  },
+  "order": ["main"]
+}

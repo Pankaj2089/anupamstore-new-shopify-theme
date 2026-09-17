@@ -1098,8 +1098,8 @@ body.filter-open {
 
 :is(body.template-collection, body.template-search) .collection-grid .product-body .badge-sale {
   position: static;
-  display: none;
-}
+        display: none;
+    }
 
 :is(body.template-collection, body.template-search) .collection-grid .product-desc {
   display: none;
@@ -1369,9 +1369,15 @@ body.template-search .collection-title {
     max-width: min(70%, 720px);
 }
 
+/* Three explicit tracks instead of a centred title with absolutely positioned
+   siblings, so a long collection name can never sit on top of the breadcrumb
+   or the sort/filter buttons. */
 :is(body.template-collection, body.template-search) .collection_template .collection-top,
 :is(body.template-collection, body.template-search) .collection-top {
-    display: flex !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 16px;
     visibility: visible !important;
     opacity: 1 !important;
     position: relative !important;
@@ -1383,6 +1389,26 @@ body.template-search .collection-title {
     width: 100% !important;
     margin: 0 !important;
     padding: 22px 0 28px !important;
+}
+
+:is(body.template-collection, body.template-search) .collection-crumb {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    grid-column: 1;
+    justify-self: start;
+    min-width: 0;
+}
+
+:is(body.template-collection, body.template-search) .collection-toolbar {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+    grid-column: 3;
+    justify-self: end;
+    flex-shrink: 0;
 }
 
 :is(body.template-collection, body.template-search) .collection-title,
@@ -1399,11 +1425,46 @@ body.template-search .collection-title {
 :is(body.template-collection, body.template-search) .collection-title,
 :is(body.template-collection, body.template-search) h1.collection-title {
     display: block !important;
+    grid-column: 2;
+    justify-self: center;
+    min-width: 0;
     font-family: 'Be Vietnam Pro', sans-serif !important;
     font-size: clamp(26px, 2.4vw, 32px) !important;
     font-weight: 700 !important;
     color: #462D20 !important;
     text-align: center !important;
     margin: 0 auto !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+@media (max-width: 767px) {
+    :is(body.template-collection, body.template-search) .collection_template .collection-top,
+    :is(body.template-collection, body.template-search) .collection-top {
+        grid-template-columns: minmax(0, 1fr) auto;
+        row-gap: 10px;
+        column-gap: 8px;
+        min-height: 0 !important;
+        padding: 12px 0 16px !important;
+    }
+
+    :is(body.template-collection, body.template-search) .collection-crumb {
+        grid-column: 1 / -1;
+        font-size: 12px;
+    }
+
+    :is(body.template-collection, body.template-search) .collection-title,
+    :is(body.template-collection, body.template-search) h1.collection-title {
+        grid-column: 1;
+        justify-self: start;
+        text-align: left !important;
+        font-size: 20px !important;
+        margin: 0 !important;
+    }
+
+    :is(body.template-collection, body.template-search) .collection-toolbar {
+        grid-column: 2;
+        justify-self: end;
+    }
 }
 

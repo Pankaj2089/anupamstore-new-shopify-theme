@@ -12,6 +12,15 @@
         blogs() {
             return this.base() + 'blogs.html';
         },
+        contact() {
+            return this.base() + 'contact.html';
+        },
+        about() {
+            return this.base() + 'about.html';
+        },
+        wishlist() {
+            return this.base() + 'wishlist.html';
+        },
         blogUrl(id) {
             return this.base() + 'blog-details.html?id=' + encodeURIComponent(id);
         },
@@ -23,7 +32,10 @@
                 .replaceAll('{{base}}', this.base())
                 .replaceAll('{{home}}', this.home())
                 .replaceAll('{{collection}}', this.collection())
-                .replaceAll('{{blogs}}', this.blogs());
+                .replaceAll('{{blogs}}', this.blogs())
+                .replaceAll('{{contact}}', this.contact())
+                .replaceAll('{{about}}', this.about())
+                .replaceAll('{{wishlist}}', this.wishlist());
         },
         formatPrice(value) {
             const n = Number(value);
@@ -128,7 +140,7 @@
                     <button class="icon-btn search-toggle" type="button" aria-label="Search" aria-expanded="false">
                         <span class="material-symbols-outlined" aria-hidden="true">search</span>
                     </button>
-                    <a class="icon-btn" href="#wishlist" aria-label="Wishlist">
+                    <a class="icon-btn" href="{{wishlist}}" aria-label="Wishlist">
                         <span class="material-symbols-outlined" aria-hidden="true">favorite</span>
                         <span class="count-badge" data-wishlist-count>0</span>
                     </a>
@@ -285,7 +297,8 @@
                             <li><a href="{{home}}#featured">Top Featured</a></li>
                             <li><a href="{{home}}#brands">Our Brands</a></li>
                             <li><a href="{{home}}#newsletter">Newsletter</a></li>
-                            <li><a href="{{home}}#footer">Contact Us</a></li>
+                            <li><a href="{{about}}">About Us</a></li>
+                            <li><a href="{{contact}}">Contact Us</a></li>
                             <li><a href="{{home}}#footer">FAQ</a></li>
                         </ul>
                     </li>
@@ -322,7 +335,8 @@
                 <li><a href="{{home}}#featured">Top Featured</a></li>
                 <li><a href="{{home}}#brands">Our Brands</a></li>
                 <li><a href="{{home}}#gifting">Gifting</a></li>
-                <li><a href="{{home}}#footer">Contact</a></li>
+                <li><a href="{{about}}">About Us</a></li>
+                <li><a href="{{contact}}">Contact</a></li>
             </ul>
         </nav>
     </aside>`);
@@ -474,8 +488,8 @@
             <section>
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="{{home}}#footer">About Us</a></li>
-                    <li><a href="{{home}}#footer">Contact Us</a></li>
+                    <li><a href="{{about}}">About Us</a></li>
+                    <li><a href="{{contact}}">Contact Us</a></li>
                     <li><a href="{{home}}#footer">Terms And Conditions</a></li>
                     <li><a href="{{home}}#footer">FAQ</a></li>
                     <li><a href="{{home}}#footer">Privacy Policy</a></li>

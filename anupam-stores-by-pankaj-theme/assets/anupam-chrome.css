@@ -119,6 +119,25 @@ body.template-index h2.section-title,
   display: none !important;
 }
 
+/* Announcement bar sits on the same track as the logo row, otherwise it falls
+   back to the narrower Bootstrap .container and looks inset. */
+.announcement > .container,
+.topheader-banner .announcement .container,
+.announcement .announcement-inner {
+  width: min(100% - 32px, 1400px) !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  float: none !important;
+}
+
+.announcement > .container::before,
+.announcement > .container::after {
+  content: none !important;
+  display: none !important;
+}
+
 .header_3 .center-header.header-inner {
   width: 100% !important;
   max-width: none !important;
@@ -1140,15 +1159,40 @@ body.template-index .brand-track {
   text-transform: uppercase !important;
   white-space: nowrap !important;
   float: none !important;
-  position: static !important;
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
   box-shadow: none !important;
+  transition: background .25s ease, color .25s ease, border-color .25s ease !important;
+}
+
+/* theme.css gives every .btn an absolutely positioned ::after that grows to
+   100% on hover. The newsletter button isn't positioned, so that pseudo element
+   resolves against a far ancestor and floods the screen with the secondary
+   colour. The HTML design is a plain background swap. */
+.footer_style_1 .newsletter .newsletter-form .btn::after,
+.footer_style_1 .newsletter .newsletter-form .btn::before,
+.footer_style_1 .newsletter .btn.btn-solid::after,
+.footer_style_1 .newsletter .btn.btn-solid::before,
+.anupam-html-footer.newsletter .newsletter-form .btn::after,
+.anupam-html-footer.newsletter .newsletter-form .btn::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
 }
 
 .footer_style_1 .newsletter .newsletter-form .btn:hover,
-.footer_style_1 .newsletter .btn.btn-solid:hover {
+.footer_style_1 .newsletter .btn.btn-solid:hover,
+.footer_style_1 .newsletter .newsletter-form .btn:focus,
+.footer_style_1 .newsletter .btn.btn-solid:focus,
+.footer_style_1 .newsletter .newsletter-form .btn:active,
+.footer_style_1 .newsletter .btn.btn-solid:active {
   background: #44200f !important;
   border-color: #44200f !important;
   color: #fff !important;
+  box-shadow: none !important;
 }
 
 .footer_style_1 .newsletter .newsletter-form .errors,
@@ -1536,4 +1580,148 @@ body.template-search .collection-grid .product-layouts {
   body.template-search .collection-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Popup / drawer buttons, matched to the HTML design's .btn-solid and
+   .btn-outline. Covers the mini cart, quick view, added-to-cart and error
+   modals, the newsletter popup, the notify-me modal and the cookie bar.
+   --------------------------------------------------------------------------- */
+#slidedown-cart .actions .btn,
+.quick-view .add-to-cart-btn.btn,
+.cart-popup-wrapper .btn,
+.ajax-success-modal .btn,
+.ajax-error-modal .btn,
+#newsletterModal .btn,
+#email-modal .btn,
+#notify-content .btn,
+.cookie-block #cookie_message .tt-cookie-inner .btn {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  z-index: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  float: none !important;
+  min-height: 46px !important;
+  padding: 0 22px !important;
+  border-radius: 8px !important;
+  border: 1px solid #6f351d !important;
+  background: #6f351d !important;
+  color: #fff !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background .25s ease, color .25s ease, border-color .25s ease !important;
+}
+
+/* The legacy .btn::after slide-fill is absolutely positioned. Without the
+   button as its containing block it resolves against a far ancestor and floods
+   the viewport with --color-btn-secondary. */
+#slidedown-cart .actions .btn::after,
+#slidedown-cart .actions .btn::before,
+.quick-view .add-to-cart-btn.btn::after,
+.quick-view .add-to-cart-btn.btn::before,
+.cart-popup-wrapper .btn::after,
+.cart-popup-wrapper .btn::before,
+.ajax-success-modal .btn::after,
+.ajax-success-modal .btn::before,
+.ajax-error-modal .btn::after,
+.ajax-error-modal .btn::before,
+#newsletterModal .btn::after,
+#newsletterModal .btn::before,
+#email-modal .btn::after,
+#email-modal .btn::before,
+#notify-content .btn::after,
+#notify-content .btn::before,
+.cookie-block #cookie_message .tt-cookie-inner .btn::after,
+.cookie-block #cookie_message .tt-cookie-inner .btn::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
+  opacity: 0 !important;
+}
+
+#slidedown-cart .actions .btn:hover,
+#slidedown-cart .actions .btn:focus,
+#slidedown-cart .actions .btn:active,
+.quick-view .add-to-cart-btn.btn:hover,
+.quick-view .add-to-cart-btn.btn:focus,
+.cart-popup-wrapper .btn:hover,
+.cart-popup-wrapper .btn:focus,
+.ajax-success-modal .btn:hover,
+.ajax-success-modal .btn:focus,
+.ajax-error-modal .btn:hover,
+.ajax-error-modal .btn:focus,
+#newsletterModal .btn:hover,
+#newsletterModal .btn:focus,
+#email-modal .btn:hover,
+#email-modal .btn:focus,
+#notify-content .btn:hover,
+#notify-content .btn:focus,
+.cookie-block #cookie_message .tt-cookie-inner .btn:hover,
+.cookie-block #cookie_message .tt-cookie-inner .btn:focus {
+  background: #44200f !important;
+  border-color: #44200f !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Secondary actions render as the HTML .btn-outline */
+#slidedown-cart .actions .btn.text-cart,
+.cookie-block #cookie_message .tt-cookie-inner .btn.dclinebtn {
+  background: transparent !important;
+  border: 1px solid #6f351d !important;
+  border-bottom: 1px solid #6f351d !important;
+  border-radius: 8px !important;
+  color: #44200f !important;
+  padding: 0 22px !important;
+  width: auto !important;
+}
+
+#slidedown-cart .actions .btn.text-cart:hover,
+#slidedown-cart .actions .btn.text-cart:focus,
+#slidedown-cart .actions .btn.text-cart:active,
+.cookie-block #cookie_message .tt-cookie-inner .btn.dclinebtn:hover,
+.cookie-block #cookie_message .tt-cookie-inner .btn.dclinebtn:focus {
+  background: #6f351d !important;
+  border-color: #6f351d !important;
+  border-bottom-color: #6f351d !important;
+  color: #fff !important;
+}
+
+/* Mini cart stacks its two actions full width */
+#slidedown-cart .has-items .actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  float: none !important;
+  width: 100% !important;
+  margin: 15px 0 0 !important;
+}
+
+#slidedown-cart .has-items .actions .btn,
+#slidedown-cart .has-items .actions .btn.checkout-btn,
+#slidedown-cart .has-items .actions .btn.text-cart {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+#slidedown-cart .actions .btn i,
+#slidedown-cart .actions .btn svg,
+.quick-view .add-to-cart-btn.btn i,
+.cart-popup-wrapper .btn i,
+#newsletterModal .btn i {
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
 }

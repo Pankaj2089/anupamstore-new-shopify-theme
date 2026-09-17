@@ -1,0 +1,506 @@
+/* Cart page restyled to the new theme's design language.
+   There is no HTML reference for /cart, so this reuses the tokens from
+   new_html/css/style.css: brown #6f351d / #44200f, border #e5ddd6, text #392d27,
+   Be Vietnam Pro headings, Inter body. */
+
+body.template-cart {
+    font-family: 'Inter', sans-serif;
+    color: #392d27;
+    background: #ffffff !important;
+}
+
+body.template-cart .page-wrapper,
+body.template-cart .main-content,
+body.template-cart .pagecontent,
+body.template-cart .pagecontent > .shopify-section {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+body.template-cart h1,
+body.template-cart h2,
+body.template-cart h3,
+body.template-cart h4 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: #462d20;
+}
+
+/* ----- Page gutters ------------------------------------------------------- */
+/* Same track as .header-inner in anupam-chrome.css, so the cart lines up with
+   the header navigation instead of the wider Bootstrap container. */
+body.template-cart .pagecontent > .container,
+body.template-cart .breadcrumb-wrap > .container {
+    width: min(100% - 32px, 1400px);
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* ----- Breadcrumb band ---------------------------------------------------- */
+body.template-cart .breadcrumb-wrap {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5ddd6 !important;
+    padding: 18px 0 !important;
+    margin: 0 0 clamp(20px, 3vw, 32px) !important;
+}
+
+body.template-cart .breadcrumb-wrap .title {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: clamp(20px, 2.2vw, 28px) !important;
+    font-weight: 700 !important;
+    color: #462d20 !important;
+    text-transform: capitalize !important;
+}
+
+body.template-cart .breadcrumb-wrap .breadcrumb,
+body.template-cart .breadcrumb-wrap .breadcrumb a,
+body.template-cart .breadcrumb-wrap .breadcrumb span {
+    font-size: 13px !important;
+    color: #8a7c74 !important;
+    background: transparent !important;
+}
+
+body.template-cart .breadcrumb-wrap .breadcrumb a {
+    color: #5c4e46 !important;
+}
+
+body.template-cart .breadcrumb-wrap .breadcrumb a:hover {
+    color: #6f351d !important;
+}
+
+/* ----- Layout cards ------------------------------------------------------- */
+body.template-cart .cart-table,
+body.template-cart .cart__footer {
+    background: #ffffff !important;
+    border: 1px solid #e5ddd6 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+body.template-cart .cart-table {
+    padding: 8px 16px 16px !important;
+}
+
+/* home.css floats the blocks inside the summary; without a block formatting
+   context they escape .cart__footer and sit on top of the policy card below.
+   Only the inner wrappers are touched here - #cart-footer keeps its col-lg-4
+   width so the summary stays in the right-hand column. */
+body.template-cart .cart__footer,
+body.template-cart .cart__blocks {
+    display: flow-root !important;
+}
+
+body.template-cart .cart__footer {
+    padding: 20px !important;
+}
+
+/* Mirrors the contact page's "Connect With Us" card (.connect-card). */
+body.template-cart .cart-policy {
+    clear: both !important;
+    display: flow-root !important;
+    margin-top: 16px !important;
+    padding: clamp(22px, 2.4vw, 32px) clamp(20px, 2vw, 28px) !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #af7c3e !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    /* keeps the icons' screen blending inside this card */
+    isolation: isolate !important;
+}
+
+/* ----- Line item table ---------------------------------------------------- */
+body.template-cart .cart_table,
+body.template-cart .cart-items {
+    border: 0 !important;
+    background: transparent !important;
+}
+
+body.template-cart .cart__row--heading th {
+    padding: 14px 10px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #e5ddd6 !important;
+    background: transparent !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    color: #77706b !important;
+}
+
+body.template-cart .cart__row.cart-item td {
+    padding: 18px 10px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #f0e9e2 !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+}
+
+body.template-cart .cart__row.cart-item:last-child td {
+    border-bottom: 0 !important;
+}
+
+body.template-cart .cart__image-wrapper img,
+body.template-cart img.cart__image {
+    width: 78px !important;
+    height: 78px !important;
+    object-fit: cover !important;
+    border: 1px solid #e5ddd6 !important;
+    border-radius: 10px !important;
+    background: #f7f1eb !important;
+}
+
+body.template-cart .cart__product-title,
+body.template-cart .list-view-item__title a {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    color: #3b2a20 !important;
+    text-transform: none !important;
+}
+
+body.template-cart .cart__product-title:hover,
+body.template-cart .list-view-item__title a:hover {
+    color: #6f351d !important;
+}
+
+body.template-cart .product-details__item,
+body.template-cart .product-details__item-label {
+    font-size: 12px !important;
+    color: #77706b !important;
+}
+
+body.template-cart .cart__price,
+body.template-cart .cart__final-price,
+body.template-cart .product-price,
+body.template-cart .cart__final-price .price {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #3b2a20 !important;
+}
+
+body.template-cart .cart__remove a,
+body.template-cart .cart__remove .text-link {
+    color: #b0a49c !important;
+    font-size: 16px !important;
+    transition: color .2s ease !important;
+}
+
+body.template-cart .cart__remove a:hover,
+body.template-cart .cart__remove .text-link:hover {
+    color: #e0503f !important;
+}
+
+/* ----- Quantity stepper --------------------------------------------------- */
+body.template-cart .cart-qty-box-set,
+body.template-cart quantity-input.quantity {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    float: none !important;
+    width: 104px !important;
+    height: 38px !important;
+    padding: 0 !important;
+    border: 1px solid #e5ddd6 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+}
+
+body.template-cart .cart-qty-box-set .quantity__button,
+body.template-cart quantity-input .quantity__button {
+    width: 32px !important;
+    height: 100% !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #6f351d !important;
+    cursor: pointer !important;
+}
+
+body.template-cart .cart-qty-box-set .quantity__button:hover,
+body.template-cart quantity-input .quantity__button:hover {
+    background: #f7f1eb !important;
+}
+
+body.template-cart .cart__qty-input,
+body.template-cart .quantity__input {
+    width: 40px !important;
+    height: 100% !important;
+    padding: 0 !important;
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    text-align: center !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #392d27 !important;
+}
+
+/* ----- Totals block ------------------------------------------------------- */
+body.template-cart .cart__note textarea,
+body.template-cart .text-area.field__input {
+    width: 100% !important;
+    min-height: 92px !important;
+    padding: 12px 14px !important;
+    border: 1px solid #e5ddd6 !important;
+    border-radius: 10px !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    color: #392d27 !important;
+    resize: vertical !important;
+}
+
+body.template-cart .cart__note textarea:focus,
+body.template-cart .text-area.field__input:focus {
+    border-color: #6f351d !important;
+}
+
+body.template-cart .totals__subtotal {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #462d20 !important;
+    text-transform: none !important;
+}
+
+body.template-cart .totals__subtotal-value {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #6f351d !important;
+}
+
+body.template-cart .tax-note,
+body.template-cart .cart_condition,
+body.template-cart .cart_condition label {
+    font-size: 12px !important;
+    color: #77706b !important;
+}
+
+/* ----- Buttons ------------------------------------------------------------ */
+body.template-cart .cart_condition {
+    float: none !important;
+    clear: both !important;
+    display: block !important;
+    margin: 10px 0 0 !important;
+    line-height: 1.5 !important;
+}
+
+body.template-cart .cart__ctas {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    clear: both !important;
+    margin-top: 20px !important;
+}
+
+body.template-cart .cart__checkout-button,
+body.template-cart #checkout,
+body.template-cart .cart__update-button {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    z-index: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    float: none !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 0 22px !important;
+    border-radius: 8px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    transition: background .25s ease, color .25s ease, border-color .25s ease !important;
+}
+
+/* theme.css animates an absolutely positioned .btn::after to full size on
+   hover, which floods the viewport when the button is not a containing block. */
+body.template-cart .cart__checkout-button::after,
+body.template-cart .cart__checkout-button::before,
+body.template-cart #checkout::after,
+body.template-cart #checkout::before,
+body.template-cart .cart__update-button::after,
+body.template-cart .cart__update-button::before {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
+    opacity: 0 !important;
+}
+
+body.template-cart .cart__checkout-button,
+body.template-cart #checkout {
+    background: #6f351d !important;
+    border: 1px solid #6f351d !important;
+    color: #ffffff !important;
+}
+
+body.template-cart .cart__checkout-button:hover,
+body.template-cart .cart__checkout-button:focus,
+body.template-cart #checkout:hover,
+body.template-cart #checkout:focus {
+    background: #44200f !important;
+    border-color: #44200f !important;
+    color: #ffffff !important;
+}
+
+body.template-cart .cart__checkout-button[disabled],
+body.template-cart #checkout[disabled] {
+    opacity: .55 !important;
+    cursor: not-allowed !important;
+}
+
+body.template-cart .cart__update-button {
+    background: transparent !important;
+    border: 1px solid #6f351d !important;
+    color: #44200f !important;
+}
+
+body.template-cart .cart__update-button:hover,
+body.template-cart .cart__update-button:focus {
+    background: #6f351d !important;
+    border-color: #6f351d !important;
+    color: #ffffff !important;
+}
+
+/* ----- Policy list -------------------------------------------------------- */
+body.template-cart .cart-policy .policy {
+    float: none !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+body.template-cart .cart-policy .policy:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* The policy PNGs are dark glyphs on an opaque white background, and custom.css
+   pins each one by block id with !important. Inverting turns the glyph light and
+   the white backdrop black, then screen blending drops that black out against
+   the brown card, leaving a white icon. */
+body.template-cart .cart-policy .policy .policy-icon {
+    flex-shrink: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    filter: grayscale(1) invert(1) brightness(1.4) !important;
+    mix-blend-mode: screen !important;
+}
+
+body.template-cart .cart-policy .policy .policy-icon::before,
+body.template-cart .cart-policy .policy .policy-icon::after {
+    content: none !important;
+    display: none !important;
+}
+
+body.template-cart .cart-policy .policy .content {
+    float: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+body.template-cart .cart-policy .policy-title {
+    float: none !important;
+    width: auto !important;
+    margin: 0 0 4px !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.4 !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+}
+
+body.template-cart .cart-policy .policy-desc {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    overflow-wrap: anywhere !important;
+}
+
+body.template-cart .cart-policy a {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+/* ----- Featured products (homepage "Top Featured" section) ---------------- */
+/* cart.json already wraps every section in div.container, so the section's own
+   container must not add a second gutter. */
+body.template-cart .section.featured > .container {
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body.template-cart .section.featured {
+    float: none;
+    clear: both;
+    width: 100%;
+    background: #ffffff !important;
+}
+
+/* No arrows on cart - the track still scrolls horizontally. */
+body.template-cart .section.featured .slider-btn {
+    display: none !important;
+}
+
+/* ----- Follow us rail ----------------------------------------------------- */
+/* footer-model-1.liquid already skips it on cart; this covers cached markup. */
+body.template-cart .follow-rail {
+    display: none !important;
+}
+
+/* ----- Empty cart --------------------------------------------------------- */
+body.template-cart .cart-empty,
+body.template-cart .empty-page-content {
+    padding: clamp(32px, 6vw, 72px) 0 !important;
+    text-align: center !important;
+}
+
+@media (max-width: 991px) {
+    body.template-cart .cart__footer {
+        margin-top: 16px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body.template-cart .cart-table {
+        padding: 8px 12px 12px !important;
+    }
+
+    body.template-cart .cart__row.cart-item td {
+        padding: 12px 8px !important;
+    }
+
+    body.template-cart .cart__image-wrapper img,
+    body.template-cart img.cart__image {
+        width: 64px !important;
+        height: 64px !important;
+    }
+}

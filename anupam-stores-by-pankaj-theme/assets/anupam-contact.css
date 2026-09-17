@@ -1,0 +1,590 @@
+/* Anupam contact page UI (ported from new_html/css/contact.css).
+   Scoped to .anupam-contact because every page template shares body.template-page. */
+
+.anupam-contact {
+    --font-body: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
+    display: block;
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    color: #3b2f29;
+    background: #ffffff !important;
+}
+
+/* Whatever the page background is, the contact page renders on white. */
+body:has(.anupam-contact),
+body:has(.anupam-contact) .page-wrapper,
+body:has(.anupam-contact) .main-content,
+body:has(.anupam-contact) .pagecontent,
+body:has(.anupam-contact) .pagecontent > .shopify-section {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+/* The HTML design has no follow rail on the contact page. */
+body:has(.anupam-contact) .follow-rail {
+    display: none !important;
+}
+
+.anupam-contact h1,
+.anupam-contact h2,
+.anupam-contact h3 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.anupam-contact .container {
+    width: min(100% - 32px, 1400px) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    float: none !important;
+}
+
+.anupam-contact .container::before,
+.anupam-contact .container::after {
+    display: none;
+    content: none;
+}
+
+/* Hero */
+.anupam-contact .contact-hero {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: clamp(170px, 24vw, 340px);
+    overflow: hidden;
+    background: #241a14;
+}
+
+.anupam-contact .contact-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+}
+
+.anupam-contact .contact-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.anupam-contact .contact-hero-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(24px, 3.4vw, 46px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* Write to us */
+.anupam-contact .contact-write {
+    background: #ffffff !important;
+}
+.anupam-contact .contact-write,
+.anupam-contact .contact-write .container {
+    padding-block: clamp(28px, 4vw, 58px);
+}
+
+.anupam-contact .contact-write .container {
+    padding-block: 0;
+}
+
+.anupam-contact .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: clamp(28px, 4vw, 72px);
+    align-items: start;
+}
+
+.anupam-contact .contact-form-col {
+    min-width: 0;
+}
+
+.anupam-contact .contact-heading {
+    margin: 0 0 10px;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #462D20;
+    text-transform: none;
+}
+
+.anupam-contact .contact-sub {
+    margin: 0 0 clamp(20px, 2.6vw, 32px);
+    max-width: 560px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #6b5c54;
+}
+
+.anupam-contact .contact-form {
+    display: grid;
+    gap: clamp(18px, 2.2vw, 26px);
+    margin: 0;
+}
+
+.anupam-contact .contact-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(18px, 3vw, 44px);
+}
+
+.anupam-contact .contact-field {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+}
+
+.anupam-contact .contact-field label {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3b2f29;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.anupam-contact .contact-field input,
+.anupam-contact .contact-field textarea {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 8px 2px 10px;
+    border: 0;
+    border-bottom: 1px solid #ded5cd;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: #3b2f29;
+}
+
+.anupam-contact .contact-field textarea {
+    min-height: 116px;
+    resize: vertical;
+}
+
+.anupam-contact .contact-field input::placeholder,
+.anupam-contact .contact-field textarea::placeholder {
+    color: #b3a79f;
+}
+
+.anupam-contact .contact-field input:focus,
+.anupam-contact .contact-field textarea:focus {
+    outline: none;
+    border-bottom-color: #6f351d;
+    background: transparent;
+}
+
+.anupam-contact .contact-field input[aria-invalid="true"],
+.anupam-contact .contact-field textarea[aria-invalid="true"] {
+    border-bottom-color: #c0553b;
+}
+
+.anupam-contact .contact-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    justify-self: start;
+    width: auto;
+    min-width: 136px;
+    min-height: 42px;
+    padding: 0 22px;
+    border: 1px solid #4a2c1c;
+    border-radius: 4px;
+    background: #4a2c1c;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.anupam-contact .contact-submit::after {
+    display: none;
+    content: none;
+}
+
+.anupam-contact .contact-submit:hover,
+.anupam-contact .contact-submit:focus {
+    background: #341c0f;
+    border-color: #341c0f;
+    color: #fff;
+}
+
+.anupam-contact .contact-submit .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.anupam-contact .form-success,
+.anupam-contact .errors {
+    margin: 0 0 18px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.anupam-contact .form-success {
+    background: #eef3e6;
+    color: #3f4a29;
+}
+
+.anupam-contact .errors {
+    background: #fbeeea;
+    color: #8f3b25;
+    list-style: none;
+}
+
+/* Connect with us card */
+.anupam-contact .connect-card {
+    padding: clamp(22px, 2.4vw, 32px) clamp(20px, 2vw, 28px);
+    border-radius: 4px;
+    background: #AF7C3E;
+    color: #fff;
+    float: none;
+    width: auto;
+}
+
+.anupam-contact .connect-title {
+    margin: 0 0 20px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.anupam-contact .connect-title--sub {
+    margin: 26px 0 18px;
+}
+
+.anupam-contact .connect-list,
+.anupam-contact .connect-social {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 18px;
+    float: none;
+    width: auto;
+}
+
+.anupam-contact .connect-list li,
+.anupam-contact .connect-social li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: none;
+    width: auto;
+    border: 0;
+}
+
+.anupam-contact .connect-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.anupam-contact .connect-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 18px;
+}
+
+.anupam-contact .connect-icon--round {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.anupam-contact .connect-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.anupam-contact .connect-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    overflow-wrap: anywhere;
+}
+
+.anupam-contact .connect-value:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.anupam-contact .connect-social a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.anupam-contact .connect-social a:hover {
+    color: #fff;
+}
+
+.anupam-contact .connect-social a:hover .connect-icon {
+    background: rgba(255, 255, 255, 0.32);
+}
+
+/* Flag band */
+.anupam-contact .contact-flag {
+    background: #F7EBE3;
+    padding-block: clamp(32px, 5vw, 68px);
+}
+
+.anupam-contact .contact-flag-title {
+    margin: 0;
+    max-width: 900px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(22px, 3.2vw, 42px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: #3b2a20;
+}
+
+.anupam-contact .contact-flag-title p {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+.anupam-contact .contact-flag-title em,
+.anupam-contact .contact-flag-title i {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #8a5a2b;
+}
+
+/* Store locator */
+.anupam-contact .store-stage {
+    position: relative;
+}
+
+.anupam-contact .store-map {
+    height: clamp(320px, 40vw, 560px);
+    background: #e8e3dc;
+}
+
+.anupam-contact .store-map-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.anupam-contact .store-map-item.is-active {
+    display: block;
+}
+
+.anupam-contact .store-map iframe {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+}
+
+.anupam-contact .store-switch {
+    position: absolute;
+    top: clamp(14px, 2vw, 22px);
+    left: clamp(16px, 3vw, 40px);
+    z-index: 2;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.anupam-contact .store-chip {
+    min-height: 34px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 4px;
+    background: #7c8a52;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(35, 28, 20, 0.18);
+}
+
+.anupam-contact .store-chip::after {
+    display: none;
+    content: none;
+}
+
+.anupam-contact .store-chip:hover {
+    background: #6b7847;
+    color: #fff;
+}
+
+.anupam-contact .store-chip.is-active {
+    background: #3f4a29;
+    color: #fff;
+}
+
+.anupam-contact .store-card {
+    position: absolute;
+    top: 50%;
+    right: clamp(16px, 3vw, 40px);
+    transform: translateY(-50%);
+    z-index: 2;
+    width: min(360px, 38%);
+    padding: 16px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(38, 28, 20, 0.18);
+}
+
+.anupam-contact .store-card-item {
+    display: none;
+}
+
+.anupam-contact .store-card-item.is-active {
+    display: block;
+}
+
+.anupam-contact .store-card-title {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #2f241d;
+    text-transform: none;
+}
+
+.anupam-contact .store-card-address {
+    margin: 0 0 14px;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #6b5c54;
+}
+
+.anupam-contact .store-card-img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+    .anupam-contact .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .anupam-contact .connect-card {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 900px) {
+    .anupam-contact .store-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: min(100% - 32px, 560px);
+        margin: -56px auto 0;
+    }
+
+    .anupam-contact .store-locator {
+        padding-bottom: clamp(24px, 4vw, 36px);
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .anupam-contact .container {
+        width: min(100% - 24px, 1400px) !important;
+        max-width: 100% !important;
+    }
+
+    .anupam-contact .contact-hero {
+        min-height: 150px;
+    }
+
+    .anupam-contact .contact-hero-title {
+        font-size: 24px;
+    }
+
+    .anupam-contact .contact-sub {
+        font-size: 14px;
+    }
+
+    .anupam-contact .contact-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .anupam-contact .contact-submit {
+        width: 100%;
+        justify-self: stretch;
+    }
+
+    .anupam-contact .connect-card {
+        max-width: none;
+    }
+
+    .anupam-contact .contact-flag-title br {
+        display: none;
+    }
+
+    .anupam-contact .store-map {
+        height: 300px;
+    }
+
+    .anupam-contact .store-switch {
+        top: 12px;
+        left: 16px;
+        gap: 8px;
+    }
+
+    .anupam-contact .store-chip {
+        min-height: 30px;
+        padding: 0 14px;
+        font-size: 12px;
+    }
+
+    .anupam-contact .store-card {
+        width: calc(100% - 32px);
+        margin-top: -40px;
+        padding: 14px;
+    }
+
+    .anupam-contact .store-card-img {
+        height: 170px;
+    }
+}

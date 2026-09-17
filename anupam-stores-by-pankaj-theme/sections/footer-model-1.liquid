@@ -34,6 +34,58 @@
       font-size: 48px !important;
     }
   }
+  /* theme.css animates a .btn::after from width 0 to 100% on hover. It is
+     absolutely positioned, so without a positioned button it resolves against a
+     far ancestor and floods the viewport with --color-btn-secondary. */
+  #newsletter .newsletter-form button,
+  #newsletter .newsletter-form .btn,
+  #newsletter .btn.btn-solid {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    z-index: 0 !important;
+    background: #6f351d !important;
+    border: 1px solid #6f351d !important;
+    color: #fff !important;
+    transition: background .25s ease, border-color .25s ease !important;
+  }
+  #newsletter .newsletter-form button::after,
+  #newsletter .newsletter-form button::before,
+  #newsletter .newsletter-form .btn::after,
+  #newsletter .newsletter-form .btn::before,
+  #newsletter .btn.btn-solid::after,
+  #newsletter .btn.btn-solid::before,
+  #newsletter .newsletter-form button:hover::after,
+  #newsletter .newsletter-form .btn:hover::after,
+  #newsletter .btn.btn-solid:hover::after,
+  #newsletter .newsletter-form button:focus::after,
+  #newsletter .newsletter-form .btn:focus::after,
+  #newsletter .btn.btn-solid:focus::after,
+  #newsletter .newsletter-form button:active::after,
+  #newsletter .newsletter-form .btn:active::after,
+  #newsletter .btn.btn-solid:active::after {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  #newsletter .newsletter-form button:hover,
+  #newsletter .newsletter-form .btn:hover,
+  #newsletter .btn.btn-solid:hover,
+  #newsletter .newsletter-form button:focus,
+  #newsletter .newsletter-form .btn:focus,
+  #newsletter .btn.btn-solid:focus,
+  #newsletter .newsletter-form button:active,
+  #newsletter .newsletter-form .btn:active,
+  #newsletter .btn.btn-solid:active {
+    background: #44200f !important;
+    border-color: #44200f !important;
+    color: #fff !important;
+    box-shadow: none !important;
+  }
 </style>
 <section class="newsletter anupam-html-footer" id="newsletter" aria-label="Newsletter">
   <div class="newsletter-space" aria-hidden="true">&nbsp;</div>
@@ -56,7 +108,9 @@
 </section>
 {% endif %}
 
-{% if show_social_icons %}
+{%- assign hide_follow_rail = false -%}
+{%- if template contains 'contact' or template contains 'about' or template contains 'wishlist' or template contains 'cart' -%}{%- assign hide_follow_rail = true -%}{%- endif -%}
+{% if show_social_icons and hide_follow_rail == false %}
 <aside class="follow-rail" aria-label="Follow us">
   {% if settings.social_youtube_link != blank %}
   <a class="follow-rail-icon" href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">

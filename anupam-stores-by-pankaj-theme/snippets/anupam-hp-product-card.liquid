@@ -69,7 +69,8 @@ deal_theme: sage | night | cocoa | olive
     <a class="product-media" href="{{ product_url }}">
       <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
     </a>
-    {% if save_percent > 0 %}
+    {%- comment -%} bestseller cards carry their badge next to the price instead {%- endcomment -%}
+    {% if save_percent > 0 and card_style != 'bestseller' %}
     <span class="badge-sale">Save -{{ save_percent }}%</span>
     {% endif %}
     <div class="product-actions">

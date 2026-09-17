@@ -1,407 +1,378 @@
-<div class="about-page">
-  <div class="row">
-    <div class="cms-aboutus1">
-      
-      {% comment %} <div class="col-sm-6 tt-about">
-        <div class="aboutus-img">
-          <a href="#"> {% if section.settings.about1_us != blank %}{{ section.settings.about1_us | img_url: "master" | img_tag: 'about_us' }}{% endif %}</a>
-        </div>
-      </div> {% endcomment %}
-      
-      <div class="col-sm-12 tt-about">
-        <div class="section-header">
-          <div class="tt-title" style="color:{{ section.settings.about1_title_color }}">{{ section.settings.about1_title}}</div>
-          {% comment %} <div class="desc" style="color:{{ section.settings.about1_desc_color }}">{{ section.settings.about1_desc }}</div> {% endcomment %}
-          <div>{{ pages['about-us'].content }}</div>
-          {% comment %} <div class="about-icon col-xs-6">
-            <div class="about-icon-cnt">
-              <i class="mdi mdi-car" style="color:{{ section.settings.about_icon_color }}"></i>
-              <div class="about-icon-title" style="color:{{ section.settings.about_title_icon_color }}">{{ section.settings.about_title_icon1}}</div>
-            </div>
-            <div class="about-icon-cnt">
-              <i class="mdi mdi-ferry" style="color:{{ section.settings.about_icon_color }}"></i>
-              <div class="about-icon-title" style="color:{{ section.settings.about_title_icon_color }}">{{ section.settings.about_title_icon2}}</div>
-            </div>
+{{ 'anupam-about.css' | asset_url | stylesheet_tag }}
+{{ 'anupam-blog.css' | asset_url | stylesheet_tag }}
+{%- assign usp_blocks = section.blocks | where: 'type', 'usp' -%}
+{%- assign story_blocks = section.blocks | where: 'type', 'story' -%}
+{%- assign store_blocks = section.blocks | where: 'type', 'store' -%}
+{%- assign recent_blog = blogs[section.settings.recent_blog] -%}
+
+<div class="anupam-about section-{{ section.id }}">
+  <section class="about-hero" aria-labelledby="about-title">
+    <img class="about-hero-img"
+      src="{% if section.settings.hero_image %}{{ section.settings.hero_image | img_url: '1920x' }}{% else %}{{ 'about-banner.png' | asset_url }}{% endif %}"
+      alt="{{ section.settings.hero_title | escape }}" width="1920" height="360">
+    <div class="container about-hero-inner">
+      <h1 class="about-hero-title" id="about-title">{{ section.settings.hero_title }}</h1>
+    </div>
+  </section>
+
+  {% if usp_blocks.size > 0 %}
+  <section class="about-usps" aria-label="{{ section.settings.usp_label | escape }}">
+    <div class="container">
+      <ul class="usp-bar">
+        {% for block in usp_blocks %}
+        <li class="usp-item" {{ block.shopify_attributes }}>
+          <span class="usp-icon material-symbols-outlined" aria-hidden="true">{{ block.settings.icon }}</span>
+          <div>
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
           </div>
-          <div class="about-icon col-xs-6">
-            <div class="about-icon-cnt">
-              <i class="mdi mdi-airplane" style="color:{{ section.settings.about_icon_color }}"></i>
-              <div class="about-icon-title" style="color:{{ section.settings.about_title_icon_color }}">{{ section.settings.about_title_icon3}}</div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="about-intro" aria-labelledby="about-intro-title">
+    <div class="container about-intro-grid">
+      <div class="about-intro-copy">
+        <h2 class="about-heading" id="about-intro-title">{{ section.settings.intro_title }}</h2>
+        {% if section.settings.intro_kicker != blank %}
+        <p class="about-kicker">{{ section.settings.intro_kicker }}</p>
+        {% endif %}
+        {{ section.settings.intro_text }}
+      </div>
+      {% if section.settings.intro_image or section.settings.show_intro_image %}
+      <figure class="about-poster">
+        <img src="{% if section.settings.intro_image %}{{ section.settings.intro_image | img_url: '800x600', crop: 'center' }}{% else %}{{ 'aboutus.png' | asset_url }}{% endif %}"
+          alt="{{ section.settings.intro_title | escape }}" width="800" height="600" loading="lazy">
+      </figure>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if section.settings.quote_text != blank %}
+  <section class="about-quote" aria-label="{{ section.settings.quote_label | escape }}">
+    <div class="container">
+      <div class="about-quote-text">{{ section.settings.quote_text }}</div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if story_blocks.size > 0 %}
+  <section class="about-story" aria-labelledby="story-title">
+    <div class="container">
+      <h2 class="about-story-title" id="story-title">{{ section.settings.story_title }}</h2>
+
+      <ol class="story-timeline">
+        {% for block in story_blocks %}
+        {%- assign side = 'right' -%}
+        {%- assign position = forloop.index0 | modulo: 2 -%}
+        {%- if position == 0 -%}{%- assign side = 'left' -%}{%- endif -%}
+        <li class="story-item story-item--{{ side }}" {{ block.shopify_attributes }}>
+          <div class="story-copy">
+            <h3>{{ block.settings.title }}</h3>
+            {{ block.settings.text }}
+          </div>
+          <span class="story-year">{{ block.settings.year }}</span>
+        </li>
+        {% endfor %}
+      </ol>
+
+      {% if section.settings.story_note != blank %}
+      <p class="story-note">{{ section.settings.story_note }}</p>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if store_blocks.size > 0 %}
+  <section class="about-stores" aria-labelledby="stores-title">
+    <div class="container">
+      <h2 class="about-stores-title" id="stores-title">{{ section.settings.stores_title }}</h2>
+      {% if section.settings.stores_subtitle != blank %}
+      <p class="about-stores-sub">{{ section.settings.stores_subtitle }}</p>
+      {% endif %}
+
+      <div class="store-cards">
+        {% for block in store_blocks %}
+        <article class="store-card-lite" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <address>{{ block.settings.address }}</address>
+          {% if block.settings.link != blank %}
+          <a class="blog-read-more" href="{{ block.settings.link }}">
+            {{ block.settings.link_text | default: 'Visit Store' }}
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if recent_blog.articles.size > 0 %}
+  <section class="section blog-recent" id="recent-articles" aria-labelledby="recent-articles-title" data-slider>
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" id="recent-articles-title">{{ section.settings.recent_title }}</h2>
+        <div class="section-controls">
+          <button class="slider-btn prev" type="button" data-slider-prev aria-label="Previous recent articles">
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+          </button>
+          <button class="slider-btn next" type="button" data-slider-next aria-label="Next recent articles">
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          </button>
+        </div>
+      </div>
+      <div class="slider-wrapper">
+        <div class="slider-track blog-recent-track" data-slider-track>
+          {% for recent in recent_blog.articles limit: 8 %}
+          <article class="blog-card blog-card--vertical" data-slider-item>
+            <a class="blog-card-image" href="{{ recent.url }}">
+              <img src="{% if recent.image %}{{ recent.image | img_url: '800x500', crop: 'center' }}{% else %}{{ 'no-image.gif' | img_url: 'master' }}{% endif %}" alt="{{ recent.title | escape }}" width="800" height="500" loading="lazy">
+            </a>
+            <div class="blog-card-body">
+              <h3 class="blog-card-title"><a href="{{ recent.url }}">{{ recent.title }}</a></h3>
+              <p class="blog-card-meta">
+                <span>
+                  <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+                  {{ recent.published_at | date: '%d %b, %Y' }}
+                </span>
+                {% if recent.author != blank %}
+                <span class="blog-meta-sep" aria-hidden="true">|</span>
+                <span>
+                  <span class="material-symbols-outlined" aria-hidden="true">person</span>
+                  By: {{ recent.author }}
+                </span>
+                {% endif %}
+              </p>
+              <p class="blog-excerpt">
+                {%- if recent.excerpt != blank -%}
+                {{ recent.excerpt | strip_html | truncate: 140 }}
+                {%- else -%}
+                {{ recent.content | strip_html | truncate: 140 }}
+                {%- endif -%}
+              </p>
+              <a class="blog-read-more" href="{{ recent.url }}">
+                {{ 'blogs.article.read_more' | t }}
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
             </div>
-            <div class="about-icon-cnt">
-              <i class="mdi mdi-tram" style="color:{{ section.settings.about_icon_color }}"></i>
-              <div class="about-icon-title" style="color:{{ section.settings.about_title_icon_color }}">{{ section.settings.about_title_icon4}}</div>
-            </div>
-          </div> {% endcomment %}
-          <div class="aboutus-btn"><a href="{{ section.settings.about1_btn_url}}" class="btn">{{ section.settings.about1_btn}}</a></div>
+          </article>
+          {% endfor %}
         </div>
       </div>
     </div>
-  </div>
-  <div class="about-services" style="background:{{ section.settings.bg_color }}">
-    <div class="block_content owl-carousel" style="display: block;">
-      <div class="tt-service">
-        <div class="service-img"><a href="#"><img loading="lazy" src="{{ section.settings.service_1 | img_url: "master"  }}" alt="service-img"/></a></div>
-        <div class="service-content">
-          <div class="service-title" style="color:{{ section.settings.service_title1_color }}">{{ section.settings.service_title1 }}</div>
-          <div class="service-desc" style="color:{{ section.settings.service_desc1_color }}">{{ section.settings.service_desc1 }}</div>
-        </div>
-      </div>
-      <div class="tt-service">
-        <div class="service-img"><a href="#"><img loading="lazy" src="{{ section.settings.service_2 | img_url: "master"  }}" alt="service-img"/></a></div>
-        <div class="service-content">
-          <div class="service-title" style="color:{{ section.settings.service_title2_color }}">{{ section.settings.service_title2 }}</div>
-          <div class="service-desc" style="color:{{ section.settings.service_desc2_color }}">{{ section.settings.service_desc2 }}</div>
-        </div>
-      </div>
-      <div class="tt-service">
-        <div class="service-img"><a href="#"><img loading="lazy" src="{{ section.settings.service_3 | img_url: "master"  }}" alt="service-img"/></a></div>
-        <div class="service-content">
-          <div class="service-title" style="color:{{ section.settings.service_title3_color }}">{{ section.settings.service_title3 }}</div>
-          <div class="service-desc" style="color:{{ section.settings.service_desc3_color }}">{{ section.settings.service_desc3 }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section-header">
-    <div class="tt-title">{{ section.settings.about_main_title }}</div></div>
-    <div class="row">
-      <div class="about-blog owl-carousel">
-        <div class="tt-blog col-sm-12">
-          <div class="about-blog-img"><a><img loading="lazy" src="{{ section.settings.about_img1 | img_url: "master"  }}"></a></div>
-          <div class="about-blog-content">
-            <div class="about-blog-title" style="color:{{ section.settings.about_title_color }}">{{ section.settings.about_title1 }}</div>
-            <div class="about-blog-desc" style="color:{{ section.settings.about_desc_color }}">{{ section.settings.about_desc1 }}</div>
-          </div>
-        </div>
-        <div class="tt-blog col-sm-12">
-          <div class="about-blog-img"><a><img loading="lazy" src="{{ section.settings.about_img2 | img_url: "master"  }}"></a></div>
-          <div class="about-blog-content">
-            <div class="about-blog-title" style="color:{{ section.settings.about_title_color }}">{{ section.settings.about_title2 }}</div>
-            <div class="about-blog-desc" style="color:{{ section.settings.about_desc_color }}">{{ section.settings.about_desc2 }}</div>
-          </div>
-        </div>
-        <div class="tt-blog col-sm-12">
-          <div class="about-blog-img"><a><img loading="lazy" src="{{ section.settings.about_img3 | img_url: "master"  }}"></a></div>
-          <div class="about-blog-content">
-            <div class="about-blog-title" style="color:{{ section.settings.about_title_color }}">{{ section.settings.about_title3 }}</div>
-            <div class="about-blog-desc" style="color:{{ section.settings.about_desc_color }}">{{ section.settings.about_desc3 }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div class="about-videoblock">
-    <div class="video-featured">
-      <div id="popup_toggle"><a href="#">{% if section.settings.video_img != blank %}{{ section.settings.video_img | img_url: "master" | img_tag: 'video_img' }}{% endif %}</a>
-        <span id="playVideo" class="play-icone"><i class="mdi mdi-play-circle" aria-hidden="true"></i></span>
-      </div>
-      <div class="popup_overlay">
-        <div class="popup" id="popupVid"><a class="popup_close">X</a>
-          <div class="video-wrapper"><iframe id="youtubeVideo" width="560" height="315" src="{{ section.settings.video_url }}" frameborder="0" ></iframe></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
+  {% endif %}
 </div>
-<script>
-  $("#playvideo").one(function(){
-    //as noted in addendum, check for querystring exitence
-    var symbol = $("#youtubeVideo")[0].src.indexOf("?") > -1 ? "&" : "?";
-    //modify source to autoplay and start video
-    $("#youtubeVideo")[0].src += symbol + "autoplay=1";
-  });
-</script>
-<style>
-  .about-videoblock .video-featured #popup_toggle .play-icone { 
-    background: {{ section.settings.video_btn_bg_color }};
-  }
-  .about-videoblock .video-featured #popup_toggle .play-icone:hover { 
-    background: {{ section.settings.video_btn_bg_hover_color }};
-  }
-  .about-videoblock .video-featured #popup_toggle .play-icone i.mdi-play-circle{ 
-    color: {{ section.settings.video_btn_color }};
-  }
-  .about-videoblock .video-featured #popup_toggle .play-icone:hover i.mdi-play-circle{ 
-    color: {{ section.settings.video_btn_hover_color }};
-  }
-</style>
+
 {% schema %}
 {
-"name": "About-us",
-"class": "index-section",
-  "disabled_on": {
-    "groups": ["header","footer"]
-},
-"settings": [ 
-{
-"type": "header",
-"content": "About Detail"
-},
-{
-"type": "color",
-"id": "about1_title_color",
-"label": "About title color"
-},
-{
-"type": "text",
-"id": "about1_title",
-"label": "About title"
-},
-{
-"type": "color",
-"id": "about1_desc_color",
-"label": "About Description color"
-},
-{
-"type": "richtext",
-"id": "about1_desc",
-"label": "About Description"
-},
-{
-"type": "color",
-"id": "about_icon_color",
-"label": "About icon color"
-},
-{
-"type": "color",
-"id": "about_title_icon_color",
-"label": "About title icon color"
-},
-{
-"type": "text",
-"id": "about_title_icon1",
-"label": "About title icon 1"
-},
-{
-"type": "text",
-"id": "about_title_icon2",
-"label": "About title icon 2"
-},
-{
-"type": "text",
-"id": "about_title_icon3",
-"label": "About title icon 3"
-},
-{
-"type": "text",
-"id": "about_title_icon4",
-"label": "About title icon 4"
-},
-{
-"type": "url",
-"id": "about1_btn_url",
-"label": "About Button URL"
-},
-{
-"type": "text",
-"id": "about1_btn",
-"label": "About Button"
-},
-{
-"type": "image_picker",
-"id": "about1_us",
-"label": "About Us Image"
-},
-{
-"type": "header",
-"content": "About ervices"
-},
-{
-"type": "color",
-"id": "bg_color",
-"label": "background Color",
-"default":"#000"
-},
-{
-"type": "image_picker",
-"id": "service_1",
-"label": "Service 1 Image"
-},
-{
-"type": "color",
-"id": "service_title1_color",
-"label": "Service 1 Title Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_title1",
-"label": "Service 1 Title"
-},
-{
-"type": "color",
-"id": "service_desc1_color",
-"label": "Service 1 Description Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_desc1",
-"label": "Service 1 Description"
-},
-{
-"type": "image_picker",
-"id": "service_2",
-"label": "Service 2 Image"
-},
-{
-"type": "color",
-"id": "service_title2_color",
-"label": "Service 2 Title Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_title2",
-"label": "Service 2 Title"
-},
-{
-"type": "color",
-"id": "service_desc2_color",
-"label": "Service 2 Description Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_desc2",
-"label": "Service 2 Description"
-},
-{
-"type": "image_picker",
-"id": "service_3",
-"label": "Service 3 Image"
-},
-{
-"type": "color",
-"id": "service_title3_color",
-"label": "Service 3 Title Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_title3",
-"label": "Service 3 Title"
-},
-{
-"type": "color",
-"id": "service_desc3_color",
-"label": "Service 3 Description Color",
-"default":"#000"
-},
-{
-"type": "text",
-"id": "service_desc3",
-"label": "Service 3 Description"
-},
-{
-"type": "header",
-"content": "About Blog"
-},
-{
-"type": "text",
-"id": "about_main_title",
-"label": "About Blog Main title"
-},
-{
-"type": "color",
-"id": "about_title_color",
-"label": "About Blog title color"
-},
-{
-"type": "color",
-"id": "about_desc_color",
-"label": "About Blog Description color"
-},
-{
-"type": "image_picker",
-"id": "about_img1",
-"label": "About Blog Image 1"
-},
-{
-"type": "text",
-"id": "about_title1",
-"label": "About Blog Title 1"
-},
-{
-"type": "text",
-"id": "about_desc1",
-"label": "About Blog Description 1"
-},
-{
-"type": "image_picker",
-"id": "about_img2",
-"label": "About Blog Image 2"
-},
-{
-"type": "text",
-"id": "about_title2",
-"label": "About Blog Title 2"
-},
-{
-"type": "text",
-"id": "about_desc2",
-"label": "About Blog Description 2"
-},
-{
-"type": "image_picker",
-"id": "about_img3",
-"label": "About Blog Image 3"
-},
-{
-"type": "text",
-"id": "about_title3",
-"label": "About Blog Title 3"
-},
-{
-"type": "text",
-"id": "about_desc3",
-"label": "About Blog Description 3"
-},
-{
-"type": "header",
-"content": "About Video"
-},
-{	
-"type": "image_picker",
-"id": "video_img",
-"label": "Video Image"
-},
-{
-"type": "url",
-"id": "video_url",
-"label": "Video Url",
-"info": "Accept Youtube Embed Link"
-},
-{
-"type": "color",
-"id": "video_btn_color",
-"label": "Video Button Color",
-"default":"#111"
-},
-{
-"type": "color",
-"id": "video_btn_hover_color",
-"label": "Video Button Hover Color",
-"default":"#ffc600"
-},
-{
-"type": "color",
-"id": "video_btn_bg_color",
-"label": "Video Button Background Color",
-"default":"#111"
-},
-{
-"type": "color",
-"id": "video_btn_bg_hover_color",
-"label": "Video Button Background Hover Color",
-"default":"#ffc600"
-}
-],
-"presets": [
-{
-"name": "About-us",
-"category": "Image"
-}
-]
+  "name": "About-us",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "About Us"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Banner Image",
+      "info": "Falls back to the bundled about banner when empty"
+    },
+    {
+      "type": "text",
+      "id": "usp_label",
+      "label": "Highlight Bar Label",
+      "default": "Why shoppers choose Anupam Stores"
+    },
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+      "type": "text",
+      "id": "intro_title",
+      "label": "Intro Title",
+      "default": "About Anupam Stores"
+    },
+    {
+      "type": "text",
+      "id": "intro_kicker",
+      "label": "Intro Kicker",
+      "default": "Jaipur's Household Supermart — Since 1990"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_intro_image",
+      "label": "Show Intro Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image",
+      "label": "Intro Image"
+    },
+    {
+      "type": "header",
+      "content": "Quote"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "label": "Quote Text"
+    },
+    {
+      "type": "text",
+      "id": "quote_label",
+      "label": "Quote Label",
+      "default": "What we believe"
+    },
+    {
+      "type": "header",
+      "content": "Story"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Story Title",
+      "default": "Our Story — From a Single Shop to a Household Supermart"
+    },
+    {
+      "type": "text",
+      "id": "story_note",
+      "label": "Story Footnote",
+      "default": "Two generations. One promise. Beautiful homes for every family."
+    },
+    {
+      "type": "header",
+      "content": "Flagship Stores"
+    },
+    {
+      "type": "text",
+      "id": "stores_title",
+      "label": "Stores Title",
+      "default": "Visit Our Flagship Stores in Jaipur"
+    },
+    {
+      "type": "textarea",
+      "id": "stores_subtitle",
+      "label": "Stores Subtitle",
+      "default": "Two very different experiences under one name — pick the one that fits what you are shopping for."
+    },
+    {
+      "type": "header",
+      "content": "Recent Articles"
+    },
+    {
+      "type": "text",
+      "id": "recent_title",
+      "label": "Recent Articles Title",
+      "default": "Recent Articles"
+    },
+    {
+      "type": "blog",
+      "id": "recent_blog",
+      "label": "Blog"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Material Symbol Name",
+          "default": "storefront",
+          "info": "Any name from Google Material Symbols, e.g. diversity_3, storefront, inventory_2, verified_user"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "150+ Trusted Brands"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "All under one roof"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "name": "Story Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "1990"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The Beginning"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "store",
+      "name": "Flagship Store",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Store 1 · Anupam Stores"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Visit Store"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About-us"
+    }
+  ]
 }
 {% endschema %}

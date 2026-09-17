@@ -1,0 +1,415 @@
+body.about-page {
+    --font-body: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
+}
+
+.about-page h1,
+.about-page h2,
+.about-page h3,
+.about-page .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* Hero */
+.about-hero {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: clamp(170px, 24vw, 340px);
+    overflow: hidden;
+    background: #241a14;
+}
+
+.about-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.about-hero-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(24px, 3.4vw, 46px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* Highlight bar */
+.about-usps {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(-56px, -4vw, -28px);
+}
+
+.usp-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 28px);
+    margin: 0;
+    padding: clamp(18px, 2vw, 26px) clamp(18px, 2.4vw, 32px);
+    list-style: none;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(50, 35, 25, 0.12);
+}
+
+.usp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.usp-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #F7EBE1;
+    color: #b0894a;
+    font-size: 20px;
+}
+
+.usp-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+.usp-item span:not(.usp-icon) {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #8a7c74;
+}
+
+/* Intro */
+.about-intro {
+    padding-block: clamp(28px, 4vw, 56px);
+}
+
+.about-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+}
+
+.about-heading {
+    margin: 0 0 6px;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 700;
+    color: #462D20;
+}
+
+.about-kicker {
+    margin: 0 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #b0894a;
+}
+
+.about-intro-copy p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #6b5c54;
+}
+
+.about-intro-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.about-poster {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #F8F5F1;
+}
+
+.about-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Quote */
+.about-quote {
+    padding-block: clamp(18px, 3vw, 34px);
+}
+
+.about-quote-text {
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-section-heading);
+    font-style: italic;
+    font-size: clamp(15px, 1.6vw, 20px);
+    color: #8a5a2b;
+}
+
+/* Story timeline */
+.about-story {
+    padding-bottom: clamp(28px, 4vw, 52px);
+}
+
+.about-story-title {
+    margin: 0 0 clamp(24px, 3vw, 40px);
+    text-align: center;
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+.story-timeline {
+    --story-gap: clamp(26px, 3.4vw, 44px);
+    --story-line: 50%;
+    display: grid;
+    gap: var(--story-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.story-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+    align-items: start;
+    column-gap: clamp(16px, 3vw, 40px);
+}
+
+/* Connector running from the first year badge down to the last */
+.story-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: calc(-1 * var(--story-gap));
+    left: var(--story-line);
+    width: 1px;
+    transform: translateX(-50%);
+    background: #4a3a30;
+}
+
+.story-item:first-child::before {
+    top: 28px;
+}
+
+.story-item:last-child::before {
+    bottom: auto;
+    height: 28px;
+}
+
+.story-year {
+    position: relative;
+    z-index: 1;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #F7EBE1;
+    color: #a4752f;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.story-copy h3 {
+    margin: 0 0 10px;
+    font-size: clamp(17px, 1.8vw, 21px);
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+.story-copy p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #6b5c54;
+}
+
+.story-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.story-item--left .story-copy {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    text-align: right;
+}
+
+.story-item--right .story-copy {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+    text-align: left;
+}
+
+.story-copy {
+    max-width: 520px;
+}
+
+.story-note {
+    margin: clamp(26px, 3.4vw, 44px) auto 0;
+    max-width: 640px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+/* Flagship stores */
+.about-stores {
+    padding-bottom: clamp(28px, 4vw, 52px);
+}
+
+.about-stores-title {
+    margin: 0 0 6px;
+    font-size: clamp(19px, 2vw, 24px);
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+.about-stores-sub {
+    margin: 0 0 clamp(16px, 2vw, 24px);
+    font-size: 14px;
+    color: #6b5c54;
+}
+
+.store-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 2.4vw, 28px);
+}
+
+.store-card-lite {
+    padding: clamp(18px, 2vw, 26px);
+    border-radius: 12px;
+    background: #F8F5F1;
+}
+
+.store-card-lite h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3b2a20;
+}
+
+.store-card-lite address {
+    margin: 0 0 14px;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #6b5c54;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+    .usp-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-intro-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-poster {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 900px) {
+    .store-cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .about-hero {
+        min-height: 150px;
+    }
+
+    .about-hero-title {
+        font-size: 24px;
+    }
+
+    .about-usps {
+        margin-top: 0;
+        padding-top: 18px;
+    }
+
+    .usp-bar {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .about-intro-copy p,
+    .about-stores-sub {
+        font-size: 14px;
+    }
+
+    .story-timeline {
+        --story-line: 24px;
+    }
+
+    .story-item,
+    .story-item--left,
+    .story-item--right {
+        grid-template-columns: 48px minmax(0, 1fr);
+        align-items: start;
+        column-gap: 14px;
+    }
+
+    .story-item:first-child::before {
+        top: 24px;
+    }
+
+    .story-item:last-child::before {
+        height: 24px;
+    }
+
+    .story-year {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+        width: 48px;
+        height: 48px;
+        font-size: 12px;
+    }
+
+    .story-copy {
+        max-width: none;
+    }
+
+    .story-item--left .story-copy,
+    .story-item--right .story-copy {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: stretch;
+        text-align: left;
+    }
+}
