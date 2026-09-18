@@ -37,6 +37,15 @@ body.template-cart .breadcrumb-wrap > .container {
     padding-right: 0;
 }
 
+/* Bootstrap .col-lg-8 adds 15px side gutters — drop the left one on desktop
+   so the cart table aligns with the page track / header. */
+@media (min-width: 992px) {
+    body.template-cart .shopify-section.cart_template-wrapper.col-lg-8,
+    body.template-cart .cart_template-wrapper.col-lg-8 {
+        padding-left: 0 !important;
+    }
+}
+
 /* ----- Breadcrumb band ---------------------------------------------------- */
 body.template-cart .breadcrumb-wrap {
     background: #ffffff !important;
@@ -142,14 +151,32 @@ body.template-cart .cart__row.cart-item:last-child td {
     border-bottom: 0 !important;
 }
 
-body.template-cart .cart__image-wrapper img,
-body.template-cart img.cart__image {
+/* home.css already puts a border on .cart__image-wrapper.product_img —
+   keep a single border on the wrapper and leave the img unbordered. */
+body.template-cart .cart__image-wrapper.product_img {
     width: 78px !important;
     height: 78px !important;
-    object-fit: cover !important;
     border: 1px solid #e5ddd6 !important;
     border-radius: 10px !important;
+    overflow: hidden !important;
     background: #f7f1eb !important;
+    padding: 0 !important;
+    float: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+body.template-cart .cart__image-wrapper img,
+body.template-cart img.cart__image {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    display: block !important;
 }
 
 body.template-cart .cart__product-title,
@@ -498,9 +525,14 @@ body.template-cart .empty-page-content {
         padding: 12px 8px !important;
     }
 
-    body.template-cart .cart__image-wrapper img,
-    body.template-cart img.cart__image {
+    body.template-cart .cart__image-wrapper.product_img {
         width: 64px !important;
         height: 64px !important;
+    }
+
+    body.template-cart .cart__image-wrapper img,
+    body.template-cart img.cart__image {
+        width: 100% !important;
+        height: 100% !important;
     }
 }

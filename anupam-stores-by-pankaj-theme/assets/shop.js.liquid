@@ -956,7 +956,10 @@
                 var o = e(".design_1 .product__media #productPhotoImg").attr("src");
               } 
               else if (jQuery('body').hasClass('product_sticky_design_2')) {
-                var o = e(".design_2 .product-wrapper-owlslider .product-block .product-single__media-wrapper:first-child .pro_img .product-single__thumb #productPhotoImg").attr("src");
+                /* New HTML PDP gallery renders #productPhotoImg inside .pdp-main;
+                   keep the legacy owlslider path as a fallback. */
+                var o = e(".design_2 .pdp-main #productPhotoImg, .design_2 #productPhotoImg").attr("src")
+                  || e(".design_2 .product-wrapper-owlslider .product-block .product-single__media-wrapper:first-child .pro_img .product-single__thumb #productPhotoImg").attr("src");
               } 
               else if (jQuery('body').hasClass('product_sticky_design_3')) {
                 var o = e(".design_3 .product__media #productPhotoImg").attr("src");
@@ -1100,8 +1103,13 @@
           //           console.log(n);
           t.hideLoading();
           t.showModalCart(".ajax-success-modal");
-          e('.ajax-success-modal.cart-popup-wrapper').addClass('open'); 
-          e(".ajax-success-modal").find(".ajax-product-image").attr("src", a);
+          e('.ajax-success-modal.cart-popup-wrapper').addClass('open');
+          /* Prefer the image captured from the card/PDP; fall back to the
+             /cart/add.js response so the popup never keeps src="/" broken. */
+          var imgSrc = a || (n && (n.image || n.featured_image)) || "";
+          if (imgSrc) {
+            e(".ajax-success-modal").find(".ajax-product-image").attr("src", imgSrc);
+          }
           e(".ajax-success-modal").find(".added-to-wishlist").hide();
           e(".ajax-success-modal").find(".added-to-cart").show();
           e(".ajax-success-modal").find(".ajax-product-title").text(p);

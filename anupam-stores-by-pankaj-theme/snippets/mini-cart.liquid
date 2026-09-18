@@ -21,7 +21,7 @@
     {% for item in cart.items %}
     <li class="item" id="cart-item-{{item.id}}">
       <a href="{{item.url}}" title="{{item.title}}" class="product-image">
-        <img loading="lazy" src="{{ item.image | product_img_url: 'medium' }}" alt="{{item.title}}"></a>
+        <img loading="lazy" src="{{ item.image | img_url: '160x160' }}" alt="{{ item.title | escape }}" width="80" height="80"></a>
       <div class="product-details">
         <p class="product-name"><a href="{{item.url}}">{{ item.product.title }}
           {% if item.product.variants.size != 0 %}
