@@ -2,8 +2,8 @@
    Scoped to .anupam-contact because every page template shares body.template-page. */
 
 .anupam-contact {
-    --font-body: 'Inter', sans-serif;
-    font-family: 'Inter', sans-serif;
+    --font-body: "Lato", sans-serif;
+    font-family: "Lato", sans-serif;
     display: block;
     float: none !important;
     width: 100% !important;
@@ -30,7 +30,7 @@ body:has(.anupam-contact) .follow-rail {
 .anupam-contact h1,
 .anupam-contact h2,
 .anupam-contact h3 {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
 }
 
 .anupam-contact .container {
@@ -206,7 +206,7 @@ body:has(.anupam-contact) .follow-rail {
     border-radius: 4px;
     background: #4a2c1c;
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -366,7 +366,7 @@ body:has(.anupam-contact) .follow-rail {
 .anupam-contact .contact-flag-title {
     margin: 0;
     max-width: 900px;
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
     font-size: clamp(22px, 3.2vw, 42px);
     font-weight: 600;
     line-height: 1.35;
@@ -381,7 +381,7 @@ body:has(.anupam-contact) .follow-rail {
 
 .anupam-contact .contact-flag-title em,
 .anupam-contact .contact-flag-title i {
-    font-family: 'Playfair Display', serif;
+    font-family: "Futura PT", serif;
     font-style: italic;
     font-weight: 500;
     color: #8a5a2b;
@@ -430,7 +430,7 @@ body:has(.anupam-contact) .follow-rail {
     border-radius: 4px;
     background: #7c8a52;
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.02em;

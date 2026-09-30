@@ -17416,3 +17416,8 @@ price .money {
 .jdgm-star{
     color: #c4a15a !important;
 }
+.grid-link__title{
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  font-family: Futura PT, sans-serif !important;
+}

@@ -1,8 +1,8 @@
 :root {
-    --font-heading: 'Be Vietnam Pro', sans-serif;
-    --font-section-heading: 'Playfair Display', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    --font-menu: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: "Futura PT", sans-serif;
+    --font-section-heading: "Futura PT", serif;
+    --font-body: "Lato", sans-serif;
+    --font-menu: "Lato", sans-serif;
     --olive: #5d683d;
     --olive-dark: #4d5932;
     --cream: #f7f1eb;
@@ -768,7 +768,7 @@ body.template-index .btn,
     margin-top: auto;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-family: Inter, sans-serif;
+    font-family: "Lato", sans-serif;
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
@@ -1084,8 +1084,10 @@ body.template-index .btn,
 
 .feature-card h3 {
     font-family: var(--font-heading);
-    font-size: 15px;
+    font-size: 20px;
+    color: #462D20;
     font-weight: 700;
+    margin-bottom:0px !important;
 }
 
 .feature-card p {
@@ -3315,7 +3317,7 @@ body.template-index .section.featured {
         background: #4a2c1c !important;
         background-image: none !important;
         color: #fff !important;
-        font-family: 'Inter', sans-serif !important;
+        font-family: "Lato", sans-serif !important;
         font-size: 12px !important;
         font-weight: 600 !important;
         letter-spacing: 0.01em !important;

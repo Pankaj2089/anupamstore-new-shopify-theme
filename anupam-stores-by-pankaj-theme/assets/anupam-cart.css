@@ -4,7 +4,7 @@
    Be Vietnam Pro headings, Inter body. */
 
 body.template-cart {
-    font-family: 'Inter', sans-serif;
+    font-family: "Lato", sans-serif;
     color: #392d27;
     background: #ffffff !important;
 }
@@ -21,7 +21,7 @@ body.template-cart h1,
 body.template-cart h2,
 body.template-cart h3,
 body.template-cart h4 {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
     color: #462d20;
 }
 
@@ -79,7 +79,7 @@ body.template-cart .breadcrumb-wrap .title {
     justify-self: center;
     min-width: 0;
     float: none !important;
-    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-family: "Futura PT", sans-serif !important;
     font-size: clamp(22px, 2.4vw, 32px) !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
@@ -99,7 +99,7 @@ body.template-cart .breadcrumb-wrap .breadcrumb {
 
 body.template-cart .breadcrumb-wrap .breadcrumb,
 body.template-cart .breadcrumb-wrap .breadcrumb > span {
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 13px !important;
     color: #8a7c74 !important;
     background: transparent !important;
@@ -199,7 +199,7 @@ body.template-cart .cart__row--heading th {
     border: 0 !important;
     border-bottom: 1px solid #e5ddd6 !important;
     background: transparent !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: 0.04em !important;
@@ -249,7 +249,7 @@ body.template-cart img.cart__image {
 
 body.template-cart .cart__product-title,
 body.template-cart .list-view-item__title a {
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 14px !important;
     font-weight: 500 !important;
     line-height: 1.5 !important;
@@ -272,7 +272,7 @@ body.template-cart .cart__price,
 body.template-cart .cart__final-price,
 body.template-cart .product-price,
 body.template-cart .cart__final-price .price {
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 14px !important;
     font-weight: 600 !important;
     color: #3b2a20 !important;
@@ -332,7 +332,7 @@ body.template-cart .quantity__input {
     box-shadow: none !important;
     background: transparent !important;
     text-align: center !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 14px !important;
     font-weight: 600 !important;
     color: #392d27 !important;
@@ -349,7 +349,7 @@ body.template-cart .text-area.field__input {
     outline: none !important;
     box-shadow: none !important;
     background: #ffffff !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 14px !important;
     color: #392d27 !important;
     resize: vertical !important;
@@ -361,7 +361,7 @@ body.template-cart .text-area.field__input:focus {
 }
 
 body.template-cart .totals__subtotal {
-    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-family: "Futura PT", sans-serif !important;
     font-size: 18px !important;
     font-weight: 700 !important;
     color: #462d20 !important;
@@ -369,7 +369,7 @@ body.template-cart .totals__subtotal {
 }
 
 body.template-cart .totals__subtotal-value {
-    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-family: "Futura PT", sans-serif !important;
     font-size: 20px !important;
     font-weight: 700 !important;
     color: #6f351d !important;
@@ -416,7 +416,7 @@ body.template-cart .cart__update-button {
     margin: 0 !important;
     padding: 0 22px !important;
     border-radius: 8px !important;
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     letter-spacing: 0.08em !important;
@@ -521,7 +521,7 @@ body.template-cart .cart-policy .policy-title {
     float: none !important;
     width: auto !important;
     margin: 0 0 4px !important;
-    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-family: "Futura PT", sans-serif !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
@@ -581,7 +581,7 @@ body.template-cart .section.featured .slider-btn {
         background: #4a2c1c !important;
         background-image: none !important;
         color: #ffffff !important;
-        font-family: 'Inter', sans-serif !important;
+        font-family: "Lato", sans-serif !important;
         font-size: 12px !important;
         font-weight: 600 !important;
         letter-spacing: 0.01em !important;

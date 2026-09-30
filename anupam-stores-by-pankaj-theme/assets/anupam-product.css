@@ -1,6 +1,6 @@
 body.template-product {
-    --font-body: 'Inter', sans-serif;
-    font-family: 'Inter', sans-serif;
+    --font-body: "Lato", sans-serif;
+    font-family: "Lato", sans-serif;
     background: #ffffff !important;
 }
 
@@ -21,7 +21,7 @@ body.template-product .section-title,
 body.template-product .promo-title,
 body.template-product .product-title,
 body.template-product .product-single__title {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
 }
 
 body.template-product .pdp {
@@ -439,7 +439,7 @@ body.template-product .pdp-info .regular-price {
 
 body.template-product .pdp-info .product-price__sale,
 body.template-product .pdp-info .product-price__price.product-price__sale {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
     font-size: 22px !important;
     font-weight: 700 !important;
     line-height: 1.2;
@@ -524,7 +524,7 @@ body.template-product .pdp-info .add-to-wishlist .added-wishlist {
     justify-content: center;
     gap: 6px;
     padding: 0 16px !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: 0.06em;
@@ -601,7 +601,7 @@ body.template-product .pdp-info input.quantity1 {
     height: 42px !important;
     border: 0 !important;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 14px !important;
     font-weight: 600;
     color: #6b4b2a !important;
@@ -649,7 +649,7 @@ body.template-product .pdp-info .shopify-payment-button__button {
     padding: 0 18px !important;
     border-radius: 999px !important;
     border: 1px solid #4a2c1c !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
@@ -714,7 +714,7 @@ body.template-product .pdp-whatsapp {
     border-radius: 999px;
     background: #fff;
     color: #1fa855 !important;
-    font-family: 'Inter', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -836,7 +836,7 @@ body.template-product .pdp-products .section-title,
 body.template-product .brands .section-title,
 body.template-product #recently-viewed-products-wrap .section-title,
 body.template-product #recently-viewed-products-wrap .tt-title {
-    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-family: "Futura PT", sans-serif !important;
     font-size: clamp(26px, 3vw, 36px) !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
@@ -1007,7 +1007,7 @@ body.template-product .anupam-reviews__summary {
 body.template-product .anupam-reviews__score strong {
     display: block;
     color: #35271f;
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
     font-size: 42px;
     line-height: 1;
 }
@@ -1214,7 +1214,7 @@ body.template-product .anupam-review-modal textarea { width: 100%; box-sizing: b
         border-radius: 8px !important;
         background: #5d683d !important;
         color: #fff !important;
-        font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+        font-family: "Lato", "Lato", sans-serif !important;
         font-size: 12px !important;
         font-weight: 600 !important;
         letter-spacing: 0.04em !important;
@@ -1317,15 +1317,15 @@ body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__content p {
 }
 .jm-reviewer-info__name{
     color: #462d20 !important;
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: "Futura PT", sans-serif;
 }
 .jm-star-rating__font-icon, .jdgm-star{
     color: #c4a15a !important;
 }
 .jdgm-review-content__body-content p{
         font-weight: normal !important;
-    --font-body: "Inter", sans-serif !important;
-    font-family: Inter, sans-serif !important;
+    --font-body: "Lato", sans-serif !important;
+    font-family: "Lato", sans-serif !important;
     font-size: 15px !important;
 }
 .jdgm-review-list .jm-review-item{
