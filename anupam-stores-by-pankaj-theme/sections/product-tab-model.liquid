@@ -1,151 +1,280 @@
-<div class="sortable-products" data-section-id="{{ section.id }}">
+<div class="sortable-products np-sortable-products" data-section-id="{{ section.id }}">
 
   {% comment %} New Products - first block only {% endcomment %}
   {% for block in section.blocks limit: 1 %}
     {% assign collection = collections[block.settings.collection] %}
 
-    <div class="section new-products" id="new-products-{{ section.id }}" {{ block.shopify_attributes }}>
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">{{ block.settings.title | default: 'New Products' | escape }}</h2>
+    <section
+      class="section new-products np-new-products"
+      id="new-products-{{ section.id }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="container np-container">
+
+        <div class="section-head np-section-head">
+          <h2 class="section-title np-section-title">
+            {{ block.settings.title | default: 'New Products' | escape }}
+          </h2>
 
           {% if collection != blank and collection.url != blank %}
-            <a class="section-link" href="{{ collection.url }}">
+            <a
+              class="section-link np-section-link"
+              href="{{ collection.url }}"
+              aria-label="View all products in {{ block.settings.title | default: 'New Products' | escape }}"
+            >
               View All Products <span aria-hidden="true">&rarr;</span>
             </a>
           {% endif %}
         </div>
 
-        <div class="product-grid">
+        <div class="product-grid np-product-grid">
           {% if collection != blank %}
             {% for product in collection.products limit: 8 %}
-              {% assign product_url = product.url %}
-              {% assign featured_src = product.featured_media | img_url: '1920x' %}
+              {% assign product_url = product.url | within: collection %}
 
-              {% if collection != blank %}
-                {% assign product_url = product.url | within: collection %}
+              {% assign featured_src = '' %}
+              {% if product.featured_media != blank %}
+                {% assign featured_src = product.featured_media | img_url: '1000x' %}
               {% endif %}
 
               {% assign save_percent = 0 %}
               {% if product.compare_at_price > product.price and product.compare_at_price > 0 %}
-                {% assign save_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+                {% assign save_percent = product.compare_at_price
+                  | minus: product.price
+                  | times: 100.0
+                  | divided_by: product.compare_at_price
+                  | round %}
               {% endif %}
 
-              <article class="product-card item-row product-layouts{% unless product.available %} product-price--sold-out{% endunless %}" data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
-                <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
-                  <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+              <article
+                class="product-card item-row product-layouts np-product-card{% unless product.available %} product-price--sold-out{% endunless %}"
+                data-id="product-{{ product.id }}"
+                data-col="{{ product.id }}"
+                data-product
+                data-name="{{ product.title | escape }}"
+                data-price="{{ product.price | divided_by: 100.0 }}"
+                data-image="{{ featured_src }}"
+              >
+                <form
+                  action="/cart/add"
+                  method="post"
+                  class="variants cart-form-{{ product.id }}"
+                  hidden
+                >
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                 </form>
 
-                <div class="product-image">
-                  <a class="product-media" href="{{ product_url }}">
-                    <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+                <div class="product-image np-product-image{% if product.available == false %} np-product-image--sold-out{% endif %}">
+                  <a class="product-media np-product-media" href="{{ product_url }}">
+                    {% if product.featured_media != blank %}
+                      <img
+                        class="featured-image np-product-image-img"
+                        src="{{ featured_src }}"
+                        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                        width="800"
+                        height="800"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      {{ 'product-1' | placeholder_svg_tag: 'np-product-image-img np-product-image-placeholder' }}
+                    {% endif %}
                   </a>
 
                   {% if save_percent > 0 %}
-                    <span class="badge-sale">Save -{{ save_percent }}%</span>
+                    <span class="badge-sale np-badge-sale">
+                      Save -{{ save_percent }}%
+                    </span>
                   {% endif %}
 
                   {% if product.available %}
-                    <a class="add-cart-btn product-hover-cta" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">
+                    <a
+                      class="add-cart-btn product-hover-cta np-product-hover-cta"
+                      href="javascript:void(0)"
+                      title="{{ 'products.product.add_to_cart' | t }}"
+                      aria-label="Add {{ product.title | escape }} to cart"
+                    >
                       Add to Cart <span aria-hidden="true">&rarr;</span>
                     </a>
                   {% endif %}
                 </div>
 
-                <div class="product-body">
-                  <h3 class="product-title">
-                    <a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a>
+                <div class="product-body np-product-body">
+                  <h3 class="product-title np-product-title">
+                    <a class="grid-link__title np-product-title-link" href="{{ product_url }}">
+                      {{ product.title }}
+                    </a>
                   </h3>
 
-                  <div class="product-price grid-view-item__meta">
+                  <div class="product-price grid-view-item__meta np-product-price">
                     {% if product.compare_at_price > product.price %}
-                      <span class="price-was">{{ product.compare_at_price | money }}</span>
+                      <span class="price-was np-price-was">
+                        {{ product.compare_at_price | money }}
+                      </span>
                     {% endif %}
-                    <span class="price-sale">{{ product.price | money }}</span>
+
+                    <span class="price-sale np-price-sale">
+                      {{ product.price | money }}
+                    </span>
                   </div>
 
                   {% if product.available %}
-                    <a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>
+                    <a
+                      class="btn btn-cart-mobile add-cart-btn np-mobile-cart-btn"
+                      href="javascript:void(0)"
+                    >
+                      Add to Cart
+                    </a>
                   {% endif %}
                 </div>
               </article>
             {% endfor %}
           {% endif %}
         </div>
+
+        {% if collection == blank %}
+          <p class="np-empty-message">Please select a collection for this section.</p>
+        {% endif %}
+
       </div>
-    </div>
+    </section>
   {% endfor %}
 
   {% comment %} Featured Products - remaining blocks {% endcomment %}
   {% for block in section.blocks offset: 1 %}
     {% assign collection = collections[block.settings.collection] %}
 
-    <div class="section featured" id="featured-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">{{ block.settings.title | default: 'Top Featured' | escape }}</h2>
+    <section
+      class="section featured np-featured-section"
+      id="featured-{{ section.id }}-{{ block.id }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="container np-container">
 
-          <div class="section-controls">
-            <button class="slider-btn prev" type="button" data-featured-prev aria-label="Previous featured products">
+        <div class="section-head np-section-head">
+          <h2 class="section-title np-section-title">
+            {{ block.settings.title | default: 'Top Featured' | escape }}
+          </h2>
+
+          <div class="section-controls np-section-controls">
+            <button
+              class="slider-btn prev"
+              type="button"
+              data-featured-prev
+              aria-label="Previous featured products"
+            >
               <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
             </button>
-            <button class="slider-btn next" type="button" data-featured-next aria-label="Next featured products">
+
+            <button
+              class="slider-btn next"
+              type="button"
+              data-featured-next
+              aria-label="Next featured products"
+            >
               <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
             </button>
           </div>
         </div>
 
-        <div class="slider-wrapper featured-slider" data-slider>
-          <div class="slider-track featured-track" data-slider-track>
+        <div class="slider-wrapper featured-slider np-featured-slider" data-slider>
+          <div class="slider-track featured-track np-featured-track" data-slider-track>
             {% if collection != blank %}
               {% for product in collection.products limit: 12 %}
-                {% assign product_url = product.url %}
-                {% assign featured_src = product.featured_media | img_url: '1920x' %}
+                {% assign product_url = product.url | within: collection %}
 
-                {% if collection != blank %}
-                  {% assign product_url = product.url | within: collection %}
+                {% assign featured_src = '' %}
+                {% if product.featured_media != blank %}
+                  {% assign featured_src = product.featured_media | img_url: '1000x' %}
                 {% endif %}
 
                 {% assign save_percent = 0 %}
                 {% if product.compare_at_price > product.price and product.compare_at_price > 0 %}
-                  {% assign save_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+                  {% assign save_percent = product.compare_at_price
+                    | minus: product.price
+                    | times: 100.0
+                    | divided_by: product.compare_at_price
+                    | round %}
                 {% endif %}
 
-                <article class="product-card item-row product-layouts product-card--featured{% unless product.available %} product-price--sold-out{% endunless %}" data-slider-item data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
-                  <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
-                    <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                <article
+                  class="product-card item-row product-layouts product-card--featured np-product-card np-featured-card{% unless product.available %} product-price--sold-out{% endunless %}"
+                  data-slider-item
+                  data-id="product-{{ product.id }}"
+                  data-col="{{ product.id }}"
+                  data-product
+                  data-name="{{ product.title | escape }}"
+                  data-price="{{ product.price | divided_by: 100.0 }}"
+                  data-image="{{ featured_src }}"
+                >
+                  <form
+                    action="/cart/add"
+                    method="post"
+                    class="variants cart-form-{{ product.id }}"
+                    hidden
+                  >
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                   </form>
 
-                  <div class="product-image product-image--contain">
-                    <a class="product-media" href="{{ product_url }}">
-                      <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+                  <div class="product-image product-image--contain np-product-image np-product-image--contain">
+                    <a class="product-media np-product-media" href="{{ product_url }}">
+                      {% if product.featured_media != blank %}
+                        <img
+                          class="featured-image np-product-image-img"
+                          src="{{ featured_src }}"
+                          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                          width="800"
+                          height="800"
+                          loading="lazy"
+                        >
+                      {% else %}
+                        {{ 'product-1' | placeholder_svg_tag: 'np-product-image-img np-product-image-placeholder' }}
+                      {% endif %}
                     </a>
 
                     {% if save_percent > 0 %}
-                      <span class="badge-sale">Save -{{ save_percent }}%</span>
+                      <span class="badge-sale np-badge-sale">
+                        Save -{{ save_percent }}%
+                      </span>
                     {% endif %}
 
                     {% if product.available %}
-                      <a class="add-cart-btn product-hover-cta" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">
+                      <a
+                        class="add-cart-btn product-hover-cta np-product-hover-cta"
+                        href="javascript:void(0)"
+                        title="{{ 'products.product.add_to_cart' | t }}"
+                        aria-label="Add {{ product.title | escape }} to cart"
+                      >
                         Add to Cart <span aria-hidden="true">&rarr;</span>
                       </a>
                     {% endif %}
                   </div>
 
-                  <div class="product-body">
-                    <h3 class="product-title">
-                      <a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a>
+                  <div class="product-body np-product-body">
+                    <h3 class="product-title np-product-title">
+                      <a class="grid-link__title np-product-title-link" href="{{ product_url }}">
+                        {{ product.title }}
+                      </a>
                     </h3>
 
-                    <div class="product-price grid-view-item__meta">
+                    <div class="product-price grid-view-item__meta np-product-price">
                       {% if product.compare_at_price > product.price %}
-                        <span class="price-was">{{ product.compare_at_price | money }}</span>
+                        <span class="price-was np-price-was">
+                          {{ product.compare_at_price | money }}
+                        </span>
                       {% endif %}
-                      <span class="price-sale">{{ product.price | money }}</span>
+
+                      <span class="price-sale np-price-sale">
+                        {{ product.price | money }}
+                      </span>
                     </div>
 
                     {% if product.available %}
-                      <a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>
+                      <a
+                        class="btn btn-cart-mobile add-cart-btn np-mobile-cart-btn"
+                        href="javascript:void(0)"
+                      >
+                        Add to Cart
+                      </a>
                     {% endif %}
                   </div>
                 </article>
@@ -153,10 +282,16 @@
             {% endif %}
           </div>
         </div>
+
+        {% if collection == blank %}
+          <p class="np-empty-message">Please select a collection for this section.</p>
+        {% endif %}
+
       </div>
-    </div>
+    </section>
   {% endfor %}
 </div>
+
 {% schema %}
 {
   "name": "Sortable Products",
@@ -178,7 +313,7 @@
       "max": 20,
       "step": 1,
       "label": "Number of columns on Desktop",
-      "default": 7
+      "default": 4
     },
     {
       "type": "range",
@@ -187,7 +322,7 @@
       "max": 20,
       "step": 1,
       "label": "Number of columns on Mobile",
-      "default": 1
+      "default": 2
     },
     {
       "type": "color",
