@@ -32,9 +32,6 @@
     var track = document.getElementById('recently-viewed-products');
     if (!wrap || !track) return;
 
-    var starSvg = '<svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" focusable="false"><path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
-    var starsHtml = '<span class="stars" aria-hidden="true">' + new Array(6).join(starSvg) + '</span>';
-
     function escapeHtml(value) {
       return String(value == null ? '' : value)
         .replace(/&/g, '&amp;')
@@ -105,7 +102,7 @@
           '</div>' +
           '<div class="product-body">' +
             '<h3 class="product-title"><a class="grid-link__title" href="' + escapeHtml(url) + '">' + escapeHtml(title) + '</a></h3>' +
-            '<div class="product-rating">' + starsHtml + '</div>' +
+            '<div class="product-rating"><div class="jdgm-widget jdgm-preview-badge" data-id="' + escapeHtml(id) + '"></div></div>' +
             '<div class="product-price grid-view-item__meta">' + compareHtml + '<span class="price-sale">' + money(price) + '</span></div>' +
             (available ? '<a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>' : '') +
           '</div>' +

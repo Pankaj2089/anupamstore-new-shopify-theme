@@ -14,19 +14,19 @@
     </div>
     <div class="product-shop summary col-xs-12 col-sm-7">
       <div class="product-item product-detail-section">
-        <h2 class="product-title"><a>&nbsp;</a></h2>
-        <p class="item-text product-description"></p>
-        <div class="prices product_price product-price__price">
-          <span class="price h2 money" id="QProductPrice"></span>
+        <h2 class="product-title quickview-title"><a>&nbsp;</a></h2>
+        <p class="item-text product-description quickview-description"></p>
+        <div class="prices product_price product-price__price quickview-price">
+          <span class="price h2" id="QProductPrice"></span>
           <span class="compare-price product-price__price compare_price" id="QComparePrice"></span> 
           <div class="pro_price"></div>
           <span class="discount-percentage"></span>
         </div>
 
-        <div class="product-info">
+        <div class="product-info quickview-inventory">
           <p class="product-inventory"><label>{{ 'products.product.availability' | t }}</label><span></span></p>    
         </div>
-        <div class="details clearfix">
+        <div class="details clearfix quickview-actions">
           <form action="/cart/add" method="post" class="variants">
             <select name='id' style="display:none"></select>
             <div class="grid--uniform product-single__addtocart">

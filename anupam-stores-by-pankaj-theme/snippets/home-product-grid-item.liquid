@@ -96,7 +96,7 @@
         <del class="grid-link__sale_price">{{ product.compare_at_price | money }}</del>
         {% endif %}
           </div>      
-            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            {{ product.metafields.judgeme.badge }}
       </div>
     
      {% include 'item-swatch' %}

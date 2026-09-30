@@ -270,18 +270,36 @@ body.template-product .product-title {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     margin: 0;
     font-size: 14px;
     line-height: 1.3;
     color: #6b5e56;
 }
 
+.pdp-rating-score {
+    font-weight: 700;
+    color: #462D20;
+}
+
 .pdp-stars {
     display: inline-flex;
+    gap: 2px;
+    color: #ded5cd;
+}
+
+.pdp-stars.has-rating {
     color: #c4a15a;
-    letter-spacing: 1px;
-    font-size: 15px;
+}
+
+.pdp-rating-link {
+    color: #6b5e56;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.pdp-rating-link:hover {
+    color: #462D20;
 }
 
 .pdp-price {
@@ -768,17 +786,19 @@ body.template-product .product-share,
 body.template-product .social-sharing,
 body.template-product .payment-content,
 body.template-product .product-single__description,
-body.template-product .product-review,
 body.template-product .add-to-cart-sticky,
 body.template-product .ttqtyprogress,
 body.template-product .complementary-products,
 body.template-product .product-price__sale-label,
 body.template-product .product-image-btn,
-body.template-product .jdgm-widget,
 body.template-product .hr,
 body.template-product .product_tab_wrapper,
 body.template-product .btn-content:not(.pdp-actions-top) {
     display: none !important;
+}
+
+body.template-product .product-review:has(#shopify-product-reviews) {
+    display: block !important;
 }
 
 body.template-product .pdp > .container,

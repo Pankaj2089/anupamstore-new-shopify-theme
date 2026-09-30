@@ -59,6 +59,37 @@
     });
   });
 
+  // Our Brands: autoplay and pause while the mouse is over the carousel.
+  const brandWrap = $('.brand-slider');
+  if (brandWrap) {
+    const brandSlider = initSlider(brandWrap, { loop: true });
+
+    if (brandSlider) {
+      let brandTimer = null;
+      const brandSpeed = 2500;
+
+      const startBrandAutoplay = () => {
+        if (brandTimer) return;
+
+        brandTimer = setInterval(() => {
+          brandSlider.go(1);
+        }, brandSpeed);
+      };
+
+      const stopBrandAutoplay = () => {
+        if (!brandTimer) return;
+
+        clearInterval(brandTimer);
+        brandTimer = null;
+      };
+
+      brandWrap.addEventListener('mouseenter', stopBrandAutoplay);
+      brandWrap.addEventListener('mouseleave', startBrandAutoplay);
+
+      startBrandAutoplay();
+    }
+  }
+
   const dealsWrap = $('.deals-slider');
   if (dealsWrap) {
     const deals = initSlider(dealsWrap);

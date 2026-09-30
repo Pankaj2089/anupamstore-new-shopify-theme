@@ -111,4 +111,81 @@
 
   initFilterAccordions();
   syncSortLabel();
+  document.querySelectorAll('#product-grid .add-cart-btn').forEach((btn) => {
+    btn.dataset.atcBound = '1';
+  });
+  initInfiniteScroll();
+
+  function bindNewProductActions(nodes) {
+    if (!window.jQuery || !nodes.length) return;
+    const sample = document.querySelector('#product-grid .add-cart-btn[data-atc-bound="1"]');
+    const events = sample && jQuery._data && jQuery._data(sample, 'events');
+    const clickHandlers = events && events.click ? events.click.slice() : [];
+    nodes.forEach((node) => {
+      node.querySelectorAll('.add-cart-btn').forEach((btn) => {
+        if (btn.dataset.atcBound === '1') return;
+        btn.dataset.atcBound = '1';
+        clickHandlers.forEach((handler) => {
+          jQuery(btn).on('click', handler.handler);
+        });
+      });
+    });
+  }
+
+  function initInfiniteScroll() {
+    const grid = document.querySelector('#product-grid');
+    const loader = document.querySelector('#infinite-scroll-loader');
+    if (!grid || !loader) return;
+
+    let loading = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || loading) return;
+        const nextPage = loader.getAttribute('data-next-page');
+        if (!nextPage) return;
+
+        loading = true;
+        loader.classList.add('is-loading');
+
+        fetch(nextPage, { credentials: 'same-origin' })
+          .then((response) => response.text())
+          .then((html) => {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const nextGrid = doc.querySelector('#product-grid');
+            const fragment = document.createDocumentFragment();
+            const added = [];
+
+            if (nextGrid) {
+              nextGrid.querySelectorAll('.product-card, article.item-row, .grid-item').forEach((card) => {
+                const node = document.importNode(card, true);
+                fragment.appendChild(node);
+                added.push(node);
+              });
+            }
+
+            if (added.length) {
+              grid.appendChild(fragment);
+              bindNewProductActions(added);
+            }
+
+            const newLoader = doc.querySelector('#infinite-scroll-loader');
+            const newNext = newLoader && newLoader.getAttribute('data-next-page');
+            if (newNext) {
+              loader.setAttribute('data-next-page', newNext);
+              loading = false;
+              loader.classList.remove('is-loading');
+            } else {
+              observer.disconnect();
+              loader.remove();
+            }
+          })
+          .catch(() => {
+            loading = false;
+            loader.classList.remove('is-loading');
+          });
+      });
+    }, { rootMargin: '500px 0px' });
+
+    observer.observe(loader);
+  }
 })();

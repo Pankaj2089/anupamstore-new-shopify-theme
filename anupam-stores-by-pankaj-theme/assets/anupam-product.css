@@ -381,10 +381,27 @@ body.template-product .pdp-rating {
     color: #6b5e56;
 }
 
+body.template-product .pdp-rating-link {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+}
+
 body.template-product .pdp-stars {
     display: inline-flex;
     color: #c4a15a;
     gap: 1px;
+}
+
+body.template-product .pdp-stars.no-rating,
+body.template-product .anupam-reviews__stars.no-rating {
+    color: #c9c2bc;
+}
+
+body.template-product .anupam-reviews__empty .anupam-reviews__empty-stars {
+    color: #c9c2bc;
 }
 
 body.template-product .pdp-stars .star-icon {
@@ -870,6 +887,10 @@ body.template-product [id^="ProductSection-"] > .container {
     display: none !important;
 }
 
+body.template-product [id^="ProductSection-"] > .container:has(.anupam-reviews) {
+    display: block !important;
+}
+
 body.template-product .add-to-cart-sticky,
 body.template-product .product-share,
 body.template-product .social-sharing,
@@ -887,7 +908,6 @@ body.template-product .sizechart,
 body.template-product .product-image-btn,
 body.template-product .product-price__sale-label,
 body.template-product .custom_label,
-body.template-product .jdgm-widget,
 body.template-product .btn-content .add-to-compare {
     display: none !important;
 }
@@ -924,6 +944,130 @@ body.template-product #recently-viewed-products .owl-nav button {
     background: transparent !important;
     color: #4a2c1c !important;
     box-shadow: none !important;
+}
+
+body.template-product .anupam-reviews {
+    width: min(100% - 32px, 1400px);
+    margin: 38px auto 0;
+    padding: 42px 0 70px;
+    border-top: 1px solid #e7dfd7;
+    color: #3f332c;
+}
+
+body.template-product .anupam-reviews__header,
+body.template-product .anupam-reviews__subhead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+body.template-product .anupam-reviews__eyebrow {
+    margin: 0 0 7px;
+    color: #a17443;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+body.template-product .anupam-reviews h2,
+body.template-product .anupam-reviews h3 {
+    margin: 0;
+    color: #35271f;
+}
+
+body.template-product .anupam-reviews h2 { font-size: clamp(26px, 3vw, 38px); }
+body.template-product .anupam-reviews h3 { font-size: 19px; }
+
+body.template-product .anupam-reviews__write {
+    border: 1px solid #462d20;
+    border-radius: 2px;
+    padding: 11px 19px;
+    background: #462d20;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+body.template-product .anupam-reviews__write:hover { background: #694533; }
+
+body.template-product .anupam-reviews__summary {
+    display: grid;
+    grid-template-columns: 190px minmax(250px, 390px) minmax(260px, 1fr);
+    gap: 42px;
+    margin-top: 30px;
+    padding: 28px 0;
+    border-top: 1px solid #eee8e2;
+    border-bottom: 1px solid #eee8e2;
+}
+
+body.template-product .anupam-reviews__score strong {
+    display: block;
+    color: #35271f;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+}
+
+body.template-product .anupam-reviews__stars,
+body.template-product .anupam-reviews__empty-stars { color: #c17426; letter-spacing: 2px; }
+body.template-product .anupam-reviews__stars { margin: 10px 0 8px; font-size: 18px; }
+body.template-product .anupam-reviews__count,
+body.template-product .anupam-reviews__say a,
+body.template-product .anupam-reviews__text-button { color: #8b603c; font-size: 13px; }
+
+body.template-product .anupam-reviews__breakdown { display: grid; gap: 8px; }
+body.template-product .anupam-reviews__bar-row {
+    display: grid;
+    grid-template-columns: 52px minmax(80px, 1fr) 38px;
+    align-items: center;
+    gap: 9px;
+    border: 0;
+    padding: 0;
+    background: none;
+    color: #8b603c;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+}
+body.template-product .anupam-reviews__bar-row:hover { color: #35271f; }
+body.template-product .anupam-reviews__bar { height: 12px; overflow: hidden; border: 1px solid #bcb4ad; border-radius: 2px; }
+body.template-product .anupam-reviews__bar i { display: block; height: 100%; background: #c17426; }
+body.template-product .anupam-reviews__bar-row b { color: #5d5149; font-weight: 500; }
+body.template-product .anupam-reviews__say p { max-width: 560px; margin: 10px 0 12px; color: #675b53; font-size: 14px; line-height: 1.7; }
+
+body.template-product .anupam-reviews__photos,
+body.template-product .anupam-reviews__subhead span { color: #93877e; font-size: 12px; }
+body.template-product .anupam-reviews__photo-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: 15px; }
+body.template-product .anupam-reviews__photo-grid a { display: block; overflow: hidden; aspect-ratio: 4 / 3; background: #eee8e2; }
+body.template-product .anupam-reviews__photo-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+body.template-product .anupam-reviews__photo-grid a:hover img { transform: scale(1.04); }
+body.template-product .anupam-reviews__empty { margin-top: 15px; padding: 25px; background: #faf7f3; text-align: center; }
+body.template-product .anupam-reviews__empty p { margin: 8px 0 10px; color: #675b53; font-size: 14px; }
+body.template-product .anupam-reviews__text-button { border: 0; padding: 0; background: none; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+body.template-product .anupam-reviews .jdgm-widget { display: block !important; margin-top: 18px; }
+
+body.template-product .anupam-review-modal[hidden] { display: none; }
+body.template-product .anupam-review-modal { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: 20px; }
+body.template-product .anupam-review-modal__backdrop { position: absolute; inset: 0; background: rgba(36, 25, 18, .55); }
+body.template-product .anupam-review-modal__dialog { position: relative; width: min(100%, 520px); max-height: calc(100vh - 40px); overflow: auto; padding: 34px; background: #fff; box-shadow: 0 18px 50px rgba(36, 25, 18, .2); }
+body.template-product .anupam-review-modal__close { position: absolute; top: 14px; right: 14px; border: 0; background: none; color: #675b53; cursor: pointer; font-size: 18px; }
+body.template-product .anupam-review-modal form { display: grid; gap: 8px; margin-top: 22px; }
+body.template-product .anupam-review-modal label { color: #675b53; font-size: 12px; font-weight: 700; }
+body.template-product .anupam-review-modal input,
+body.template-product .anupam-review-modal select,
+body.template-product .anupam-review-modal textarea { width: 100%; box-sizing: border-box; margin: 0 0 10px; border: 1px solid #d9d0c8; border-radius: 2px; padding: 11px 12px; background: #fff; color: #3f332c; font: inherit; font-size: 13px; }
+
+@media (max-width: 767px) {
+    body.template-product .anupam-reviews { width: min(100% - 24px, 1400px); margin-top: 24px; padding-top: 30px; }
+    body.template-product .anupam-reviews__header { align-items: flex-start; flex-direction: column; }
+    body.template-product .anupam-reviews__summary { grid-template-columns: 1fr; gap: 26px; }
+    body.template-product .anupam-reviews__photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    body.template-product .anupam-review-modal__dialog { padding: 28px 20px; }
 }
 
 @media (min-width: 1024px) {
@@ -1092,4 +1236,118 @@ body.template-product #recently-viewed-products .owl-nav button {
     body.template-product .pdp-info .product-price__sale {
         font-size: 20px !important;
     }
+}
+
+/* ==========================================================
+   Judge.me / Customer Reviews brand colors
+   Brand brown: #462d20
+   Review message follows the product-description body color.
+   ========================================================== */
+body.template-product .anupam-reviews {
+    color: #462d20;
+}
+
+body.template-product .anupam-reviews h2,
+body.template-product .anupam-reviews h3,
+body.template-product .anupam-reviews__score strong,
+body.template-product .anupam-reviews__count,
+body.template-product .anupam-reviews__stars,
+body.template-product .anupam-reviews__empty-stars,
+body.template-product .anupam-reviews__bar-row,
+body.template-product .anupam-reviews__bar-row b,
+body.template-product .anupam-reviews__say a,
+body.template-product .anupam-reviews__text-button {
+    color: #462d20;
+}
+
+body.template-product .anupam-reviews__stars,
+body.template-product .anupam-reviews__empty-stars {
+    color: #462d20;
+}
+
+body.template-product .anupam-reviews__write,
+body.template-product .anupam-reviews__write:hover,
+body.template-product .anupam-reviews__write:focus {
+    border-color: #462d20;
+    background: #462d20;
+    color: #ffffff;
+}
+
+/* Judge.me Review Widget brand color overrides */
+body.template-product .anupam-reviews .jdgm-widget,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__author,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__title,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__timestamp,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__buyer-badge {
+    color: #462d20;
+}
+
+body.template-product .anupam-reviews .jdgm-widget .jdgm-star,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-star::before,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rating,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__rating {
+    color: #462d20 !important;
+}
+
+body.template-product .anupam-reviews .jdgm-widget .jdgm-btn,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-write-rev,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-btn.jdgm-write-rev,
+body.template-product .anupam-reviews .jdgm-widget button[type="submit"] {
+    border-color: #462d20 !important;
+    background: #462d20 !important;
+    color: #ffffff !important;
+}
+
+/* Review message should use the same body color as product descriptions. */
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__body,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__body p,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__content,
+body.template-product .anupam-reviews .jdgm-widget .jdgm-rev__content p {
+    color: var(--color-body-text) !important;
+}
+
+.jm-button, .jm-rating-filter__tag--selected, .jdgm-write-review-modal__nav-btn{
+    background-color: #462d20 !important;
+    border-color: #462d20 !important;
+    color: #FFF !important;
+}
+.jm-button .jm-custom-answer-filter__icon svg{
+    color: #FFF !important;
+}
+.jm-reviewer-info__name{
+    color: #462d20 !important;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+.jm-star-rating__font-icon, .jdgm-star{
+    color: #c4a15a !important;
+}
+.jdgm-review-content__body-content p{
+        font-weight: normal !important;
+    --font-body: "Inter", sans-serif !important;
+    font-family: Inter, sans-serif !important;
+    font-size: 15px !important;
+}
+.jdgm-review-list .jm-review-item{
+    padding-block-end:0px !important;
+}
+.anupam-reviews__write{
+    display:none !important;
+}
+.jm-review-widget-minimal-header__title{
+    display:none !important;
+}
+.jm-review-widget--minimal-header, #anupam-reviews__list{
+    padding-top:0px !important;
+    margin-top:0px !important;
+}
+.jm-average-rating-display .jm-cluster .jm-text:first-child{
+    font-size: clamp(24px, 3vw, 28px) !important;
+    color:#462d20 !important;
+}
+.jdgm-review-list .jm-review-item[data-v-7af49453], .jm-review-item[data-v-32f3960d] {
+    padding-block-start: var(--jm-space-600) !important;
+    border-block-start: 1px solid color-mix(in srgb, var(--jm-review-widget-text-color) 20%, transparent);
+    border-block-end:none !important;
+    margin-top: 0px !important;
 }

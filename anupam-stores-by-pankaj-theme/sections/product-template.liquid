@@ -339,12 +339,6 @@
                   <div class="fixed-content">
                     <div class="product-single__header col-xs-12{% if section.settings.product_layout == 'design_2' %} pdp-intro{% endif %}">
 
-                        {% if section.settings.show_reviews %}
-                         <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
-                          {{ product.metafields.judgeme.badge }}
-                        </div>
-                      {% endif %}  
-
                       <div class="title-arrows">
                         <h1 itemprop="name" id="pdp-title" class="product-single__title pdp-title text-capitalize{% if section.settings.product_vendor_enable %} wvendor{% endif %}">{{ product.title }}</h1>                   
                         {% if collection %}
@@ -462,26 +456,12 @@
                             {% endif %} {% endcomment %}
                       </div>
                       {%- if section.settings.product_layout == 'design_2' -%}
-                      {%- assign rating_value = 5.0 -%}
-                      {%- assign rating_count = 0 -%}
-                      {%- if product.metafields.reviews.rating.value.rating != blank -%}
-                        {%- assign rating_value = product.metafields.reviews.rating.value.rating -%}
-                      {%- elsif product.metafields.reviews.rating.value != blank -%}
-                        {%- assign rating_value = product.metafields.reviews.rating.value -%}
-                      {%- endif -%}
-                      {%- if product.metafields.reviews.rating_count.value != blank -%}
-                        {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
-                      {%- elsif product.metafields.reviews.rating_count != blank -%}
-                        {%- assign rating_count = product.metafields.reviews.rating_count -%}
-                      {%- endif -%}
-                      {%- assign rating_display = rating_value | times: 10 | round | times: 0.1 -%}
-                      <div class="pdp-rating" aria-label="Rated {{ rating_display }} out of 5 from {{ rating_count }} reviews">
-                        <span class="pdp-stars" aria-hidden="true">
-                          {%- for i in (1..5) -%}
-                          <svg class="star-icon" viewBox="0 0 24 24" width="14" height="14" focusable="false"><path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                          {%- endfor -%}
-                        </span>
-                        <span>({{ rating_count }} Reviews)</span>
+                      <div
+                        class="jdgm-widget jdgm-preview-badge"
+                        data-id="{{ product.id }}"
+                        data-auto-install="false"
+                      >
+                        {{ product.metafields.judgeme.badge }}
                       </div>
                       <div class="h2 product-single__price pdp-price" id="price-{{ section.id }}">
                         {% render 'product-price', product: product, use_variant: true, show_vendor: section.settings.show_vendor %}
@@ -1649,11 +1629,35 @@
           </div>
         </div>
       </div>
-      <div class="product-review" href="#tab-2">
-        {% if product.metafields.spr.reviews != "" %}
-        <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div> 
-        {% endif %}
-      </div>    
+      {% if section.settings.show_reviews %}
+        <section class="anupam-reviews" id="product-reviews" aria-labelledby="reviews-title">
+          <div class="anupam-reviews__header">
+            <div>
+              <p class="anupam-reviews__eyebrow">Real homes, real experiences</p>
+              <h2 id="reviews-title">Customer reviews</h2>
+            </div>
+            <a class="anupam-reviews__write" href="#review-list" data-review-open>Write a review</a>
+          </div>
+          <div class="anupam-reviews__list" id="review-list">
+            {% assign has_judgeme_app_block = false %}
+            {% for block in section.blocks %}
+              {% if block.type == '@app' %}
+                {% assign has_judgeme_app_block = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if has_judgeme_app_block %}
+              {% for block in section.blocks %}
+                {% if block.type == '@app' %}
+                  {% render block %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% render 'judgeme-review-widget', product: product %}
+            {% endif %}
+          </div>
+        </section>
+      {% endif %}
       {% unless section.settings.product_layout == 'design_2' %}
       {% if section.settings.related_products_enable %}     
       {% render 'related-products', product: product %}
@@ -2254,6 +2258,9 @@ $(document).ready(function() {
 }
 ],
 "blocks": [
+{
+"type": "@app"
+},
 {
 "type": "variant_picker",
 "name": "variant_picker",

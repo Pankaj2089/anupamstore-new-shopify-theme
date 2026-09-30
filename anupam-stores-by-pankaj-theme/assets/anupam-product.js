@@ -142,10 +142,74 @@
     });
   }
 
+  function initJudgeMeReviewLink() {
+    if (document.documentElement.dataset.judgeMeReviewLinkBound === 'true') return;
+    document.documentElement.dataset.judgeMeReviewLinkBound = 'true';
+
+    const getWidget = () => (
+      document.querySelector('#judgeme_product_reviews') ||
+      document.querySelector('.jdgm-review-widget')
+    );
+
+    const findWriteControl = (widget) => {
+      if (!widget) return null;
+
+      const controls = Array.from(
+        widget.querySelectorAll('button, a, input[type="button"], input[type="submit"]')
+      );
+
+      return controls.find((control) => {
+        const text = (control.textContent || control.value || '')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLowerCase();
+
+        return (
+          text.includes('write a review') ||
+          text === 'write review' ||
+          text.includes('review this product')
+        );
+      }) || null;
+    };
+
+    const openJudgeMeForm = (attempts = 0) => {
+      const widget = getWidget();
+      if (!widget) {
+        if (attempts < 40) {
+          window.setTimeout(() => openJudgeMeForm(attempts + 1), 250);
+        }
+        return;
+      }
+
+      widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const control = findWriteControl(widget);
+      if (control) {
+        control.click();
+        return;
+      }
+
+      // Judge.me loads its internal UI asynchronously. Keep checking briefly
+      // instead of failing when the customer clicks before the widget finishes.
+      if (attempts < 40) {
+        window.setTimeout(() => openJudgeMeForm(attempts + 1), 250);
+      }
+    };
+
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('[data-review-open]');
+      if (!link) return;
+
+      event.preventDefault();
+      openJudgeMeForm();
+    });
+  }
+
   initGallery();
   initAccordions();
   initQuantity();
   initBuyLabel();
+  initJudgeMeReviewLink();
   const buyRoot = document.querySelector('.pdp-cta, .product-form__buttons');
   if (buyRoot && window.MutationObserver) {
     const observer = new MutationObserver(initBuyLabel);

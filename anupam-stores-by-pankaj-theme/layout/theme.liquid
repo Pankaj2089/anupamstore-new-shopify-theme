@@ -141,14 +141,10 @@
     {{ 'anupam-faq.css' | asset_url | stylesheet_tag }}
     {% endif %}
     <script src="{{ 'custom-helper.js' | asset_url }}" defer="defer"></script>
-    
-    <script 
-      type="text/javascript"
-      src="https://d3mkw6s8thqya7.cloudfront.net/integration-plugin.js"
-      id="aisensy-wa-widget"
-      widget-id="aabmgt"
-    >
-    </script>
+    {%- comment -%}
+      AiSensy is injected after window load (see footer script).
+      Loading it in <head> keeps network busy and can hang Shopify admin theme previews.
+    {%- endcomment -%}
 	
   </head>
   <body id="{{ page_title | handle }}" class="{% if settings.dark != blank %} darkmode darklayout{% endif %} {{ settings.toggle_menu_position }} hover_{{ settings.product_hover_btn }} {% if settings.display_toogle_menu == false %}menu-content{% endif %} {% if shop.locale == 'ar' or shop.locale == 'he' or shop.locale == 'ur' %}rtl {% endif %}{{ settings.header_icon_color }} {{ page_title | handle }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.display_toogle_menu  == false %} left-menu{% else %} toggle-menu{% endif %}">
@@ -175,17 +171,10 @@
         </div>
       </div>
     </div>
-    {% if settings.display_preloader != blank %}
-  {% if settings.preloader_pages == blank and template == 'index' %}
-  <div class="ttloader">
-    <span class="rotating"></span>
-  </div>
-  {% elsif settings.preloader_pages != blank %}
-      <div class="ttloader">
-    <span class="rotating"></span>
-  </div>
-  {% endif %}
-  {% endif %}
+    {%- comment -%}
+      Preloader disabled: it waits on window.load and blocks Shopify admin theme
+      library screenshots / previews whenever a third-party script is slow.
+    {%- endcomment -%}
     <input type="hidden" name="type" value="{{shop.url}}" id="shop-url">
     <div class="page-wrapper page-element">
       {% if settings.sticky_icon_enabled %}
@@ -297,11 +286,51 @@
       {% sections 'footer-group' %}
       {% render 'site-cookie' %}
       <script>
-        window.ajax_cart = {{ settings.use_ajax_cart }};
-        jQuery(window).on('load', function() {       
-          jQuery(".ttloader").fadeOut(500); 
-          jQuery(".ttloader .rotating").addClass("load-open");  
-        });
+        window.ajax_cart = {{ settings.use_ajax_cart | json }};
+        (function () {
+          function hidePreloader() {
+            var loader = document.querySelector('.ttloader');
+            if (!loader) return;
+            if (window.jQuery) {
+              jQuery('.ttloader').stop(true, true).fadeOut(300);
+              jQuery('.ttloader .rotating').addClass('load-open');
+            } else {
+              loader.style.display = 'none';
+            }
+          }
+          hidePreloader();
+          if (window.jQuery) jQuery(window).on('load', hidePreloader);
+          else window.addEventListener('load', hidePreloader);
+          setTimeout(hidePreloader, 800);
+        })();
+
+        // Load WhatsApp widget only after the page is fully ready, and never inside
+        // the theme editor / admin preview iframes (those hang on open network sockets).
+        (function () {
+          var skip =
+            (window.Shopify && (Shopify.designMode || Shopify.visualPreviewMode)) ||
+            window.self !== window.top ||
+            /Shopify|screenshot|preview/i.test(navigator.userAgent || '');
+          if (skip) return;
+
+          function injectAiSensy() {
+            if (document.getElementById('aisensy-wa-widget')) return;
+            var s = document.createElement('script');
+            s.id = 'aisensy-wa-widget';
+            s.src = 'https://d3mkw6s8thqya7.cloudfront.net/integration-plugin.js';
+            s.setAttribute('widget-id', 'aabmgt');
+            s.async = true;
+            document.body.appendChild(s);
+          }
+
+          if (document.readyState === 'complete') {
+            setTimeout(injectAiSensy, 3000);
+          } else {
+            window.addEventListener('load', function () {
+              setTimeout(injectAiSensy, 3000);
+            });
+          }
+        })();
       </script>  
       {% render 'quick-veiw' %}
       {% if template == 'index' %}

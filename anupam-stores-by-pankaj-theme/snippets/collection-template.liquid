@@ -66,28 +66,11 @@
       {% endfor %}
     </div>
 
-    {% if paginate.pages > 1 %}
-    <nav class="collection-pagination" data-pagination aria-label="Product pagination">
-      {% if paginate.previous %}
-      <a class="page-btn" href="{{ paginate.previous.url }}">Previous</a>
-      {% else %}
-      <button class="page-btn" type="button" disabled>Previous</button>
-      {% endif %}
-      {% for part in paginate.parts %}
-        {% if part.is_link %}
-          <a class="page-btn" href="{{ part.url }}">{{ part.title }}</a>
-        {% elsif part.title == paginate.current_page %}
-          <span class="page-btn is-active" aria-current="page">{{ part.title }}</span>
-        {% else %}
-          <span class="page-btn">{{ part.title }}</span>
-        {% endif %}
-      {% endfor %}
-      {% if paginate.next %}
-      <a class="page-btn" href="{{ paginate.next.url }}">Next</a>
-      {% else %}
-      <button class="page-btn" type="button" disabled>Next</button>
-      {% endif %}
-    </nav>
+    {% if paginate.next %}
+    <div id="infinite-scroll-loader" class="collection-infinite-loader" data-next-page="{{ paginate.next.url }}" role="status" aria-live="polite">
+      <span class="collection-infinite-spinner" aria-hidden="true"></span>
+      <span class="visually-hidden">Loading more products</span>
+    </div>
     {% endif %}
   </div>
   {% endpaginate %}

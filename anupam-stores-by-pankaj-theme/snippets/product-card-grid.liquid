@@ -188,7 +188,7 @@
       </div>
       {% if settings.collections_show_rating %}    
       <div class="spr-badges grid-item-meta">
-        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {{ product.metafields.judgeme.badge }}
       </div>
       {% endif %}
       <div class="grid-view-item__meta">

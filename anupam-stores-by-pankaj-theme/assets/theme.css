@@ -3599,7 +3599,7 @@ span.cart-products-count {
   top: 0;
   bottom: 0;
   width: 420px;
-  z-index: 999;
+  z-index: 99999;
   background: #fff;
   border: 1px solid var(--color-border);
   border-right: none;
@@ -3889,6 +3889,21 @@ button.btn.text-cart {
   bottom: 0;
   visibility: hidden;
   z-index: 9999;
+}
+.fixed-cart-wrap .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.fixed-cart-wrap #slidedown-cart {
+  z-index: 2;
 }
 .fixed-cart-wrap.active {
   visibility: visible;
@@ -13173,11 +13188,15 @@ span.spr-summary-caption {
   left: 0;
   height: 100%;
   text-align: center;
-  z-index: 9;
+  z-index: 9998;
   right: 0;
   display: none;
   top: 0;
   background: rgba(0, 0, 0, 0.9);
+}
+.overlay{
+  z-index: 99999;
+
 }
 .video-featured #popup_toggle .video-featured .popup_overlay .popup,
 .video-featured .popup_overlay .popup {
@@ -15113,7 +15132,7 @@ ul#promo-carousel {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 4;
+  z-index: 9998;
 }
 .modal-cart {
   display: flex;
@@ -15206,7 +15225,7 @@ ul#promo-carousel {
   -ms-transform: translateY(-100%);
   background: #fff;
   width: 400px;
-  z-index: 4;
+  z-index: 99999;
 }
 .cart-popup-wrapper.modal .cart-content .content {
   padding: 20px 24px;
@@ -17393,4 +17412,7 @@ price .money {
 
 .product-single__header .jdgm-widget.jdgm-widget {
     padding-bottom: 10px;
+}
+.jdgm-star{
+    color: #c4a15a !important;
 }

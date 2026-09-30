@@ -1042,7 +1042,7 @@ body.template-index .btn,
 
 /* Features */
 .features {
-    margin-top: -42px;
+    margin-top: -20px;
     position: relative;
     z-index: 4;
     padding-bottom: 12px;
@@ -1678,6 +1678,28 @@ body.template-index .bestsellers {
     border-color: #3b2216;
 }
 
+/* Same mobile ATC treatment for Top Featured / cart Featured collection */
+.featured .btn-cart-mobile {
+    display: none;
+    width: 100%;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    background: #4a2c1c;
+    border: 1px solid #4a2c1c;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+}
+
+.featured .btn-cart-mobile:hover {
+    background: #3b2216;
+    border-color: #3b2216;
+    color: #fff;
+}
+
 /* Best sellers */
 .bestseller-layout {
     display: grid;
@@ -1705,13 +1727,58 @@ body.template-index .bestsellers {
     height: 100%;
 }
 
+.product-card--featured .product-image {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
 .product-card--featured .product-image img {
-    aspect-ratio: auto;
+    width: 100%;
     height: 100%;
     min-height: 280px;
-    object-fit: cover;
-    object-position: center top;
+    padding: 0;
+    object-fit: contain;
+    object-position: center;
+    display: block;
 }
+    .bestsellers .product-card--featured .product-image {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: auto;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bestsellers .product-card--featured .product-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .bestsellers .product-card--featured .product-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        padding: 0;
+        object-fit: contain;
+        object-position: center center;
+        transform: none;
+        background: #fff;
+    }
+
+    .bestsellers .product-card--featured:hover .product-image img {
+        transform: none;
+    }
 
 .product-card--featured .product-title {
     font-size: 22px;
@@ -1886,6 +1953,7 @@ body.template-index .bestsellers {
     background: #3e2416;
     color: var(--white);
     overflow: hidden;
+    margin-bottom: 30px;
 }
 
 .promo-track {
@@ -2060,6 +2128,13 @@ body.template-index .bestsellers {
     .promo-slide {
         min-height: 742px;
     }
+}
+
+.rf__header-section .rf__title span{
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 700;
+    color: #462d20;
 }
 
 /* Featured */
@@ -3224,6 +3299,50 @@ body.template-index .section.featured {
         min-height: 38px;
         padding: 0 10px;
         font-size: 12px;
+    }
+
+    .featured .btn-cart-mobile,
+    .featured a.btn.btn-cart-mobile.add-cart-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        min-height: 38px !important;
+        margin-top: 8px !important;
+        padding: 0 12px !important;
+        border: 1px solid #4a2c1c !important;
+        border-radius: 999px !important;
+        background: #4a2c1c !important;
+        background-image: none !important;
+        color: #fff !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.01em !important;
+        line-height: 1 !important;
+        text-transform: none !important;
+        text-decoration: none !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        float: none !important;
+        white-space: nowrap !important;
+    }
+
+    .featured .btn-cart-mobile:hover,
+    .featured a.btn.btn-cart-mobile.add-cart-btn:hover,
+    .featured .btn-cart-mobile:focus,
+    .featured a.btn.btn-cart-mobile.add-cart-btn:focus {
+        background: #3b2216 !important;
+        border-color: #3b2216 !important;
+        color: #fff !important;
+    }
+
+    .featured .btn-cart-mobile::before,
+    .featured .btn-cart-mobile::after,
+    .featured a.btn.btn-cart-mobile.add-cart-btn::before,
+    .featured a.btn.btn-cart-mobile.add-cart-btn::after {
+        content: none !important;
+        display: none !important;
     }
 
     .new-products .badge-sale {

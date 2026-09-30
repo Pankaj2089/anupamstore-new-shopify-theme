@@ -1,127 +1,236 @@
-{% for block in section.blocks %}
-{%- assign collection = collections[block.settings.collection] -%}
-{% if forloop.first %}
-<section class="section new-products" id="new-products" {{ block.shopify_attributes }}>
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{{ block.settings.title | default: 'New Products' }}</h2>
-      {% if collection != blank and collection.url != blank %}
-      <a class="section-link" href="{{ collection.url }}">View All Products <span aria-hidden="true">→</span></a>
-      {% endif %}
-    </div>
-    <div class="product-grid">
-      {% if collection != blank %}
-        {% for product in collection.products limit: 8 %}
-          {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'new' %}
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
-{% else %}
-<section class="section featured" id="featured" {{ block.shopify_attributes }}>
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">{{ block.settings.title | default: 'Top Featured' }}</h2>
-      <div class="section-controls">
-        <button class="slider-btn prev" type="button" data-featured-prev aria-label="Previous featured products">
-          <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-        </button>
-        <button class="slider-btn next" type="button" data-featured-next aria-label="Next featured products">
-          <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-        </button>
+<div class="sortable-products" data-section-id="{{ section.id }}">
+
+  {% comment %} New Products - first block only {% endcomment %}
+  {% for block in section.blocks limit: 1 %}
+    {% assign collection = collections[block.settings.collection] %}
+
+    <div class="section new-products" id="new-products-{{ section.id }}" {{ block.shopify_attributes }}>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">{{ block.settings.title | default: 'New Products' | escape }}</h2>
+
+          {% if collection != blank and collection.url != blank %}
+            <a class="section-link" href="{{ collection.url }}">
+              View All Products <span aria-hidden="true">&rarr;</span>
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="product-grid">
+          {% if collection != blank %}
+            {% for product in collection.products limit: 8 %}
+              {% assign product_url = product.url %}
+              {% assign featured_src = product.featured_media | img_url: '1920x' %}
+
+              {% if collection != blank %}
+                {% assign product_url = product.url | within: collection %}
+              {% endif %}
+
+              {% assign save_percent = 0 %}
+              {% if product.compare_at_price > product.price and product.compare_at_price > 0 %}
+                {% assign save_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+              {% endif %}
+
+              <article class="product-card item-row product-layouts{% unless product.available %} product-price--sold-out{% endunless %}" data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
+                <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
+                  <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                </form>
+
+                <div class="product-image">
+                  <a class="product-media" href="{{ product_url }}">
+                    <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+                  </a>
+
+                  {% if save_percent > 0 %}
+                    <span class="badge-sale">Save -{{ save_percent }}%</span>
+                  {% endif %}
+
+                  {% if product.available %}
+                    <a class="add-cart-btn product-hover-cta" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">
+                      Add to Cart <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  {% endif %}
+                </div>
+
+                <div class="product-body">
+                  <h3 class="product-title">
+                    <a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a>
+                  </h3>
+
+                  <div class="product-price grid-view-item__meta">
+                    {% if product.compare_at_price > product.price %}
+                      <span class="price-was">{{ product.compare_at_price | money }}</span>
+                    {% endif %}
+                    <span class="price-sale">{{ product.price | money }}</span>
+                  </div>
+
+                  {% if product.available %}
+                    <a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>
+                  {% endif %}
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
+        </div>
       </div>
     </div>
-    <div class="slider-wrapper featured-slider" data-slider>
-      <div class="slider-track featured-track" data-slider-track>
-        {% if collection != blank %}
-          {% for product in collection.products limit: 12 %}
-            {% render 'anupam-hp-product-card', product: product, collection: collection, card_style: 'featured' %}
-          {% endfor %}
-        {% endif %}
+  {% endfor %}
+
+  {% comment %} Featured Products - remaining blocks {% endcomment %}
+  {% for block in section.blocks offset: 1 %}
+    {% assign collection = collections[block.settings.collection] %}
+
+    <div class="section featured" id="featured-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">{{ block.settings.title | default: 'Top Featured' | escape }}</h2>
+
+          <div class="section-controls">
+            <button class="slider-btn prev" type="button" data-featured-prev aria-label="Previous featured products">
+              <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <button class="slider-btn next" type="button" data-featured-next aria-label="Next featured products">
+              <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="slider-wrapper featured-slider" data-slider>
+          <div class="slider-track featured-track" data-slider-track>
+            {% if collection != blank %}
+              {% for product in collection.products limit: 12 %}
+                {% assign product_url = product.url %}
+                {% assign featured_src = product.featured_media | img_url: '1920x' %}
+
+                {% if collection != blank %}
+                  {% assign product_url = product.url | within: collection %}
+                {% endif %}
+
+                {% assign save_percent = 0 %}
+                {% if product.compare_at_price > product.price and product.compare_at_price > 0 %}
+                  {% assign save_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+                {% endif %}
+
+                <article class="product-card item-row product-layouts product-card--featured{% unless product.available %} product-price--sold-out{% endunless %}" data-slider-item data-id="product-{{ product.id }}" data-col="{{ product.id }}" data-product data-name="{{ product.title | escape }}" data-price="{{ product.price | divided_by: 100.0 }}" data-image="{{ featured_src }}">
+                  <form action="/cart/add" method="post" class="variants cart-form-{{ product.id }}" hidden>
+                    <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                  </form>
+
+                  <div class="product-image product-image--contain">
+                    <a class="product-media" href="{{ product_url }}">
+                      <img class="featured-image" src="{{ featured_src }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="400" loading="lazy">
+                    </a>
+
+                    {% if save_percent > 0 %}
+                      <span class="badge-sale">Save -{{ save_percent }}%</span>
+                    {% endif %}
+
+                    {% if product.available %}
+                      <a class="add-cart-btn product-hover-cta" href="javascript:void(0)" title="{{ 'products.product.add_to_cart' | t }}">
+                        Add to Cart <span aria-hidden="true">&rarr;</span>
+                      </a>
+                    {% endif %}
+                  </div>
+
+                  <div class="product-body">
+                    <h3 class="product-title">
+                      <a class="grid-link__title" href="{{ product_url }}">{{ product.title }}</a>
+                    </h3>
+
+                    <div class="product-price grid-view-item__meta">
+                      {% if product.compare_at_price > product.price %}
+                        <span class="price-was">{{ product.compare_at_price | money }}</span>
+                      {% endif %}
+                      <span class="price-sale">{{ product.price | money }}</span>
+                    </div>
+
+                    {% if product.available %}
+                      <a class="btn btn-cart-mobile add-cart-btn" href="javascript:void(0)">Add to Cart</a>
+                    {% endif %}
+                  </div>
+                </article>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-{% endif %}
-{% endfor %}
+  {% endfor %}
+</div>
 {% schema %}
 {
-"name": "Sortable Products",
-"class": "index-section ttproduct sortable-products-section",
+  "name": "Sortable Products",
+  "class": "index-section ttproduct sortable-products-section",
   "disabled_on": {
-    "groups": ["header","footer"]
-},
-"max_blocks": 5,
-"settings": [
-{
-"type": "checkbox",
-"id": "product_rows",
-"label": "2 Rows Product"
-},
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_rows",
+      "label": "2 Rows Product"
+    },
+    {
+      "type": "range",
+      "id": "product_col_desktop_pro",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "label": "Number of columns on Desktop",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "product_col_mobile_pro",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "label": "Number of columns on Mobile",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Tab text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Tab text hover color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Column",
+      "settings": [
         {
-"type": "range",
-"id": "product_col_desktop_pro",
-"min": 2,
-"max": 20,
-"step": 1,
-"label": "Number of columns on Desktop",
-"default": 7
-},
-
-
-{
-"type": "range",
-"id": "product_col_mobile_pro",
-"min": 1,
-"max": 20,
-"step": 1,
-"label": "Number of columns on Mobile",
-"default": 1
-},
-{
-"type": "color",
-"id": "button_text",
-"label": "Tab text color",
-"default": "#000"
-},
-{
-"type": "color",
-"id": "button_hover_text",
-"label": "Tab text hover color",
-"default": "#fff"
-}
-],
-"blocks": [	
-{
-"type": "text_block",
-"name": "Column",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "Collection Name",
-"default": "Tab Name"
-},	
-
-{
-"id": "collection",
-"type": "collection",
-"label": "Collection"
-}	
-]
-}
-],
-"presets": [
-{
-"name": "Sortable Products",
-"category": "Collection",
-"blocks": [
-{
-"type": "text_block"
-}        
-]
-}
-]
+          "type": "text",
+          "id": "title",
+          "label": "Collection Name",
+          "default": "Tab Name"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sortable Products",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "text_block"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

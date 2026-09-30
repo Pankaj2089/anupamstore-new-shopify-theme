@@ -101,32 +101,11 @@ deal_theme: sage | night | cocoa | olive
     <p class="product-desc">{{ product.description | strip_html | truncatewords: 12 }}</p>
     {% endif %}
     {% if card_style == 'bestseller' or card_style == 'collection' %}
-    {%- assign rating_value = 5.0 -%}
-    {%- assign rating_count = 0 -%}
-    {%- if product.metafields.reviews.rating.value.rating != blank -%}
-      {%- assign rating_value = product.metafields.reviews.rating.value.rating -%}
-    {%- elsif product.metafields.reviews.rating.value != blank -%}
-      {%- assign rating_value = product.metafields.reviews.rating.value -%}
-    {%- endif -%}
-    {%- if product.metafields.reviews.rating_count.value != blank -%}
-      {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
-    {%- elsif product.metafields.reviews.rating_count != blank -%}
-      {%- assign rating_count = product.metafields.reviews.rating_count -%}
-    {%- endif -%}
-    {%- assign rating_display = rating_value | times: 10 | round | times: 0.1 -%}
-    <div class="product-rating" aria-label="Rated {{ rating_display }} out of 5">
-      <span class="stars" aria-hidden="true">
-        {%- for i in (1..5) -%}
-        <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" focusable="false"><path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        {%- endfor -%}
-      </span>
-      <span class="rating-meta">{{ rating_display }} ({{ rating_count }})</span>
-      {% if settings.collections_show_rating %}
-      <span class="spr-badges grid-item-meta">
-        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-      </span>
-      {% endif %}
-    </div>
+    {% if settings.collections_show_rating %}
+      <div class="product-rating jdgm-card-rating">
+        {{ product.metafields.judgeme.badge }}
+      </div>
+    {% endif %}
     {% endif %}
     <div class="product-price grid-view-item__meta">
       {% if product.compare_at_price > product.price %}
