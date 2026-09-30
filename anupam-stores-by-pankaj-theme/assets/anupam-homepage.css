@@ -1084,7 +1084,7 @@ body.template-index .btn,
 
 .feature-card h3 {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: 16px;
     color: #462D20;
     font-weight: 700;
     margin-bottom:0px !important;
@@ -3876,8 +3876,23 @@ body.template-index .hero-photo-link .hero-photo { width: 100%; }
   right: 0;
   z-index: 60;
 }
-body.template-index .sortable-products-section .nav-tabs { display: none !important; }
+body.template-index .sortable-products-section .nav-tabs {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 25px;
+  padding: 0;
+}
 
+body.template-index .sortable-products-section .nav-tabs > li {
+  display: inline-block;
+  float: none;
+}
+
+body.template-index .sortable-products-section .nav-tabs > li > a {
+  display: inline-block;
+}
 .promo-banner,
 .promo-banner .promo-slide {
     width: 100%;
