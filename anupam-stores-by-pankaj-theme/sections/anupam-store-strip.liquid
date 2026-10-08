@@ -1,0 +1,76 @@
+<section class="anupam-store-strip" aria-label="Our stores">
+  <div class="anupam-store-strip__grid">
+    <article class="anupam-store-strip__item">
+      <h2>{{ section.settings.store_one_title | escape }}</h2>
+      {% if section.settings.store_one_image != blank %}
+        <img src="{{ section.settings.store_one_image | img_url: '1200x' }}" alt="{{ section.settings.store_one_title | escape }}" width="1200" height="480" loading="lazy">
+      {% else %}
+        <img src="{{ 'store-1.png' | asset_url }}" alt="{{ section.settings.store_one_title | escape }}" width="1200" height="480" loading="lazy">
+      {% endif %}
+      <div class="anupam-store-strip__address">
+        <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+        <address>{{ section.settings.store_one_address | escape }}</address>
+      </div>
+    </article>
+
+    <article class="anupam-store-strip__item">
+      <h2>{{ section.settings.store_two_title | escape }}</h2>
+      {% if section.settings.store_two_image != blank %}
+        <img src="{{ section.settings.store_two_image | img_url: '1200x' }}" alt="{{ section.settings.store_two_title | escape }}" width="1200" height="480" loading="lazy">
+      {% else %}
+        <img src="{{ 'store-2.png' | asset_url }}" alt="{{ section.settings.store_two_title | escape }}" width="1200" height="480" loading="lazy">
+      {% endif %}
+      <div class="anupam-store-strip__address">
+        <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+        <address>{{ section.settings.store_two_address | escape }}</address>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Store strip before header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "store_one_title",
+      "label": "Store 1 heading",
+      "default": "Anupam Store 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "store_one_image",
+      "label": "Store 1 image"
+    },
+    {
+      "type": "textarea",
+      "id": "store_one_address",
+      "label": "Store 1 address",
+      "default": "68, Suraj Nagar West, opposite metro pillar 60, Civil Lines, Sodala Circle, Ajmer Road, Jaipur, Rajasthan 302006"
+    },
+    {
+      "type": "text",
+      "id": "store_two_title",
+      "label": "Store 2 heading",
+      "default": "Anupam Store 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "store_two_image",
+      "label": "Store 2 image"
+    },
+    {
+      "type": "textarea",
+      "id": "store_two_address",
+      "label": "Store 2 address",
+      "default": "Plot No. 18, 19, 20, Ashok Nagar, Purani Chungi, near Ridhiraj World Business Center, Ajmer Road, Jaipur, Rajasthan 302019"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store strip before header"
+    }
+  ]
+}
+{% endschema %}
